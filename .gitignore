@@ -1,0 +1,5 @@
+db.sqlite3
+.python-version
+venv/
+.idea/
+__pycache__/
