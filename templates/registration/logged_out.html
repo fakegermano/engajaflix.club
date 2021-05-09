@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% translate "Logout" %}
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <p>Test</p>
+    {% else %}
+        <p>Logged out <a href="/login/">Login again</a></p>
+    {% endif %}
+{% endblock %}
