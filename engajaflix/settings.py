@@ -59,6 +59,7 @@ AUTH_USER_MODEL = "bio.CustomUser"
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"
 ROOT_URLCONF = 'engajaflix.urls'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 INTERNAL_IPS = [
     "127.0.0.1"

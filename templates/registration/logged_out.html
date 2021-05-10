@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <p>Test</p>
-    {% else %}
-        <p>Logged out <a href="/login/">Login again</a></p>
-    {% endif %}
+    <div class="row">
+        <div class="col">
+            <p>Logged out <a href="{% url "login" %}">Login again</a></p>
+        </div>
+    </div>
 {% endblock %}

@@ -13,7 +13,7 @@ What makes up a profile on the system
 List of features that the software *should* have
 ** login DONE
 ** logout DONE
-** forgot password/reset
+** forgot password/reset DONE
 ** change password
 ** register
 ** see profile
