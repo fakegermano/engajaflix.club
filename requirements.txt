@@ -5,3 +5,7 @@ django-debug-toolbar
 django-phonenumber-field
 django-widget-tweaks
 phonenumbers
+pytest
+pytest-django
+pytest-cov
+mixer
