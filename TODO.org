@@ -16,7 +16,7 @@ List of features that the software *should* have
 ** logout DONE
 ** forgot password/reset DONE
 ** change password DONE
-** register
+** register DONE
 ** see profile
 ** edit profile
 ** add social-media info
