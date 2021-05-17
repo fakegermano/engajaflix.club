@@ -33,6 +33,7 @@ class CustomUser(AbstractUser):
     phone = PhoneNumberField(_('phone'), blank=True, null=True)
     picture = models.ImageField(_('picture'), upload_to='profiles/', blank=True, null=True)
     type = models.CharField(_('type'), max_length=1, choices=USER_TYPES, default=DOER)
+    pronoums = models.CharField(_('pronoums'), max_length=10, blank=True, null=True)
 
 
 class SocialLink(models.Model):

@@ -9,12 +9,13 @@ What makes up a profile on the system
 ** picture
 ** social links
 ** type [Cative, Fazedor, Padrinho]
+** pronoums
 * Feature list
 List of features that the software *should* have
 ** login DONE
 ** logout DONE
 ** forgot password/reset DONE
-** change password
+** change password DONE
 ** register
 ** see profile
 ** edit profile
