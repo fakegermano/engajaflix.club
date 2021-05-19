@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+    {% translate "Profile" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            {% if user.is_authenticated %}
+                <p>
+                    {% translate "Profile Picture:" %}
+                    {% if object.picture %}
+                        {{ object.picture.url }}
+                    {% else %}
+                        {% translate "Not set" %}
+                    {% endif %}
+                </p>
+                <p>{% translate "Username:" %} {{ object.username }}</p>
+                <p>{% translate "First Name:" %} {{ object.first_name }}</p>
+                <p>{% translate "Last Name:" %} {{ object.last_name }}</p>
+                <p>{% translate "Pronoums:" %} {{ object.pronoums|default:_("Not set") }}</p>
+                <p>{% translate "E-mail:" %} {{ object.email }}</p>
+                <p>{% translate "Phone:" %} {{ object.phone|default:_("Not set") }}</p>
+                <p>{% translate "Social Links:" %}</p>
+                <ul>
+                    {% for link in object.sociallink_set.all %}
+                        <li>{{ link.url }}</li>
+                    {% empty %}
+                        <li>{% translate "No links"%}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>{% translate "You shouldn't see this" %}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

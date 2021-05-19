@@ -2,7 +2,9 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+from .models import CustomUser
 from .forms import RegisterForm
 
 
@@ -28,5 +30,16 @@ class RegisterView(generic.FormView):
             form.add_error('username', _('Failed to create user'))
             return super(RegisterView, self).form_invalid(form)
         return result
-        
 
+
+class ProfileView(LoginRequiredMixin, generic.DetailView):
+    model = CustomUser
+    user = None
+    template_name = 'bio/profile.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user = request.user
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return self.user
