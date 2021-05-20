@@ -202,10 +202,11 @@ class TestProfileView:
             assert user.picture.url in content
         assert user.first_name in content
         assert user.last_name in content
-        if user.pronoums:
-            assert user.pronoums in content
+        if user.pronouns:
+            assert user.pronouns in content
         assert user.email in content
         if user.phone:
             assert user.phone in content
+        assert user.description in content
 
 
