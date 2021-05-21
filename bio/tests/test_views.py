@@ -3,11 +3,13 @@ from mixer.backend.django import mixer
 from django.test import Client
 from engajaflix.settings import AUTH_USER_MODEL
 from ..models import SocialLink
+from phonenumbers import example_number_for_type, format_number
+
 pytestmark = pytest.mark.django_db
 
 
-class TestHomeView:
-    view_url = '/bio/'
+class MustBeLoggedOut:
+    view_url = None
 
     def test_anonymous(self):
         c = Client()
@@ -20,18 +22,16 @@ class TestHomeView:
         user = mixer.blend(AUTH_USER_MODEL, username=username)
         c.force_login(user)
         response = c.get(self.view_url)
-        assert response.status_code == 200
-        assert username in response.content.decode('utf-8')
+        assert 'logout' in response.url
 
 
-class TestLoginView:
-    view_url = '/login/'
+class MustBeLoggedIn:
+    view_url = None
 
     def test_anonymous(self):
         c = Client()
         response = c.get(self.view_url)
-        assert response.status_code == 200
-        assert '</form>' in response.content.decode('utf-8')
+        assert 'login' in response.url
 
     def test_logged_in(self):
         c = Client()
@@ -39,7 +39,41 @@ class TestLoginView:
         c.force_login(user)
         response = c.get(self.view_url)
         assert response.status_code == 200
-        assert 'logout' in response.content.decode('utf-8')
+
+
+class TestHomeView:
+    view_url = '/bio/'
+
+    def test_anonymous(self):
+        c = Client()
+        response = c.get(self.view_url)
+        assert response.status_code == 200
+
+    def test_logged_in(self):
+        c = Client()
+        user = mixer.blend(AUTH_USER_MODEL)
+        c.force_login(user)
+        response = c.get(self.view_url)
+        content = response.content.decode('utf-8')
+        assert response.status_code == 200
+        assert user.username in content
+
+
+class TestLoginView:
+    view_url = '/login/'
+
+    def test_form(self):
+        c = Client()
+        response = c.get(self.view_url)
+        assert '</form>' in response.content.decode('utf-8')
+
+    def test_logged_in(self):
+        c = Client()
+        user = mixer.blend(AUTH_USER_MODEL)
+        c.force_login(user)
+        response = c.get(self.view_url)
+        content = response.content.decode('utf-8')
+        assert 'logout' in content
 
 
 class TestLogoutView:
@@ -76,36 +110,12 @@ class TestPasswordResetView:
         assert '</form>' in response.content.decode('utf-8')
 
 
-class TestPasswordChangeView:
+class TestPasswordChangeView(MustBeLoggedIn):
     view_url = '/password/change/'
 
-    def test_anonymous(self):
-        c = Client()
-        response = c.get(self.view_url)
-        assert 'login' in response.url
 
-    def test_logged_in(self):
-        c = Client()
-        user = mixer.blend(AUTH_USER_MODEL)
-        c.force_login(user)
-        response = c.get(self.view_url)
-        assert response.status_code == 200
-
-
-class TestRegisterView:
+class TestRegisterView(MustBeLoggedOut):
     view_url = '/bio/register/'
-
-    def test_anonymous(self):
-        c = Client()
-        response = c.get(self.view_url)
-        assert response.status_code == 200
-
-    def test_logged_in(self):
-        c = Client()
-        user = mixer.blend(AUTH_USER_MODEL)
-        c.force_login(user)
-        response = c.get(self.view_url)
-        assert response.status_code == 302
 
     def test_register_fail(self):
         c = Client()
@@ -174,20 +184,8 @@ class TestRegisterView:
         assert c.login(username=username, password=password)
 
 
-class TestProfileView:
+class TestProfileView(MustBeLoggedIn):
     view_url = '/bio/profile/'
-
-    def test_anonymous(self):
-        c = Client()
-        response = c.get(self.view_url)
-        assert 'login' in response.url
-
-    def test_logged_in(self):
-        c = Client()
-        user = mixer.blend(AUTH_USER_MODEL)
-        c.force_login(user)
-        response = c.get(self.view_url)
-        assert response.status_code == 200
 
     def test_user_info_in_view(self):
         c = Client()
@@ -196,7 +194,6 @@ class TestProfileView:
         c.force_login(user)
         response = c.get(self.view_url)
         content = response.content.decode('utf-8')
-        print(content)
         assert user.username in content
         if user.picture:
             assert user.picture.url in content
@@ -210,3 +207,114 @@ class TestProfileView:
         assert user.description in content
 
 
+def gen_phones():
+    phones = set()
+    for i in range(0, 10):
+        num = example_number_for_type(region_code=1, num_type=i)
+        print(num)
+        phones.add(str(format_number(num, 1)))
+    return phones
+
+
+class TestProfileEditView(MustBeLoggedIn):
+    view_url = '/bio/profile/edit/'
+    PHONES = [
+        "+1 206-564-9959",
+        "+1 318-857-8882",
+        "+93 70 202 9827",
+        "+93 77 221 7514",
+        "+54 9 3777 73-6034",
+        "+54 9 3888 04-1337",
+        "+55 16 93263-6194",
+        "+55 24 91213-1794",
+        "+55 93 7513-7877",
+        "+92 364 8372324",
+    ]
+
+    def _edit_field(self, field_name):
+        c = Client()
+        user = mixer.blend(
+            AUTH_USER_MODEL,
+            first_name=mixer.FAKE,
+            last_name=mixer.FAKE,
+            pronouns=mixer.RANDOM,
+            description=mixer.RANDOM,
+            picture=mixer.FAKE,
+            phone=mixer.RANDOM(*self.PHONES[:5]),
+        )
+        old = getattr(user, field_name)
+        c.force_login(user)
+        body = {field_name: getattr(mixer.blend(
+            AUTH_USER_MODEL,
+            first_name=mixer.FAKE,
+            last_name=mixer.FAKE,
+            pronouns=mixer.RANDOM,
+            description=mixer.RANDOM,
+            picture=mixer.FAKE,
+            phone=mixer.RANDOM(*self.PHONES[5:]),
+        ), field_name)}
+        response = c.post(self.view_url, data=body, follow=True)
+        assert response.status_code == 200
+        content = response.content.decode('utf-8')
+        print(content)
+        assert 'invalid' not in content
+        assert str(body[field_name]) in content
+        assert str(old) not in content
+
+    def _remove_field(self, field_name):
+        c = Client()
+        user = mixer.blend(
+            AUTH_USER_MODEL,
+            first_name=mixer.FAKE,
+            last_name=mixer.FAKE,
+            pronouns=mixer.RANDOM,
+            description=mixer.RANDOM,
+            picture=mixer.FAKE,
+            phone=mixer.RANDOM(*self.PHONES),
+        )
+        c.force_login(user)
+        saved = {field_name: getattr(user, field_name)}
+        body = {
+            field_name: ""
+        }
+        response = c.post(self.view_url, data=body, follow=True)
+        assert response.status_code == 200
+        content = response.content.decode('utf-8')
+        print(content)
+        assert str(saved[field_name]) not in content
+
+    def test_edit_first_name(self):
+        self._edit_field('first_name')
+
+    def test_remove_first_name(self):
+        self._remove_field('first_name')
+
+    def test_edit_last_name(self):
+        self._edit_field('last_name')
+
+    def test_remove_last_name(self):
+        self._remove_field('last_name')
+
+    def test_edit_pronouns(self):
+        self._edit_field('pronouns')
+
+    def test_remove_pronouns(self):
+        self._remove_field('pronouns')
+
+    def test_edit_description(self):
+        self._edit_field('description')
+
+    def test_remove_description(self):
+        self._remove_field('description')
+
+    def test_edit_phone(self):
+        self._edit_field('phone')
+
+    def test_remove_phone(self):
+        self._remove_field('phone')
+
+    def test_edit_picture(self):
+        self._edit_field('picture')
+
+    def test_remove_picture(self):
+        self._remove_field('picture')

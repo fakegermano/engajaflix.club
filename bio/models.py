@@ -30,11 +30,11 @@ class CustomUser(AbstractUser):
     - last_login
     """
 
-    phone = PhoneNumberField(_('phone'), blank=True, null=True)
-    picture = models.ImageField(_('picture'), upload_to='profiles/', blank=True, null=True)
+    phone = PhoneNumberField(_('phone'), blank=True, default="")
+    picture = models.ImageField(_('picture'), upload_to='profiles/', blank=True, default="default.png")
     type = models.CharField(_('type'), max_length=1, choices=USER_TYPES, default=DOER)
-    pronouns = models.CharField(_('pronouns'), max_length=10, blank=True, null=True)
-    description = models.TextField(_('description'), default="")
+    pronouns = models.CharField(_('pronouns'), max_length=10, blank=True, default="")
+    description = models.TextField(_('description'), blank=True, default="")
 
 
 class SocialLink(models.Model):

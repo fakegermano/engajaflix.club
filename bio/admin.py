@@ -12,10 +12,10 @@ class SocialLinkInline(admin.StackedInline):
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
-    (_('Extra'), {'fields': ('phone', 'picture', 'type')}),
+        (_('Extra'), {'fields': ('description', 'phone', 'picture', 'type')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (_('Extra'), {'fields': ('phone', 'picture', 'type')}),
+        (_('Extra'), {'fields': ('description', 'phone', 'picture', 'type')}),
     )
     inlines = (SocialLinkInline,)
 

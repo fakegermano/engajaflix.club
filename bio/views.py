@@ -43,3 +43,25 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
 
     def get_object(self, queryset=None):
         return self.user
+
+
+class ProfileEditView(LoginRequiredMixin, generic.edit.UpdateView):
+    model = CustomUser
+    user = None
+    template_name = 'bio/profile_update.html'
+    fields = (
+        'pronouns',
+        'first_name',
+        'last_name',
+        'picture',
+        'description',
+        'phone',
+    )
+    success_url = reverse_lazy('bio:edit_profile')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user = request.user
+        return super(ProfileEditView, self).dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return self.user

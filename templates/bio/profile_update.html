@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+    {% translate "Update Profile" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            {% if user.is_authenticated %}
+                <h1>{% translate "Edit your profile!" %}</h1>
+                <form method="post">
+                    {% include "form.html" %}
+                    <input type="submit" class="btn btn-primary" value="{% translate "Update" %}"/>
+                </form>
+            {% else %}
+                <h1>{% translate "You shouldn't see this"%}</h1>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
