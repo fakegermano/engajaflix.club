@@ -9,6 +9,8 @@
         <div class="col">
             {% if user.is_authenticated %}
                 <h1>{% translate "Welcome "%}{{ user.username }}{% translate " to engajaflix"%}</h1>
+                <p>{% translate "You can " %}<a href="{% url "bio:edit_profile" %}">{% translate "edit" %}</a>{% translate " your profile!" %}</p>
+                <p>{% translate "Stay tuned for more information!" %}</p>
             {% else %}
                 <h1>{% translate "Welcome to engajaflix!" %}</h1>
                 <p>{% translate "You know, you can " %}<a href="{% url "login" %}">{% translate "Log in"%}</a></p>

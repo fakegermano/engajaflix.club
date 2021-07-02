@@ -18,7 +18,7 @@ List of features that the software *should* have
 ** change password DONE
 ** register DONE
 ** see profile DONE
-** edit profile
+** edit profile DONE
 ** add social-media info
 ** create new topic
 ** post message to topic (basic markdown)
