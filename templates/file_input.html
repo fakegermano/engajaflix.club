@@ -1,0 +1,28 @@
+{% load i18n %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="input-group mb-3{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+        <div {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %}
+             {% if label_class %}class="input-group-text bg-light {{ label_class }}"
+             {% else %} class="input-group-text bg-light"{% endif %}>
+            {{ field.label|safe }}
+        </div>
+        {% if field.value %}
+            <div class="input-group-text bg-white">
+                <a href="{{ field.value.url }}">{{ field.value }}</a>
+            </div>
+            {% if not field.field.required %}
+                <div class="input-group-text bg-danger text-dark fw-bold">
+                    <label for="{{ field.name}}-clear_id">{% translate "Clear" %}</label>
+                    <input type="checkbox" class="form-check-input mt-0 ms-2" name="{{ field.name }}-clear" id="{{ field.name }}-clear_id">
+                </div>
+            {% endif %}
+            <input type="file" name="{{ field.name }}" class="form-control {% if field.errors %} is-invalid {% endif %}">
+        {% else %}
+            <input type="file" name="{{ field.name }}" class="form-control {% if field.errors %} is-invalid {% endif %}">
+        {% endif %}
+        {% include 'bootstrap5/layout/help_text_and_errors.html' %}
+    </{% if tag %}{{ tag }}{% else %}div{% endif %}>
+{% endif %}

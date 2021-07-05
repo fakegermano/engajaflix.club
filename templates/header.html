@@ -1,0 +1,43 @@
+{% load i18n %}
+<header class="fixed-bottom">
+    <nav class="navbar bg-light">
+        <div class="container-fluid justify-content-center">
+            <div class="justify-content-center" id="navbarNav">
+                <ul class="navbar-nav nav-pills nav-flush flex-row mb-auto ">
+                    <li class="nav-item wr-4">
+                        <a class="nav-link active py-2 border-start border-end text-small" aria-current="page" href="#">
+                            <i class="bi bi-house isize" aria-label="{% translate "Home" %}"></i><br/>
+                            {% translate "Home" %}
+                        </a>
+                    </li>
+                    <li class="nav-item wr-4">
+                        <a class="nav-link py-2 border-end text-small" href="#">
+                            <i class="bi bi-people isize" aria-label="{% translate "People" %}"></i><br/>
+                            {% translate "People" %}
+                        </a>
+                    </li>
+                    <li class="nav-item wr-4">
+                        <a class="nav-link py-2 border-end text-small" href="#">
+                            <i class="bi bi-plus-circle isize" aria-label="{% translate "Add" %}"></i><br/>
+                            {% translate "Add" %}
+                        </a>
+                    </li>
+                    <li class="nav-item wr-4">
+                        <a class="nav-link py-2 border-end text-small" href="#">
+                            <i class="bi bi-at isize" aria-label="{% translate "Tag" %}"></i><br/>
+                            {% translate "Tag" %}
+                        </a>
+                    </li>
+                    <li class="nav-item wr-4">
+                        <a class="nav-link py-2 border-end text-small" href="#">
+                            <i class="bi bi-gear isize" aria-label="{% translate "Settings" %}"></i><br/>
+                            {% translate "Settings" %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block header-inner %}
+    {% endblock %}
+</header>

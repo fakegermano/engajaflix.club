@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load crispy_forms_tags %}
+
 {% block title %}
     {% translate "Update Profile" %}
 {% endblock %}
@@ -8,14 +10,7 @@
     <div class="row">
         <div class="col">
             {% if user.is_authenticated %}
-                <h1>{% translate "Edit your profile!" %}</h1>
-                <form method="post" enctype="multipart/form-data">
-                    {% include "form.html" %}
-                    <input type="submit" class="btn btn-primary" value="{% translate "Update" %}"/>
-                    <button class="btn btn-secondary" type="button" onclick="window.history.back()">
-                        {% translate "Back" %}
-                    </button>
-                </form>
+                {% crispy form %}
             {% else %}
                 <h1>{% translate "You shouldn't see this"%}</h1>
             {% endif %}

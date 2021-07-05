@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% translate "Email verification success." %}
+{% endblock %}
+
+{% block content %}
+    <div class="row mt-3">
+        <div class="col">
+            <p class="lead text-success">{{ msg }}</p>
+            <a href="{{ link }}" class="btn btn-outline-primary">{% translate "Login" %}</a>
+        </div>
+    </div>
+{% endblock %}

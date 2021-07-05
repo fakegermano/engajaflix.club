@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,9 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.forms',
+
     'debug_toolbar',
     'widget_tweaks',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'phonenumber_field',
+    'verify_email',
 
     'bio',
 ]
@@ -56,10 +62,20 @@ MIDDLEWARE = [
 ]
 
 AUTH_USER_MODEL = "bio.CustomUser"
-LOGIN_URL = "/login/"
+LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "/"
 ROOT_URLCONF = 'engajaflix.urls'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'noreply<noreply@engajaflix.com>'
+HTML_MESSAGE_TEMPLATE = "verify.html"
+VERIFICATION_SUCCESS_TEMPLATE = "verify_success.html"
+VERIFICATION_FAILED_TEMPLATE = "verify_failed.html"
+SUBJECT = _("Engajaflix - Email Verification")
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 INTERNAL_IPS = [
     "127.0.0.1"
@@ -132,8 +148,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR / 'static'
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

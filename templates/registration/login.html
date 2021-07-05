@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load widget_tweaks %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     {% translate "Login" %}
@@ -12,13 +12,8 @@
             {% if user.is_authenticated %}
                 <p>Already logged in <a href="{% url "logout" %}">Log out</a></p>
             {% else %}
-                <form method="post">
-                    {% include "form.html" %}
-                    <input type="submit" class="btn btn-primary" value="{% translate "Login" %}"/>
-                    <a href="{% url "password_reset" %}">{% translate "Forgot password" %}</a>
-                </form>
+                {% crispy form %}
             {% endif %}
-            </div>
         </div>
     </div>
 {% endblock %}

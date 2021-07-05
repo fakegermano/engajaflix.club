@@ -1,9 +1,16 @@
 import pytest
+import re
 from mixer.backend.django import mixer
 from django.test import Client
-from engajaflix.settings import AUTH_USER_MODEL
-from ..models import SocialLink
+from django.core import mail
+from secrets import token_urlsafe
 from phonenumbers import example_number_for_type, format_number
+
+from engajaflix.settings import AUTH_USER_MODEL
+
+
+from ..models import SocialLink, CustomUser
+
 
 pytestmark = pytest.mark.django_db
 
@@ -113,9 +120,23 @@ class TestPasswordResetView:
 class TestPasswordChangeView(MustBeLoggedIn):
     view_url = '/password/change/'
 
+    def test_anonymous(self):
+        c = Client()
+        response = c.get(self.view_url, follow=True)
+        assert response.status_code == 200
+        assert 'login' in response.content.decode('utf-8')
+
+    def test_logged_in(self):
+        c = Client()
+        user = mixer.blend(AUTH_USER_MODEL)
+        c.force_login(user)
+        response = c.get(self.view_url)
+        assert response.status_code == 200
+        assert '</form>' in response.content.decode('utf-8')
+
 
 class TestRegisterView(MustBeLoggedOut):
-    view_url = '/bio/register/'
+    view_url = '/register/'
 
     def test_register_fail(self):
         c = Client()
@@ -138,7 +159,6 @@ class TestRegisterView(MustBeLoggedOut):
         assert 'too common' in content
 
     def test_register_password_missmatch(self):
-        from secrets import token_urlsafe
         c = Client()
         password = token_urlsafe(10)
         password2 = password + '1'
@@ -155,7 +175,6 @@ class TestRegisterView(MustBeLoggedOut):
         assert 'didn’t match' in content
 
     def test_register_ok(self):
-        from secrets import token_urlsafe
         c = Client()
         password = token_urlsafe(10)
         username = 'test'
@@ -166,12 +185,16 @@ class TestRegisterView(MustBeLoggedOut):
             'password2': password
         }
         response = c.post(self.view_url, data=body)
-        assert 'login' in response.url
+        content = response.content.decode('utf-8')
+        assert body['email'] in content
 
-    def test_register_than_login(self):
-        from secrets import token_urlsafe
+        assert len(mail.outbox) == 1
+        assert body['email'] in mail.outbox[0].to
+        assert body['username'] in mail.outbox[0].body
+
+    def test_register_than_login_fails(self):
         c = Client()
-        password = token_urlsafe(10)
+        password = token_urlsafe(11)
         username = 'test'
         body = {
             'username': username,
@@ -181,6 +204,30 @@ class TestRegisterView(MustBeLoggedOut):
         }
         response = c.post(self.view_url, data=body, follow=True)
         assert response.status_code == 200
+        assert c.login(username=username, password=password) is False
+
+    def test_register_than_verify_than_login(self):
+        c = Client()
+        password = token_urlsafe(12)
+        username = 'test'
+        body = {
+            'username': username,
+            'email': 'test@example.com',
+            'password1': password,
+            'password2': password
+        }
+        response = c.post(self.view_url, data=body, follow=True)
+        assert response.status_code == 200
+
+        assert len(mail.outbox) == 1
+        assert body['email'] in mail.outbox[0].to
+        assert body['username'] in mail.outbox[0].body
+
+        # simulate user verifying email
+        user = CustomUser.objects.get(username=username)
+        user.is_active = True
+        user.save()
+
         assert c.login(username=username, password=password)
 
 
@@ -244,15 +291,18 @@ class TestProfileEditView(MustBeLoggedIn):
         )
         old = getattr(user, field_name)
         c.force_login(user)
-        body = {field_name: getattr(mixer.blend(
-            AUTH_USER_MODEL,
-            first_name=mixer.FAKE,
-            last_name=mixer.FAKE,
-            pronouns=mixer.RANDOM,
-            description=mixer.RANDOM,
-            picture=None,
-            phone=mixer.RANDOM(*self.PHONES[5:]),
-        ), field_name)}
+        body = {
+            "username": user.username,
+            "email": user.email,
+            field_name: getattr(mixer.blend(
+                AUTH_USER_MODEL,
+                first_name=mixer.FAKE,
+                last_name=mixer.FAKE,
+                pronouns=mixer.RANDOM,
+                description=mixer.RANDOM,
+                picture=None,
+                phone=mixer.RANDOM(*self.PHONES[5:]),
+            ), field_name)}
         response = c.post(self.view_url, data=body, follow=True)
         assert response.status_code == 200
         content = response.content.decode('utf-8')

@@ -1,0 +1,32 @@
+{% load i18n %}
+<nav class="d-flex flex-column flex-shrink-0 bg-light wr-4 fixed-top">
+    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+        <li class="nav-item">
+            <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title="{% translate "Home" %}" data-bs-toggle="tooltip" data-bs-placement="right">
+                <i class="bi bi-house isize" aria-label="{% translate "Home" %}"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link py-3 border-bottom" title="{% translate "People" %}" data-bs-toggle="tooltip" data-bs-placement="right">
+                <i class="bi bi-people isize" aria-label="{% translate "People" %}"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link py-3 border-bottom" title="{% translate "Add" %}" data-bs-toggle="tooltip" data-bs-placement="right">
+                <i class="bi bi-plus-circle isize" aria-label="{% translate "Add" %}"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link py-3 border-bottom" title="{% translate "Tag" %}" data-bs-toggle="tooltip" data-bs-placement="right">
+                <i class="bi bi-at isize" aria-label="{% translate "Tag" %}"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link py-3 border-bottom" title="{% translate "Settings" %}" data-bs-toggle="tooltip" data-bs-placement="right">
+                <i class="bi bi-gear isize" aria-label="{% translate "Settings" %}"></i>
+            </a>
+        </li>
+    </ul>
+    {% block sidebar-inner %}
+    {% endblock %}
+</nav>

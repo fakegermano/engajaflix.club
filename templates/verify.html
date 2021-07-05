@@ -1,0 +1,7 @@
+{% load i18n %}
+<div>
+    <p>{% translate "Welcome to engajaflix. Click the link to verify your e-mail"%}</p>
+    <p><a href="{{ link }}">{{ link }}</a></p>
+    <p>{% translate "If this wasn't you, just ignore this message." %}</p>
+    <p>{% translate "This is a machine generated email, do not reply." %}</p>
+</div>

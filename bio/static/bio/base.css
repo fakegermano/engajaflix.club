@@ -1,0 +1,19 @@
+.wr-4 {
+    width: 4rem;
+}
+
+.text-small {
+    font-size: 85%;
+}
+
+.isize {
+    font-size: 20px;
+}
+
+.required > label {
+    font-weight: bold;
+}
+
+.rows-3 {
+    height: 6rem !important;
+}

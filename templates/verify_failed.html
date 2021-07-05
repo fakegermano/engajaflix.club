@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% translate "Email verification failed." %}
+{% endblock %}
+
+{% block content %}
+    <div class="row mt-3">
+        <div class="col">
+            <p class="lead text-danger">{{ msg }}</p>
+        </div>
+    </div>
+{% endblock %}
