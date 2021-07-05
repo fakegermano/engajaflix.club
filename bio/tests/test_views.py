@@ -1,5 +1,4 @@
 import pytest
-import re
 from mixer.backend.django import mixer
 from django.test import Client
 from django.core import mail
@@ -158,7 +157,7 @@ class TestRegisterView(MustBeLoggedOut):
         assert 'invalid' in content
         assert 'too common' in content
 
-    def test_register_password_missmatch(self):
+    def test_register_password_mismatch(self):
         c = Client()
         password = token_urlsafe(10)
         password2 = password + '1'
@@ -172,7 +171,7 @@ class TestRegisterView(MustBeLoggedOut):
         assert response.status_code == 200
         content = response.content.decode('utf-8')
         assert 'invalid' in content
-        assert 'didn’t match' in content
+        assert "didn’t match" in content
 
     def test_register_ok(self):
         c = Client()
@@ -194,8 +193,8 @@ class TestRegisterView(MustBeLoggedOut):
 
     def test_register_than_login_fails(self):
         c = Client()
-        password = token_urlsafe(11)
-        username = 'test'
+        password = token_urlsafe(10)
+        username = 'test_fail'
         body = {
             'username': username,
             'email': 'test@example.com',
@@ -208,8 +207,8 @@ class TestRegisterView(MustBeLoggedOut):
 
     def test_register_than_verify_than_login(self):
         c = Client()
-        password = token_urlsafe(12)
-        username = 'test'
+        password = token_urlsafe(10)
+        username = 'test_verify'
         body = {
             'username': username,
             'email': 'test@example.com',
