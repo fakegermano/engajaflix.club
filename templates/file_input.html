@@ -3,26 +3,32 @@
 {% if field.is_hidden %}
     {{ field }}
 {% else %}
-    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="input-group mb-3{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
-        <div {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %}
-             {% if label_class %}class="input-group-text bg-light {{ label_class }}"
-             {% else %} class="input-group-text bg-light"{% endif %}>
-            {{ field.label|safe }}
-        </div>
-        {% if field.value %}
-            <div class="input-group-text bg-white">
-                <a href="{{ field.value.url }}">{{ field.value }}</a>
+    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="mb-3{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+        <div class="row g-3">
+            <div class="col-sm-2">
+                <div {% if field.id_for_label %}for="{{ field.id_for_label }}"{% endif %}
+                     {% if label_class %}class="input-group-text bg-light {{ label_class }}"
+                     {% else %} class="input-group-text bg-light"{% endif %}>
+                    {{ field.label|safe }}
+                </div>
             </div>
-            {% if not field.field.required %}
-                <div class="input-group-text bg-danger text-dark fw-bold">
-                    <label for="{{ field.name}}-clear_id">{% translate "Clear" %}</label>
-                    <input type="checkbox" class="form-check-input mt-0 ms-2" name="{{ field.name }}-clear" id="{{ field.name }}-clear_id">
+            <div class="col-sm justify-content-center">
+                <input type="file" name="{{ field.name }}" class="form-control {% if field.errors %} is-invalid {% endif %}">
+            </div>
+            {% if field.value %}
+                <div class="col-sm bg-white input-group">
+                    <span class="input-group-text w-75">
+                        <a href="{{ field.value.url }}">{{ field.value }}</a>
+                    </span>
+                    {% if not field.field.required %}
+                        <span class="input-group-text text-dark bg-danger w-25 text-center justify-content-end">
+                            <label for="{{ field.name}}-clear_id">{% translate "Clear" %}</label>
+                            <input type="checkbox" class="form-check-input ms-2 mt-0" name="{{ field.name }}-clear" id="{{ field.name }}-clear_id">
+                        </span>
+                    {% endif %}
                 </div>
             {% endif %}
-            <input type="file" name="{{ field.name }}" class="form-control {% if field.errors %} is-invalid {% endif %}">
-        {% else %}
-            <input type="file" name="{{ field.name }}" class="form-control {% if field.errors %} is-invalid {% endif %}">
-        {% endif %}
+        </div>
         {% include 'bootstrap5/layout/help_text_and_errors.html' %}
     </{% if tag %}{{ tag }}{% else %}div{% endif %}>
 {% endif %}

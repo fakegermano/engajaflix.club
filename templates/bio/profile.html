@@ -5,32 +5,32 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col">
+    <div class="row mt-3 justify-content-center">
+        <div class="col d-flex">
             {% if user.is_authenticated %}
-                <p>
-                    {% translate "Profile Picture:" %}
-                    {% if object.picture %}
-                        {{ object.picture.url }}
-                    {% else %}
-                        {% translate "Not set" %}
-                    {% endif %}
-                </p>
-                <p>{% translate "Username:" %} {{ object.username }}</p>
-                <p>{% translate "First Name:" %} {{ object.first_name }}</p>
-                <p>{% translate "Last Name:" %} {{ object.last_name }}</p>
-                <p>{% translate "Pronoums:" %} {{ object.pronouns|default:_("Not set") }}</p>
-                <p>{% translate "E-mail:" %} {{ object.email }}</p>
-                <p>{% translate "Phone:" %} {{ object.phone|default:_("Not set") }}</p>
-                <p>{% translate "Short Bio:" %} {{ object.description }}</p>
-                <p>{% translate "Social Links:" %}</p>
-                <ul>
-                    {% for link in object.sociallink_set.all %}
-                        <li>{{ link.url }}</li>
-                    {% empty %}
-                        <li>{% translate "No links"%}</li>
-                    {% endfor %}
-                </ul>
+            <div class="card mx-auto text-center" style="width: 18rem;">
+                <h4 class="card-header">{% translate "Profile" %}</h4>
+                <img src="{{ object.picture.url }}" class="card-img-top"
+                     alt="{{ object.username }} {% translate "profile picture" %}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ object.username }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ object.first_name }} {{ object.last_name }}</h6>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ object.email }}</li>
+                        <li class="list-group-item">{{ object.phone }}</li>
+                        <li class="list-group-item">{{ object.pronouns|default:"" }}</li>
+                    </ul>
+                    <blockquote class="blockquote mb-2">
+                        <p>{{ object.description }}</p>
+                        <footer class="blockquote-footer">{{ object.username }}</footer>
+                    </blockquote>
+                    <button onclick="window.history.back();" class="btn btn-outline-dark">{% translate "Back" %}</button>
+                    <a class="btn btn-outline-info" href="{% url "bio:edit_profile" %}">{% translate "Edit" %}</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {% translate "Joined: " %}{{ object.date_joined|date }}
+                </div>
+            </div>
             {% else %}
                 <p>{% translate "You shouldn't see this" %}</p>
             {% endif %}

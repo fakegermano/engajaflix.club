@@ -22,7 +22,7 @@
     {% endblock %}
     <title>{% block title %} {% endblock %}</title>
 </head>
-<body class="text-center justify-content-center">
+<body>
 {% if user.is_authenticated %}
     {% block header %}
         {% comment %}{% include "header.html" %}{% endcomment %}
