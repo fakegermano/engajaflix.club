@@ -57,7 +57,7 @@ class RegisterView(generic.FormView):
         inactive_user = send_verification_email(self.request, form)
         if inactive_user is None:
             form.add_error('username', _('Failed to create user'))
-            return super(RegisterView, self).form_invalid(form)
+            return super().form_invalid(form)
         context = self.get_context_data()
         context['email'] = inactive_user.email
         return self.render_to_response(context)
@@ -81,7 +81,7 @@ class ProfileEditView(LoginRequiredMixin, generic.edit.UpdateView):
     user = None
     template_name = 'bio/profile_update.html'
     form_class = ProfileEditForm
-    success_url = reverse_lazy('bio:edit_profile')
+    success_url = reverse_lazy('bio:profile')
 
     def dispatch(self, request, *args, **kwargs):
         self.user = request.user
@@ -89,3 +89,12 @@ class ProfileEditView(LoginRequiredMixin, generic.edit.UpdateView):
 
     def get_object(self, queryset=None):
         return self.user
+
+    def form_valid(self, form):
+        inactive_user = send_verification_email(self.request, form)
+        if inactive_user is None:
+            form.add_error('email', _('Failed to create user'))
+            return super().form_invalid(form)
+        context = self.get_context_data()
+        context['email'] = inactive_user.email
+        return self.render_to_response(context)
