@@ -58,7 +58,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
             FloatingField("new_password2", wrapper_class="required"),
             FormActions(
                 Submit('password-change', _("Password change")),
-                Button('cancel', _("Cancel"), css_class="btn-danger", onclick="window.history.back()")
+                Button('cancel', _("Cancel"), css_class="btn-warning", onclick="window.history.back()")
             )
         )
 
@@ -76,7 +76,7 @@ class CustomPasswordResetForm(PasswordResetForm):
             FloatingField("email", wrapper_class="required"),
             FormActions(
                 Submit('reset-password', _("Reset password")),
-                Button('cancel', _("Cancel"), css_class="btn-danger", onclick="window.history.back()")
+                Button('cancel', _("Cancel"), css_class="btn-warning", onclick="window.history.back()")
             )
         )
 
