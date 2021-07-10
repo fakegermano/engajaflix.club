@@ -14,3 +14,4 @@ crispy-bootstrap5
 django-verify-email
 django_compressor
 django-libsass
+mysqlclient
