@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row mt-3 justify-content-center">
+    <div class="row mt-3 mb-3 d-flex justify-content-center">
         <div class="col text-center">
             {% if user.is_authenticated %}
-                <h1>{% translate "Welcome "%}{{ user.username }}{% translate " to engajaflix"%}</h1>
+                <h1>{% translate "Welcome "%}<strong class="text-primary">{{ user.username }}</strong>{% translate " to engajaflix"%}</h1>
                 <p>{% translate "You can " %}<a href="{% url "bio:profile" %}">{% translate "see" %}</a>{% translate " your profile!" %}</p>
                 <p class="text-muted">{% translate "Stay tuned for more information!" %}</p>
                 <p><a href="{% url "logout" %}">{% translate "logout" %}</a></p>
@@ -16,6 +16,7 @@
                 <h1>{% translate "Welcome to engajaflix!" %}</h1>
                 <p>{% translate "You know, you can " %}<a href="{% url "login" %}">{% translate "Log in"%}</a></p>
             {% endif %}
+            <p>{% translate "At any time you can go back to the " %}<a href="{% url "comming_soon" %}">{% translate "coming soon" %}</a>{% translate " page!" %}</p>
         </div>
     </div>
 {% endblock %}

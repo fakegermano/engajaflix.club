@@ -98,3 +98,7 @@ class ProfileEditView(LoginRequiredMixin, generic.edit.UpdateView):
         context = self.get_context_data()
         context['email'] = inactive_user.email
         return self.render_to_response(context)
+
+
+class ComingSoonView(generic.TemplateView):
+    template_name = "index.html"

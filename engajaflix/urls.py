@@ -26,11 +26,10 @@ from bio.views import (
     CustomPasswordResetView,
     CustomPasswordResetConfirmView,
     RegisterView,
+    ComingSoonView,
 )
 
 urlpatterns = [
-    path('__debug__/', include(debug_toolbar.urls)),
-    path('admin/', admin.site.urls, name="admin"),
     path('verification/', include('verify_email.urls')),
     path('login/', CustomLoginView.as_view(), name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
@@ -41,10 +40,13 @@ urlpatterns = [
     path('password/change/', CustomPasswordChangeView.as_view(), name='password_change'),
     path('password/change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('register/', RegisterView.as_view(), name="register"),
+    path('', ComingSoonView.as_view(), name="comming_soon"),
     path('bio/', include('bio.urls')),
 ]
 
 if settings.DEBUG:
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
+    urlpatterns += [path('admin/', admin.site.urls, name="admin")]
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL,

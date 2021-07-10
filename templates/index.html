@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% translate "engajaflix is coming" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row mt-3 mb-3 d-flex justify-content-center align-items-center">
+        <div class="col text-center">
+            <h1 class="text-primary">engajaflix.club</h1>
+            <p class="lead">{% translate "We're coming, stay tuned for more information" %}</p>
+            {% if not user.is_authenticated %}
+                <p>{% translate "If you want, you can " %}<a href="{% url "register" %}">{% translate "register" %}</a>{% translate " as an early adopter!" %}</p>
+                <p>{% translate "If you are coming back, you can " %}<a href="{% url "login" %}">{% translate "login" %}</a>.</p>
+            {% else %}
+                <p>
+                    {% translate "Go to our " %}
+                    <a href="{% url "bio:index" %}">
+                        {% translate "start page" %}
+                    </a>
+                    {% translate " or " %}
+                    <a href="{% url "logout" %}">
+                        {% translate "logout" %}
+                    </a>
+                    .
+                </p>
+            {% endif %}
+            <p class="lead">
+                <a href="https://instagram.com/engajaflix.club/" class="btn btn-lg btn-outline-secondary">
+                    {% translate "Check our insta" %}
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

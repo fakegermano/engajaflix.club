@@ -141,7 +141,8 @@ class RegisterForm(UserCreationForm):
             FloatingField('description', css_class="rows-3"),
             Field('picture', template="file_input.html", disabled="disabled"),
             FormActions(
-                Submit('register', _("Register"))
+                Submit('register', _("Register")),
+                Button('cancel', _("Cancel"), css_class="btn-warning", onclick="window.history.back()"),
             )
         )
 
