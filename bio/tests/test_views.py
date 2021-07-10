@@ -220,7 +220,6 @@ class TestRegisterView(MustBeLoggedOut):
 
         assert len(mail.outbox) == 1
         assert body['email'] in mail.outbox[0].to
-        assert body['username'] in mail.outbox[0].body
 
         # simulate user verifying email
         user = CustomUser.objects.get(username=username)
