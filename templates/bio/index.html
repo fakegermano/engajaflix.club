@@ -11,6 +11,7 @@
                 <h1>{% translate "Welcome "%}{{ user.username }}{% translate " to engajaflix"%}</h1>
                 <p>{% translate "You can " %}<a href="{% url "bio:profile" %}">{% translate "see" %}</a>{% translate " your profile!" %}</p>
                 <p class="text-muted">{% translate "Stay tuned for more information!" %}</p>
+                <p><a href="{% url "logout" %}">{% translate "logout" %}</a></p>
             {% else %}
                 <h1>{% translate "Welcome to engajaflix!" %}</h1>
                 <p>{% translate "You know, you can " %}<a href="{% url "login" %}">{% translate "Log in"%}</a></p>

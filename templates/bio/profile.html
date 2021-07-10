@@ -8,8 +8,8 @@
     <div class="row mt-3 justify-content-center">
         <div class="col d-flex">
             {% if user.is_authenticated %}
-            <div class="card mx-auto text-center" style="width: 18rem;">
-                <h4 class="card-header">{% translate "Profile" %}</h4>
+            <div class="card border-primary mx-auto text-center" style="width: 18rem;">
+                <h4 class="card-header bg-primary text-light">{% translate "Profile" %}</h4>
                 <img src="{{ object.picture.url }}" class="card-img-top"
                      alt="{{ object.username }} {% translate "profile picture" %}">
                 <div class="card-body">
