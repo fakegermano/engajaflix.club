@@ -6,5 +6,6 @@ DATABASES = {
         'NAME': ':memory:',
     }
 }
+LANGUAGE_CODE = 'en-us'
 
 EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'

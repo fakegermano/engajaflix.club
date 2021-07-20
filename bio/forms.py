@@ -33,13 +33,13 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.helper.form_action = ""
         self.helper.layout = Layout(
             HTML('{% load static %}<img class="mb-4 mt-3" src="{% static "bio/logo.svg" %}" alt="" width="72" height="57">'),  # noqa: E501
-            HTML('{% load i18n %}<h1 class="h3 mb-3 fw-normal">{% translate "Please sign in" %}</h1>'),
+            HTML(f'<h1 class="h3 mb-3 fw-normal">{_("Please sign in")}</h1>'),
             FloatingField("username", wrapper_class="required"),
             FloatingField("password", wrapper_class="required"),
             FormActions(
                 Submit('login', _("Login")),
             ),
-            HTML('{% load i18n %}<a class="mt-5 mb-3 text-muted" href="{% url "password_reset" %}">{% translate "Forgot password" %}</a>')  # noqa: E501
+            HTML(f'<a class="mt-5 mb-3 text-muted" href="{{% url "password_reset" %}}">{_("Forgot password")}</a>')  # noqa: E501
         )
 
 
@@ -52,7 +52,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML('{% load i18n %}<h1 class="h3 mb-3 mt-3 fw-normal">{% translate "Password change" %}</h1>'),
+            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Password change")}</h1>'),
             FloatingField("old_password", wrapper_class="required"),
             FloatingField("new_password1", wrapper_class="required"),
             FloatingField("new_password2", wrapper_class="required"),
@@ -72,7 +72,7 @@ class CustomPasswordResetForm(PasswordResetForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML('{% load i18n %}<h1 class="h3 mb-3 mt-3 fw-normal">{% translate "Reset password" %}</h1>'),
+            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Reset password")}</h1>'),
             FloatingField("email", wrapper_class="required"),
             FormActions(
                 Submit('reset-password', _("Reset password")),
@@ -90,7 +90,7 @@ class CustomPasswordSetForm(SetPasswordForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML('{% load i18n %}<h1 class="h3 mb-3 mt-3 fw-normal">{% translate "Set password" %}</h1>'),
+            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Set password")}</h1>'),
             FloatingField("new_password1", wrapper_class="required"),
             FloatingField("new_password2", wrapper_class="required"),
             FormActions(
@@ -122,7 +122,7 @@ class RegisterForm(UserCreationForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML('{% load i18n %}<h1 class="h3 mb-3 mt-3 fw-normal">{% translate "Create your account!" %}</h1>'),
+            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Create your account!")}</h1>'),
             FloatingField('username', required="true", wrapper_class="required"),
             FloatingField('email', required="true", wrapper_class="required"),
             FloatingField('password1', required="true", wrapper_class="required"),
@@ -179,7 +179,7 @@ class ProfileEditForm(forms.ModelForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML('{% load i18n %}<h1 class="h3 mb-3 mt-3 fw-normal">{% translate "Edit your profile!" %}</h1>'),
+            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Edit your profile!")}</h1>'),
             FloatingField('username', readonly="readonly", wrapper_class="required"),
             Row(
                 Column(

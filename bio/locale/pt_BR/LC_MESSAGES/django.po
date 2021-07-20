@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-10 14:55-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: bio/admin.py:15 bio/admin.py:18
+msgid "Extra"
+msgstr "Extra"
+
+#: bio/forms.py:40
+msgid "Login"
+msgstr "Entrar"
+
+#: bio/forms.py:60
+msgid "Password change"
+msgstr "Mudar senha"
+
+#: bio/forms.py:61 bio/forms.py:79 bio/forms.py:145 bio/forms.py:209
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: bio/forms.py:78
+msgid "Reset password"
+msgstr "Redefinir senha"
+
+#: bio/forms.py:97
+msgid "Set password"
+msgstr "Definir senha"
+
+#: bio/forms.py:144
+msgid "Register"
+msgstr "Registrar-se"
+
+#: bio/forms.py:206
+msgid "Save"
+msgstr "Salvar"
+
+#: bio/forms.py:207
+msgid "Change password"
+msgstr "Mudar senha"
+
+#: bio/forms.py:217
+msgid "You cannot change the username for now."
+msgstr "Você não pode mudar o nome de usuário agora."
+
+#: bio/models.py:15
+msgid "master"
+msgstr "mestre"
+
+#: bio/models.py:16
+msgid "patron"
+msgstr "patrono"
+
+#: bio/models.py:17
+msgid "doer"
+msgstr "fazedor"
+
+#: bio/models.py:33
+msgid "phone"
+msgstr "telefone"
+
+#: bio/models.py:34
+msgid "picture"
+msgstr "foto"
+
+#: bio/models.py:35
+msgid "type"
+msgstr "tipo"
+
+#: bio/models.py:36
+msgid "pronouns"
+msgstr "pronomes"
+
+#: bio/models.py:37
+msgid "description"
+msgstr "descrição"
+
+#: bio/models.py:41
+msgid "url"
+msgstr "url"
+
+#: bio/views.py:59 bio/views.py:96
+msgid "Failed to create user"
+msgstr "Falha ao criar usuário"

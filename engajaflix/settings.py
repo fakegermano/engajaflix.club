@@ -65,6 +65,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOCALE_PATHS = [
+    BASE_DIR / "locale"
+]
 AUTH_USER_MODEL = "bio.CustomUser"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "/"
@@ -162,7 +165,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -186,7 +189,10 @@ COMPRESS_PRECOMPILERS = (
 )
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+if DEBUG:
+    STATIC_ROOT = BASE_DIR / 'static'
+else:
+    STATIC_ROOT = BASE_DIR / 'public/static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
