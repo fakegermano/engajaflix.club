@@ -60,9 +60,9 @@ jobs:
         script: |
           cd engajaflix.club
           cp -r new/* .
-          rm -rf new/*
+          rm -rf new
           source venv/bin/activate
-          pip install
+          pip install -r requirements.txt
           python manage.py collectstatic
           python manage.py migrate
           touch tmp/restart.txt
