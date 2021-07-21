@@ -33,7 +33,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        DJANGO_SETTINGS_MODULE=engajaflix.test_settings SECRET_KEY=placeholder pytest --nomigrations
+        DJANGO_SETTINGS_MODULE=engajaflix.test_settings SECRET_KEY=placeholder DEBUG=on pytest --nomigrations
     - name: Create "new" dir on remote
       uses: appleboy/ssh-action@master
       with:
