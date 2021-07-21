@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-10 14:55-0300\n"
+"POT-Creation-Date: 2021-07-20 21:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,82 +18,98 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: bio/admin.py:15 bio/admin.py:18
+#: .\bio\admin.py:15 .\bio\admin.py:18
 msgid "Extra"
 msgstr "Extra"
 
-#: bio/forms.py:40
+#: .\bio\forms.py:36
+msgid "Please sign in"
+msgstr "Por favor, faça login"
+
+#: .\bio\forms.py:40
 msgid "Login"
 msgstr "Entrar"
 
-#: bio/forms.py:60
+#: .\bio\forms.py:42
+msgid "Logout"
+msgstr "Logout"
+
+#: .\bio\forms.py:55 .\bio\forms.py:60
 msgid "Password change"
 msgstr "Mudar senha"
 
-#: bio/forms.py:61 bio/forms.py:79 bio/forms.py:145 bio/forms.py:209
+#: .\bio\forms.py:61 .\bio\forms.py:79 .\bio\forms.py:145 .\bio\forms.py:209
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: bio/forms.py:78
+#: .\bio\forms.py:75 .\bio\forms.py:78
 msgid "Reset password"
 msgstr "Redefinir senha"
 
-#: bio/forms.py:97
+#: .\bio\forms.py:93 .\bio\forms.py:97
 msgid "Set password"
 msgstr "Definir senha"
 
-#: bio/forms.py:144
+#: .\bio\forms.py:125
+msgid "Create your account!"
+msgstr "Crie sua conta!"
+
+#: .\bio\forms.py:144
 msgid "Register"
 msgstr "Registrar-se"
 
-#: bio/forms.py:206
+#: .\bio\forms.py:182
+msgid "Edit your profile!"
+msgstr "Edite seu perfil!"
+
+#: .\bio\forms.py:206
 msgid "Save"
 msgstr "Salvar"
 
-#: bio/forms.py:207
+#: .\bio\forms.py:207
 msgid "Change password"
 msgstr "Mudar senha"
 
-#: bio/forms.py:217
+#: .\bio\forms.py:217
 msgid "You cannot change the username for now."
 msgstr "Você não pode mudar o nome de usuário agora."
 
-#: bio/models.py:15
+#: .\bio\models.py:15
 msgid "master"
 msgstr "mestre"
 
-#: bio/models.py:16
+#: .\bio\models.py:16
 msgid "patron"
 msgstr "patrono"
 
-#: bio/models.py:17
+#: .\bio\models.py:17
 msgid "doer"
 msgstr "fazedor"
 
-#: bio/models.py:33
+#: .\bio\models.py:33
 msgid "phone"
 msgstr "telefone"
 
-#: bio/models.py:34
+#: .\bio\models.py:34
 msgid "picture"
 msgstr "foto"
 
-#: bio/models.py:35
+#: .\bio\models.py:35
 msgid "type"
 msgstr "tipo"
 
-#: bio/models.py:36
+#: .\bio\models.py:36
 msgid "pronouns"
 msgstr "pronomes"
 
-#: bio/models.py:37
+#: .\bio\models.py:37
 msgid "description"
 msgstr "descrição"
 
-#: bio/models.py:41
+#: .\bio\models.py:41
 msgid "url"
 msgstr "url"
 
-#: bio/views.py:59 bio/views.py:96
+#: .\bio\views.py:59 .\bio\views.py:96
 msgid "Failed to create user"
 msgstr "Falha ao criar usuário"
