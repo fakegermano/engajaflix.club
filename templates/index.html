@@ -15,15 +15,7 @@
                 <p>{% translate "If you are coming back, you can " %}<a href="{% url "login" %}">{% translate "login" %}</a>.</p>
             {% else %}
                 <p>
-                    {% translate "Go to our " %}
-                    <a href="{% url "bio:index" %}">
-                        {% translate "start page" %}
-                    </a>
-                    {% translate " or " %}
-                    <a href="{% url "logout" %}">
-                        {% translate "logout" %}
-                    </a>
-                    .
+                    {% translate "Go to our " %}<a href="{% url "bio:index" %}">{% translate "start page" %}</a>{% translate " or " %}<a href="{% url "logout" %}">{% translate "logout" %}</a>.
                 </p>
             {% endif %}
             <p class="lead">

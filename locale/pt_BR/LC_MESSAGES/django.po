@@ -161,7 +161,7 @@ msgstr "registrar-se"
 
 #: .\templates\index.html:14
 msgid " as an early adopter!"
-msgstr " como um pioneiro!"
+msgstr " como um pioneire!"
 
 #: .\templates\index.html:15
 msgid "If you are coming back, you can "
