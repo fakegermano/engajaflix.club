@@ -85,7 +85,7 @@ vars().update(EMAIL_CONFIG)
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
-    EMAIL_BACKEND = 'django.core.mail.backend.smtp.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 DEFAULT_FROM_EMAIL = 'noreply<noreply@engajaflix.club>'
 HTML_MESSAGE_TEMPLATE = "verify.html"
