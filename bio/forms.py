@@ -8,7 +8,7 @@ from django.contrib.auth.forms import (
 )
 from django import forms
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Button, HTML, Row, Column, Field
 from crispy_forms.bootstrap import FormActions
@@ -32,14 +32,14 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML('{% load static %}<img class="mb-4 mt-3" src="{% static "bio/logo.svg" %}" alt="" width="72" height="57">'),  # noqa: E501
-            HTML(f'<h1 class="h3 mb-3 fw-normal">{_("Please sign in")}</h1>'),
+            HTML('{% load static %}<img class="mb-4 mt-3" src="{% static "bio/logo.svg" %}" alt="engajaflix logo" width="72" height="57">'),  # noqa: E501
+            HTML('<h1 class="h3 mb-3 fw-normal">%(translate)s</h1>' % {'translate': _("Please sign in")}),
             FloatingField("username", wrapper_class="required"),
             FloatingField("password", wrapper_class="required"),
             FormActions(
                 Submit('login', _("Login")),
             ),
-            HTML(f'<a class="mt-5 mb-3 text-muted" href="{{% url "password_reset" %}}">{_("Forgot password")}</a>')  # noqa: E501
+            HTML('<a class="mt-5 mb-3 text-muted" href="%(url)s">%(translate)s</a>' % {'url': reverse_lazy('logout'), 'translate': _("Logout")})  # noqa: E501
         )
 
 
@@ -52,7 +52,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Password change")}</h1>'),
+            HTML('<h1 class="h3 mb-3 mt-3 fw-normal">%(translate)s</h1>' % {'translate': _("Password change")}),
             FloatingField("old_password", wrapper_class="required"),
             FloatingField("new_password1", wrapper_class="required"),
             FloatingField("new_password2", wrapper_class="required"),
@@ -72,7 +72,7 @@ class CustomPasswordResetForm(PasswordResetForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Reset password")}</h1>'),
+            HTML('<h1 class="h3 mb-3 mt-3 fw-normal">%(translate)s</h1>' % {'translate': _("Reset password")}),
             FloatingField("email", wrapper_class="required"),
             FormActions(
                 Submit('reset-password', _("Reset password")),
@@ -90,7 +90,7 @@ class CustomPasswordSetForm(SetPasswordForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Set password")}</h1>'),
+            HTML('<h1 class="h3 mb-3 mt-3 fw-normal">%(translate)s</h1>' % {'translate': _("Set password")}),
             FloatingField("new_password1", wrapper_class="required"),
             FloatingField("new_password2", wrapper_class="required"),
             FormActions(
@@ -122,7 +122,7 @@ class RegisterForm(UserCreationForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Create your account!")}</h1>'),
+            HTML('<h1 class="h3 mb-3 mt-3 fw-normal">%(translate)s</h1>' % {'translate': _("Create your account!")}),
             FloatingField('username', required="true", wrapper_class="required"),
             FloatingField('email', required="true", wrapper_class="required"),
             FloatingField('password1', required="true", wrapper_class="required"),
@@ -179,7 +179,7 @@ class ProfileEditForm(forms.ModelForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML(f'<h1 class="h3 mb-3 mt-3 fw-normal">{_("Edit your profile!")}</h1>'),
+            HTML('<h1 class="h3 mb-3 mt-3 fw-normal">%(translate)s</h1>' % {'translate': _("Edit your profile!")}),
             FloatingField('username', readonly="readonly", wrapper_class="required"),
             Row(
                 Column(
@@ -205,7 +205,7 @@ class ProfileEditForm(forms.ModelForm):
             FormActions(
                 Submit('save', _("Save"), css_class="btn-success"),
                 Button('change-password', _("Change password"), css_class="btn-outline-info text-dark",
-                       onclick=f"window.location = \"{reverse_lazy('password_change')}\""),
+                       onclick="window.location = \"%(url)s\"" % {'url': reverse_lazy('password_change')}),
                 Button('cancel', _("Cancel"), css_class="btn-warning", onclick="window.history.back()")
             )
         )

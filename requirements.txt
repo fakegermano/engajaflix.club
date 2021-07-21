@@ -1,4 +1,5 @@
 django
+django-environ
 Pillow
 loguru
 django-debug-toolbar
