@@ -108,8 +108,7 @@ INTERNAL_IPS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,7 +128,7 @@ WSGI_APPLICATION = 'engajaflix.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db(default='sqlite://%(file)s' % {'file': BASE_DIR / 'db.sqlite3'})
+    'default': env.db(default='sqlite:///%(file)s' % {'file': BASE_DIR / 'db.sqlite3'})
 }
 
 # Password validation
@@ -176,12 +175,16 @@ STATICFILES_FINDERS = [
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
+if not DEBUG:
+    COMPRESS_OFFLINE = True
 
 STATIC_URL = '/static/'
 if DEBUG:
     STATIC_ROOT = BASE_DIR / 'static'
 else:
-    STATIC_ROOT = BASE_DIR / 'public/static'
+    STATIC_ROOT = env('PUBLIC_ROOT', default=BASE_DIR) / 'static'
+    COMPRESS_ROOT = STATIC_ROOT
+    COMPRESS_URL = STATIC_URL
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

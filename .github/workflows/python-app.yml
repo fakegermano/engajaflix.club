@@ -65,8 +65,10 @@ jobs:
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> engajaflix/.env
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> engajaflix/.env
           echo "EMAIL_URL=${{ secrets.EMAIL_URL }}" >> engajaflix/.env
+          echo "PUBLIC_ROOT=$(pwd)/public" >> engajaflix/.env
           source venv/bin/activate
           pip install -r requirements.txt
-          python manage.py collectstatic
-          python manage.py migrate
+          python manage.py compress
+          python manage.py collectstatic --noinput
+          python manage.py migrate --noinput
           touch tmp/restart.txt
