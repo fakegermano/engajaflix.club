@@ -66,6 +66,8 @@ jobs:
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> engajaflix/.env
           echo "EMAIL_URL=${{ secrets.EMAIL_URL }}" >> engajaflix/.env
           echo "PUBLIC_ROOT=$(pwd)/public" >> engajaflix/.env
+          rm -rf public/static
+          mv static public/
           source venv/bin/activate
           pip install -r requirements.txt
           python manage.py compress
