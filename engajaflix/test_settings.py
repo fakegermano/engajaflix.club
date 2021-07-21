@@ -1,4 +1,6 @@
+import secrets
 from .settings import *
+
 
 DATABASES = {
     'default': {
@@ -7,5 +9,7 @@ DATABASES = {
     }
 }
 LANGUAGE_CODE = 'en-us'
+
+SECRET_KEY = secrets.token_urlsafe()
 
 EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
