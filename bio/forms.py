@@ -32,7 +32,7 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            HTML('{% load static %}<img class="mb-4 mt-3" src="{% static "bio/logo.svg" %}" alt="engajaflix logo" width="72" height="57">'),  # noqa: E501
+            HTML('{% load static %}<img class="mb-4 mt-3" src="{% static "bio/logo.png" %}" alt="engajaflix logo" width="203" height="151">'),  # noqa: E501
             HTML('<h1 class="h3 mb-3 fw-normal">%(translate)s</h1>' % {'translate': _("Please sign in")}),
             FloatingField("username", wrapper_class="required"),
             FloatingField("password", wrapper_class="required"),
