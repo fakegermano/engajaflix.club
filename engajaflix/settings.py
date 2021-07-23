@@ -179,15 +179,17 @@ if not DEBUG:
     COMPRESS_OFFLINE = True
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
 if DEBUG:
     STATIC_ROOT = BASE_DIR / 'static'
+    MEDIA_ROOT = BASE_DIR / 'media'
 else:
     STATIC_ROOT = env('PUBLIC_ROOT', default=BASE_DIR) / 'static'
+    MEDIA_ROOT = env('PUBLIC_ROOT', default=BASE_DIR) / 'media'
     COMPRESS_ROOT = STATIC_ROOT
     COMPRESS_URL = STATIC_URL
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

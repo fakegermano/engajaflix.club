@@ -71,7 +71,7 @@ msgstr "Entrar"
 
 #: .\templates\bio\index.html:19
 msgid "At any time you can go back to the "
-msgstr "A qualquer modento você consegue voltar à seção "
+msgstr "A qualquer momento você consegue voltar à seção "
 
 #: .\templates\bio\index.html:19
 msgid "coming soon"
