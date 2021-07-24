@@ -92,6 +92,8 @@ HTML_MESSAGE_TEMPLATE = "verify.html"
 VERIFICATION_SUCCESS_TEMPLATE = "verify_success.html"
 VERIFICATION_FAILED_TEMPLATE = "verify_failed.html"
 SUBJECT = _("Engajaflix - Email Verification")
+VERIFICATION_SUCCESS_MSG = _("Your email is verified successfully and account has been activated. You can now login...")
+VERIFICATION_FAILED_MSG = _("There is something wrong with this link, can't verify the user...")
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"

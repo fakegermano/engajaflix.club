@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-20 22:10-0300\n"
+"POT-Creation-Date: 2021-07-23 21:30-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,16 @@ msgstr ""
 #: .\engajaflix\settings.py:94
 msgid "Engajaflix - Email Verification"
 msgstr "Engajaflix - Verificação de e-mail"
+
+#: .\engajaflix\settings.py:95
+msgid ""
+"Your email is verified successfully and account has been activated. You can "
+"now login..."
+msgstr "Seu email foi verificado com sucesso e sua conta foi ativada! Você pode agora fazer login..."
+
+#: .\engajaflix\settings.py:96
+msgid "There is something wrong with this link, can't verify the user..."
+msgstr "Parece ter algo de errado com este link, não pudemos verificar o usuário..."
 
 #: .\templates\bio\index.html:4 .\templates\header.html:9
 #: .\templates\header.html:10 .\templates\sidebar.html:5
@@ -52,7 +62,7 @@ msgstr " seu perfil!"
 msgid "Stay tuned for more information!"
 msgstr "Fique ligade para mais informações!"
 
-#: .\templates\bio\index.html:14 .\templates\index.html:24
+#: .\templates\bio\index.html:14 .\templates\index.html:18
 msgid "logout"
 msgstr "sair"
 
@@ -175,15 +185,15 @@ msgstr "entrar"
 msgid "Go to our "
 msgstr "Vá para nossa "
 
-#: .\templates\index.html:20
+#: .\templates\index.html:18
 msgid "start page"
 msgstr "página inicial"
 
-#: .\templates\index.html:22
+#: .\templates\index.html:18
 msgid " or "
 msgstr " ou "
 
-#: .\templates\index.html:31
+#: .\templates\index.html:23
 msgid "Check our insta"
 msgstr "Veja nosso insta"
 
