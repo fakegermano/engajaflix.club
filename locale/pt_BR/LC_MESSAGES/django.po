@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 21:30-0300\n"
+"POT-Creation-Date: 2021-07-23 21:49-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,11 +26,14 @@ msgstr "Engajaflix - Verificação de e-mail"
 msgid ""
 "Your email is verified successfully and account has been activated. You can "
 "now login..."
-msgstr "Seu email foi verificado com sucesso e sua conta foi ativada! Você pode agora fazer login..."
+msgstr ""
+"Seu email foi verificado com sucesso e sua conta foi ativada! Você pode "
+"agora fazer login..."
 
 #: .\engajaflix\settings.py:96
 msgid "There is something wrong with this link, can't verify the user..."
-msgstr "Parece ter algo de errado com este link, não pudemos verificar o usuário..."
+msgstr ""
+"Parece ter algo de errado com este link, não pudemos verificar o usuário..."
 
 #: .\templates\bio\index.html:4 .\templates\header.html:9
 #: .\templates\header.html:10 .\templates\sidebar.html:5
@@ -62,32 +65,36 @@ msgstr " seu perfil!"
 msgid "Stay tuned for more information!"
 msgstr "Fique ligade para mais informações!"
 
-#: .\templates\bio\index.html:14 .\templates\index.html:18
+#: .\templates\bio\index.html:14
+msgid "see user list"
+msgstr "ver lista de usuários"
+
+#: .\templates\bio\index.html:15 .\templates\index.html:18
 msgid "logout"
 msgstr "sair"
 
-#: .\templates\bio\index.html:16
+#: .\templates\bio\index.html:17
 msgid "Welcome to engajaflix!"
 msgstr "Bem vinde ao engajaflix!"
 
-#: .\templates\bio\index.html:17
+#: .\templates\bio\index.html:18
 msgid "You know, you can "
 msgstr "Sabe, você pode "
 
-#: .\templates\bio\index.html:17
+#: .\templates\bio\index.html:18
 #: .\templates\registration\password_reset_complete.html:11
 msgid "Log in"
 msgstr "Entrar"
 
-#: .\templates\bio\index.html:19
+#: .\templates\bio\index.html:20
 msgid "At any time you can go back to the "
 msgstr "A qualquer momento você consegue voltar à seção "
 
-#: .\templates\bio\index.html:19
+#: .\templates\bio\index.html:20
 msgid "coming soon"
 msgstr "em breve"
 
-#: .\templates\bio\index.html:19
+#: .\templates\bio\index.html:20
 msgid " page!"
 msgstr "!"
 
@@ -112,7 +119,7 @@ msgid "Joined: "
 msgstr "Entrou em: "
 
 #: .\templates\bio\profile.html:35 .\templates\bio\profile_update.html:21
-#: .\templates\bio\register.html:13
+#: .\templates\bio\register.html:13 .\templates\bio\user_list.html:19
 msgid "You shouldn't see this"
 msgstr "Você não deveria conseguir ver isso"
 
@@ -127,6 +134,14 @@ msgstr "Email de verificação enviado para "
 #: .\templates\bio\register.html:6
 msgid "Register"
 msgstr "Registrar-se"
+
+#: .\templates\bio\user_list.html:4
+msgid "User List"
+msgstr "Lista de Usuários"
+
+#: .\templates\bio\user_list.html:15
+msgid "User list is strangely empty"
+msgstr "A lista de usuários está estranhamente vazia"
 
 #: .\templates\file_input.html:25
 #: .\venv\Lib\site-packages\django\forms\widgets.py:403

@@ -8,7 +8,7 @@ from django.contrib.auth.views import (
     PasswordResetView,
     PasswordResetConfirmView,
 )
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from verify_email.email_handler import send_verification_email
 
 from .models import CustomUser
@@ -102,3 +102,11 @@ class ProfileEditView(LoginRequiredMixin, generic.edit.UpdateView):
 
 class ComingSoonView(generic.TemplateView):
     template_name = "index.html"
+
+
+class UserListView(UserPassesTestMixin, generic.ListView):
+    template_name = "bio/user_list.html"
+    model = CustomUser
+
+    def test_func(self):
+        return self.request.user.is_staff
