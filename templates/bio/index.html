@@ -8,7 +8,7 @@
     <div class="row mt-3 mb-3 d-flex justify-content-center">
         <div class="col text-center">
             {% if user.is_authenticated %}
-                <h1>{% translate "Welcome to engajaflix, "%}<strong class="text-primary">{{ user.username }}</strong></h1>
+                <h1>{% translate "Welcome to engajaflix, " %}<strong class="text-primary">{{ user.username }}</strong></h1>
                 <p>{% translate "You can " %}<a href="{% url "bio:profile" %}">{% translate "see" %}</a>{% translate " your profile!" %}</p>
                 <p class="text-muted">{% translate "Stay tuned for more information!" %}</p>
                 {% if user.is_staff %}<p><a href="{% url "bio:user_list" %}">{% translate "see user list" %}</a></p>{% endif %}
