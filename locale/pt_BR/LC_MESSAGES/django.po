@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 22:27-0300\n"
+"POT-Creation-Date: 2021-08-31 22:19-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,6 +207,18 @@ msgstr " ou "
 #: .\templates\index.html:23
 msgid "Check our insta"
 msgstr "Veja nosso insta"
+
+#: .\templates\index.html:27
+msgid "Check out the "
+msgstr "Acompanhe o desafio "
+
+#: .\templates\index.html:27
+msgid "#100daysdoing"
+msgstr "#100diasfazendo"
+
+#: .\templates\index.html:27
+msgid "challenge!"
+msgstr "!"
 
 #: .\templates\registration\logged_out.html:5
 msgid "Logout"
