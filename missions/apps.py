@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class DesafioConfig(AppConfig):
+class MissionsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'desafio'
+    name = 'missions'
