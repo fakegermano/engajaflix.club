@@ -40,9 +40,9 @@ urlpatterns = [
     path('password/change/', CustomPasswordChangeView.as_view(), name='password_change'),
     path('password/change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('register/', RegisterView.as_view(), name="register"),
-    path('', ComingSoonView.as_view(), name="comming_soon"),
+    path('soon/', ComingSoonView.as_view(), name="coming_soon"),
     path('bio/', include('bio.urls')),
-    path('missions/', include('missions.urls')),
+    path('', include('missions.urls')),
 ]
 
 if settings.DEBUG:

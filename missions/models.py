@@ -7,11 +7,18 @@ class Mission(models.Model):
     day = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=256)
-    description = models.TextField()
-    attachment = models.FileField(upload_to="media/missions/content/")
+    description = models.TextField(default="")
+    attachment = models.FileField(upload_to="media/missions/content/", blank=True, null=True)
 
     def __str__(self):
         return f"{self.day} - {self.title}"
+
+    @staticmethod
+    def earliest():
+        return Mission.objects.order_by("day").first()
+
+    def number(self):
+        return (self.day - self.earliest().day).days
 
 
 class MissionSubmission(models.Model):
@@ -19,8 +26,8 @@ class MissionSubmission(models.Model):
     mission = models.ForeignKey(Mission, on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
     email = models.EmailField()
-    description = models.TextField()
-    attachment = models.FileField(upload_to="media/missions/submissions/")
+    description = models.TextField(blank=True, default="")
+    attachment = models.FileField(upload_to="qmedia/missions/submissions/", blank=True, null=True)
 
     def __str__(self):
         return f"{self.mission.day} - {self.person.uid}"

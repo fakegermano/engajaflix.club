@@ -39,7 +39,7 @@ class CustomAuthenticationForm(AuthenticationForm):
             FormActions(
                 Submit('login', _("Login")),
             ),
-            HTML('<a class="mt-5 mb-3 text-muted" href="%(url)s">%(translate)s</a>' % {'url': reverse_lazy('logout'), 'translate': _("Logout")})  # noqa: E501
+            HTML('<a class="mt-5 mb-3 text-muted" href="%(url)s">%(translate)s</a>' % {'url': reverse_lazy('coming_soon'), 'translate': _("Coming Soon")})  # noqa: E501
         )
 
 

@@ -9,13 +9,23 @@
                     <h1>Muito bom!</h1>
                     <p>Próxima missão em <span id="countdown">{{ next_mission }}</span></p>
                 {% else %}
-                    <h1>Desafio {{ mission.day }} - {{ mission.title }}</h1>
+                    <h2>Desafio #{{ mission.number }}:</h2>
+                    <h4>{{ mission.day }} - {{ mission.title }}</h4>
                     <p>{{ mission.description }}</p>
                     {% crispy form %}
                 {% endif %}
             {% else %}
                 <h1>Comming soon</h1>
             {% endif %}
+            <span>
+                {% if not user.is_authenticated %}
+                <a class="btn btn-secondary" href="{% url "register" %}">Registrar-se</a>
+                {% endif %}
+                <a class="btn btn-light" href="{% url "coming_soon" %}">Soon...</a>
+                {% if not user.is_authenticated %}
+                <a class="btn btn-secondary" href="{% url "login" %}">Login</a>
+                {% endif %}
+            </span>
         </div>
     </div>
 {% endblock %}
