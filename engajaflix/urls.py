@@ -42,6 +42,7 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name="register"),
     path('', ComingSoonView.as_view(), name="comming_soon"),
     path('bio/', include('bio.urls')),
+    path('missions/', include('missions.urls')),
 ]
 
 if settings.DEBUG:

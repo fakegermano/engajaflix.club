@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'verify_email',
 
     'bio',
+    'missions',
 ]
 
 MIDDLEWARE = [
