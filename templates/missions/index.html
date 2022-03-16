@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -6,26 +7,44 @@
         <div class="col text-center">
             {% if mission %}
                 {% if has_sent %}
-                    <h1>Muito bom!</h1>
-                    <p>Próxima missão em <span id="countdown">{{ next_mission }}</span></p>
+                    <h1>{% translate "Congratulations on completing today's mission!"%}</h1>
+                    <p>{% translate "The next mission will be available in " %}<noscript>{{ next_mission }}</noscript><span id="countdown"></span></p>
                 {% else %}
-                    <h2>Desafio #{{ mission.number }}:</h2>
+                    <h2>{% translate "Mission #" %}{{ mission.number }}:</h2>
                     <h4>{{ mission.day }} - {{ mission.title }}</h4>
                     <p>{{ mission.description }}</p>
                     {% crispy form %}
                 {% endif %}
             {% else %}
-                <h1>Comming soon</h1>
+                <h1>{% translate "You've seen all we've got, but there is sure more coming." %}</h1>
             {% endif %}
             <span>
                 {% if not user.is_authenticated %}
-                <a class="btn btn-secondary" href="{% url "register" %}">Registrar-se</a>
+                <a class="btn btn-secondary" href="{% url "register" %}">{% translate "Register" %}</a>
                 {% endif %}
-                <a class="btn btn-light" href="{% url "coming_soon" %}">Soon...</a>
+                <a class="btn btn-light" href="{% url "coming_soon" %}">{% translate "Coming soon" %}</a>
                 {% if not user.is_authenticated %}
-                <a class="btn btn-secondary" href="{% url "login" %}">Login</a>
+                <a class="btn btn-secondary" href="{% url "login" %}">{% translate "Login" %}</a>
                 {% endif %}
             </span>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    let targetSecs = Number("{{ next_mission }}");
+    setInterval(function () {
+        targetSecs -= 1;
+        let diff = targetSecs;
+        const hours = Math.floor(diff / 3600) % 24;
+        diff -= hours * 3600;
+        const minutes = Math.floor(diff / 60) % 60;
+        diff -= minutes * 60;
+        const seconds = Math.floor(diff) % 60;
+        $("#countdown").text(`${hours}h ${minutes}m ${seconds}s`);
+    }, 1000);
+})
+</script>
 {% endblock %}

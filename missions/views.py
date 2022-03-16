@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from uuid import uuid4, UUID
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
+import pytz
+
+from engajaflix.settings import TIME_ZONE
 
 from .models import MissionPerson, Mission, MissionVisualization, MissionSubmission
 from .forms import SubmissionForm
 
 
 def index(request):
+    now = datetime.utcnow().replace(tzinfo=pytz.timezone(TIME_ZONE))
     try:
-        mission = Mission.objects.get(day=date.today())
+        mission = Mission.objects.get(day=now.date())
     except Mission.DoesNotExist:
         mission = None
     cookie = request.session.get("uid", None)
@@ -16,14 +20,14 @@ def index(request):
         person = MissionPerson(uid=uuid4())
         request.session["uid"] = str(person.uid)
     else:
-        person = MissionPerson.objects.get(uid=UUID(cookie))
+        person, _ = MissionPerson.objects.get_or_create(uid=UUID(cookie))
     if request.user.is_authenticated:
         person.user = request.user
     person.save()
     form = None
     if request.method == "GET" and mission:
         visualization, _ = MissionVisualization.objects.get_or_create(mission=mission, person=person)
-        visualization.views.create(seen_at=datetime.now())
+        visualization.views.create(seen_at=now)
         visualization.save()
         form = SubmissionForm()
     elif request.method == "POST" and mission:
@@ -33,10 +37,15 @@ def index(request):
             submission.person = person
             submission.mission = mission
             submission.save()
-
+    midnight = (now + timedelta(days=1)).replace(
+        hour=0,
+        minute=0,
+        second=0,
+        microsecond=0
+    )
     return render(request, template_name="missions/index.html", context={
         "mission": mission,
         "has_sent": person.has_sent,
-        "next_mission": date.today() + timedelta(days=1),
+        "next_mission": (midnight - now).seconds,
         "form": form,
     })
