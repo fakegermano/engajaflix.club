@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'phonenumber_field',
     'verify_email',
+    'pagedown',
+    'markdownify',
 
     'bio',
     'missions',
@@ -193,6 +195,15 @@ else:
     COMPRESS_ROOT = STATIC_ROOT
     COMPRESS_URL = STATIC_URL
 
+MARKDOWNIFY = {
+    "default": {
+        "STRIP": False,
+        "BLEACH": False,
+    }
+}
+
+PAGEDOWN_IMAGE_UPLOAD_ENABLED = True
+PAGEDOWN_IMAGE_UPLOAD_UNIQUE = False
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

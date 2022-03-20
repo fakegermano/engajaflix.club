@@ -16,3 +16,5 @@ django-verify-email
 django_compressor
 django-libsass
 mysqlclient
+django-pagedown
+django-markdownify

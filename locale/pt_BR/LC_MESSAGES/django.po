@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 11:23+0100\n"
+"POT-Creation-Date: 2022-03-20 18:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\engajaflix\settings.py:95
+#: .\engajaflix\settings.py:97
 msgid "Engajaflix - Email Verification"
 msgstr "Engajaflix - Verificação de e-mail"
 
-#: .\engajaflix\settings.py:96
+#: .\engajaflix\settings.py:98
 msgid ""
 "Your email is verified successfully and account has been activated. You can "
 "now login..."
@@ -30,10 +30,18 @@ msgstr ""
 "Seu email foi verificado com sucesso e sua conta foi ativada! Você pode "
 "agora fazer login..."
 
-#: .\engajaflix\settings.py:97
+#: .\engajaflix\settings.py:99
 msgid "There is something wrong with this link, can't verify the user..."
 msgstr ""
 "Parece ter algo de errado com este link, não pudemos verificar o usuário..."
+
+#: .\missions\forms.py:20
+msgid "You must fill in either the description or send an attachment"
+msgstr "Você deve inserir ou a descrição ou um anexo"
+
+#: .\missions\forms.py:41
+msgid "Send"
+msgstr "Submeter"
 
 #: .\missions\models.py:8
 #, fuzzy
@@ -72,6 +80,14 @@ msgstr "uid"
 #: .\missions\models.py:70
 msgid "seen_at"
 msgstr "visto_em"
+
+#: .\missions\views.py:50
+msgid "I completed mission #"
+msgstr "Completei a missão nº"
+
+#: .\missions\views.py:52
+msgid "missions completed so far!"
+msgstr "missões cumpridas até hoje!"
 
 #: .\templates\bio\index.html:4 .\templates\header.html:9
 #: .\templates\header.html:10 .\templates\sidebar.html:5
@@ -165,7 +181,7 @@ msgstr "Atualizar Perfil"
 msgid "Verification email sent to "
 msgstr "Email de verificação enviado para "
 
-#: .\templates\bio\register.html:6 .\templates\missions\index.html:23
+#: .\templates\bio\register.html:6 .\templates\missions\index.html:43
 msgid "Register"
 msgstr "Registrar-se"
 
@@ -258,29 +274,41 @@ msgstr "página inicial"
 msgid " or "
 msgstr " ou "
 
-#: .\templates\missions\index.html:10
-msgid "Congratulations on completing today's mission!"
-msgstr ""
-
 #: .\templates\missions\index.html:11
+msgid "Daily missions to improve your brand's communication"
+msgstr "Missões diárias para melhorar a comunicação da sua marca"
+
+#: .\templates\missions\index.html:19
+msgid "Congratulations on completing today's mission!"
+msgstr "Parabéns por completar a missão de hoje!"
+
+#: .\templates\missions\index.html:21
+msgid "Share "
+msgstr "Compartilhar "
+
+#: .\templates\missions\index.html:24
+msgid "Results copied to clipboard"
+msgstr "Resultados copiados no ctrl-v"
+
+#: .\templates\missions\index.html:27
 msgid "The next mission will be available in "
 msgstr "A próxima missão estará disponível em "
 
-#: .\templates\missions\index.html:13
+#: .\templates\missions\index.html:33
 msgid "Mission #"
 msgstr "Missão nº"
 
-#: .\templates\missions\index.html:19
+#: .\templates\missions\index.html:39
 msgid "You've seen all we've got, but there is sure more coming."
 msgstr "Você viu tudo o que temos, mas em breve vem mais."
 
-#: .\templates\missions\index.html:25
+#: .\templates\missions\index.html:45
 #, fuzzy
 #| msgid "coming soon"
-msgid "Coming soon"
-msgstr "em breve"
+msgid "Coming Soon"
+msgstr "Em Breve"
 
-#: .\templates\missions\index.html:27 .\templates\registration\login.html:6
+#: .\templates\missions\index.html:47 .\templates\registration\login.html:6
 #: .\templates\verify_success.html:12
 msgid "Login"
 msgstr "Entrar"

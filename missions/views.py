@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from uuid import uuid4, UUID
 from datetime import datetime, timedelta
+from django.utils.translation import gettext_lazy
+from django.template.defaultfilters import urlencode
 import pytz
 
 from engajaflix.settings import TIME_ZONE
@@ -43,9 +45,18 @@ def index(request):
         second=0,
         microsecond=0
     )
+    completed = mission.missionsubmission_set.filter(person=person).count()
+    share_text = (
+        gettext_lazy("I completed mission #") +
+        f"{mission.number()}! {completed} " +
+        gettext_lazy("missions completed so far!") +
+        " https://engajaflix.club/"
+    )
+
     return render(request, template_name="missions/index.html", context={
         "mission": mission,
         "has_sent": person.has_sent,
         "next_mission": (midnight - now).seconds,
+        "share_text": share_text,
         "form": form,
     })

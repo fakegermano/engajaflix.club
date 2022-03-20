@@ -4,6 +4,7 @@ from crispy_forms.layout import Submit, Layout, Button, HTML, Row, Column, Field
 from crispy_forms.bootstrap import FormActions
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 from .models import MissionSubmission
 
@@ -16,7 +17,7 @@ class SubmissionForm(forms.ModelForm):
     def clean(self):
         data = self.cleaned_data
         if not data.get("description") and not data.get("attachment"):
-            raise ValidationError("You must fill in either the description or send an attachment")
+            raise ValidationError(_("You must fill in either the description or send an attachment"))
         return data
 
     def __init__(self, *args, **kwargs):
@@ -37,7 +38,7 @@ class SubmissionForm(forms.ModelForm):
                 ),
                 Column(
                     FormActions(
-                        Submit('send', "Send"),
+                        Submit('send', _("Send")),
                         css_class="float-end"
                     ),
                     css_class="col-sm-2 col-xs-12",

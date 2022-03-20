@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="{% static "bio/base.css" %}">
     {% endblock %}
     <title>{% block title %} {% endblock %}</title>
+    {% block opengraph %}{% endblock %}
 </head>
 <body>
 {% if user.is_authenticated %}
