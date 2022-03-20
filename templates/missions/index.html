@@ -36,7 +36,7 @@
                         {{ mission.description|markdownify }}
                     </div>
                     <div class="mb-2 mt-2">
-                        <a class="btn btn-info" href="{{ mission.attachment.url }}">{% translate "Download attachment" %}</a>
+                        <a class="btn btn-info" href="{{ mission.attachment.url }}" target="_blank">{% translate "Download attachment" %}</a>
                     </div>
                     <p class="display-5 mt-1 mb-2">{% translate "Submit your mission:" %}</p>
                     {% crispy form %}
