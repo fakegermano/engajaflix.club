@@ -12,7 +12,7 @@ from .models import MissionSubmission
 class SubmissionForm(forms.ModelForm):
     class Meta:
         model = MissionSubmission
-        fields = ["name", "email", "description", "attachment"]
+        fields = ["description", "attachment"]
 
     def clean(self):
         data = self.cleaned_data
@@ -28,8 +28,6 @@ class SubmissionForm(forms.ModelForm):
         self.helper.form_method = "post"
         self.helper.form_action = ""
         self.helper.layout = Layout(
-            FloatingField('name', required="true", wrapper_class="required"),
-            FloatingField('email', required="true", wrapper_class="required"),
             FloatingField('description', css_class="rows-3"),
             Row(
                 Column(

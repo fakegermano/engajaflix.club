@@ -2,7 +2,7 @@ from django.shortcuts import render
 from uuid import uuid4, UUID
 from datetime import datetime, timedelta
 from django.utils.translation import gettext_lazy
-from django.template.defaultfilters import urlencode
+from django_user_agents.utils import get_user_agent
 import pytz
 
 from engajaflix.settings import TIME_ZONE
@@ -12,6 +12,8 @@ from .forms import SubmissionForm
 
 
 def index(request):
+    user_agent = get_user_agent(request)
+    can_share = not user_agent.is_pc and user_agent.os.family != "iOS"
     now = datetime.utcnow().replace(tzinfo=pytz.timezone(TIME_ZONE))
     try:
         mission = Mission.objects.get(day=now.date())
@@ -33,9 +35,11 @@ def index(request):
         visualization.save()
         form = SubmissionForm()
     elif request.method == "POST" and mission:
-        form = SubmissionForm(request.POST)
+        form = SubmissionForm(request.POST, request.FILES)
         if form.is_valid():
             submission = form.save(commit=False)
+            submission.name = request.user.first_name
+            submission.email = request.user.email
             submission.person = person
             submission.mission = mission
             submission.save()
@@ -63,6 +67,7 @@ def index(request):
         "mission": mission,
         "has_sent": person.has_sent,
         "next_mission": (midnight - now).seconds,
+        "can_share": can_share,
         "share_text": share_text,
         "form": form,
     })

@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'verify_email',
     'pagedown',
     'markdownify',
+    'django_user_agents',
 
     'bio',
     'missions',
@@ -71,8 +72,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
+USER_AGENTS_CACHE = None
 LOCALE_PATHS = [
     BASE_DIR / "locale"
 ]

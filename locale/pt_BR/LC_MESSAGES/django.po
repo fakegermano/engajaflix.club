@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 23:00+0100\n"
+"POT-Creation-Date: 2022-03-21 00:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\engajaflix\settings.py:97
+#: .\engajaflix\settings.py:100
 msgid "Engajaflix - Email Verification"
 msgstr "Engajaflix - Verificação de e-mail"
 
-#: .\engajaflix\settings.py:98
+#: .\engajaflix\settings.py:101
 msgid ""
 "Your email is verified successfully and account has been activated. You can "
 "now login..."
@@ -30,7 +30,7 @@ msgstr ""
 "Seu email foi verificado com sucesso e sua conta foi ativada! Você pode "
 "agora fazer login..."
 
-#: .\engajaflix\settings.py:99
+#: .\engajaflix\settings.py:102
 msgid "There is something wrong with this link, can't verify the user..."
 msgstr ""
 "Parece ter algo de errado com este link, não pudemos verificar o usuário..."
@@ -39,7 +39,7 @@ msgstr ""
 msgid "You must fill in either the description or send an attachment"
 msgstr "Você deve inserir ou a descrição ou um anexo"
 
-#: .\missions\forms.py:41
+#: .\missions\forms.py:39
 msgid "Send"
 msgstr "Submeter"
 
@@ -121,11 +121,11 @@ msgstr "instância de visualização de missão"
 msgid "mission visualization instances"
 msgstr "instâncias de visualização de missão"
 
-#: .\missions\views.py:56
+#: .\missions\views.py:60
 msgid "I completed mission #"
 msgstr "Completei a missão nº"
 
-#: .\missions\views.py:58
+#: .\missions\views.py:62
 msgid "missions completed so far!"
 msgstr "missões cumpridas até hoje!"
 
@@ -310,47 +310,51 @@ msgstr "página inicial"
 msgid " or "
 msgstr " ou "
 
-#: .\templates\missions\index.html:11
+#: .\templates\missions\index.html:12
 msgid "Daily missions to improve your brand's communication"
 msgstr "Missões diárias para melhorar a comunicação da sua marca"
 
-#: .\templates\missions\index.html:19
+#: .\templates\missions\index.html:20
 msgid "Congratulations on completing today's mission!"
 msgstr "Parabéns por completar a missão de hoje!"
 
-#: .\templates\missions\index.html:21
+#: .\templates\missions\index.html:23
 msgid "Share "
 msgstr "Compartilhar "
 
-#: .\templates\missions\index.html:24
+#: .\templates\missions\index.html:25
+msgid "Copy to clipboard "
+msgstr "Copiar resultado "
+
+#: .\templates\missions\index.html:30
 msgid "Results copied to clipboard"
 msgstr "Resultados copiados no ctrl-v"
 
-#: .\templates\missions\index.html:27
+#: .\templates\missions\index.html:34
 msgid "The next mission will be available in "
 msgstr "A próxima missão estará disponível em "
 
-#: .\templates\missions\index.html:33
+#: .\templates\missions\index.html:40
 msgid "Mission #"
 msgstr "Missão nº"
 
-#: .\templates\missions\index.html:39
+#: .\templates\missions\index.html:46
 msgid "Extra material"
 msgstr "Material complementar"
 
-#: .\templates\missions\index.html:41
+#: .\templates\missions\index.html:48
 msgid "Submit the result of your mission"
 msgstr "Envie o resultado da sua missão"
 
-#: .\templates\missions\index.html:42
+#: .\templates\missions\index.html:49
 msgid ""
 "After completing your mission, you can submit it for our review! We'll give "
 "you extra insights and track your progress!"
 msgstr ""
-"Depois de completar a missão, você pode enviar ela aqui para que nós a revisemos. "
-"Vamos te dar dicas e acompanhar seu progresso!"
+"Depois de completar a missão, você pode enviar ela aqui para que nós a "
+"revisemos. Vamos te dar dicas e acompanhar seu progresso!"
 
-#: .\templates\missions\index.html:46
+#: .\templates\missions\index.html:53
 msgid "You've seen all we've got, but there is sure more coming."
 msgstr "Você viu tudo o que temos, mas em breve vem mais."
 
