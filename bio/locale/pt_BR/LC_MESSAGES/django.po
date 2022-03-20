@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 22:08+0100\n"
+"POT-Creation-Date: 2022-03-20 22:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,47 +70,51 @@ msgstr "Mudar senha"
 msgid "You cannot change the username for now."
 msgstr "Você não pode mudar o nome de usuário agora."
 
-#: .\bio\models.py:15
+#: .\bio\models.py:16
 msgid "master"
 msgstr "mestre"
 
-#: .\bio\models.py:16
+#: .\bio\models.py:17
 msgid "patron"
 msgstr "patrono"
 
-#: .\bio\models.py:17
+#: .\bio\models.py:18
 msgid "doer"
 msgstr "fazedor"
 
-#: .\bio\models.py:33
+#: .\bio\models.py:19
+msgid "nothing"
+msgstr "nada"
+
+#: .\bio\models.py:35
 msgid "phone"
 msgstr "telefone"
 
-#: .\bio\models.py:34
+#: .\bio\models.py:36
 msgid "picture"
 msgstr "foto"
 
-#: .\bio\models.py:35
+#: .\bio\models.py:37
 msgid "type"
 msgstr "tipo"
 
-#: .\bio\models.py:36
+#: .\bio\models.py:38
 msgid "pronouns"
 msgstr "pronomes"
 
-#: .\bio\models.py:37
+#: .\bio\models.py:39
 msgid "description"
 msgstr "descrição"
 
-#: .\bio\models.py:41
+#: .\bio\models.py:47
 msgid "url"
 msgstr "url"
 
-#: .\bio\models.py:45
+#: .\bio\models.py:51
 msgid "social link"
 msgstr "link de rede social"
 
-#: .\bio\models.py:46
+#: .\bio\models.py:52
 msgid "social links"
 msgstr "links de rede social"
 

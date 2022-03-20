@@ -10,11 +10,13 @@ class CustomUser(AbstractUser):
     MASTER = 'M'
     PATRON = 'P'
     DOER = 'D'
+    NOTHING = 'N'
 
     USER_TYPES = [
         (MASTER, _('master')),
         (PATRON, _('patron')),
-        (DOER, _('doer'))
+        (DOER, _('doer')),
+        (NOTHING, _('nothing')),
     ]
     """
     Extend the base user model from django
@@ -32,9 +34,13 @@ class CustomUser(AbstractUser):
 
     phone = PhoneNumberField(_('phone'), blank=True, default="")
     picture = models.ImageField(_('picture'), upload_to='profiles/', blank=True, default="default.png")
-    type = models.CharField(_('type'), max_length=1, choices=USER_TYPES, default=DOER)
+    type = models.CharField(_('type'), max_length=1, choices=USER_TYPES, default=NOTHING)
     pronouns = models.CharField(_('pronouns'), max_length=10, blank=True, default="")
     description = models.TextField(_('description'), blank=True, default="")
+
+    @property
+    def allowed(self):
+        return self.type != self.NOTHING
 
 
 class SocialLink(models.Model):
