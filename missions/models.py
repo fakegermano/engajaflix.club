@@ -11,6 +11,10 @@ class Mission(models.Model):
     description = models.TextField(_("description"), default="")
     attachment = models.FileField(_("attachment"), upload_to="media/missions/content/", blank=True, null=True)
 
+    class Meta:
+        verbose_name = _("mission")
+        verbose_name_plural = _("missions")
+
     def __str__(self):
         return f"{self.day} - {self.title}"
 
@@ -30,6 +34,10 @@ class MissionSubmission(models.Model):
     description = models.TextField(_("description"), blank=True, default="")
     attachment = models.FileField(_("attachment"), upload_to="media/missions/submissions/", blank=True, null=True)
 
+    class Meta:
+        verbose_name = _("mission submission")
+        verbose_name_plural = _("mission submissions")
+
     def __str__(self):
         return f"{self.mission.day} - {self.person.who}"
 
@@ -37,6 +45,10 @@ class MissionSubmission(models.Model):
 class MissionPerson(models.Model):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     uid = models.UUIDField(_("uid"))
+
+    class Meta:
+        verbose_name = _("mission person")
+        verbose_name_plural = _("mission persons")
 
     @property
     def has_sent(self):
@@ -57,6 +69,10 @@ class MissionVisualization(models.Model):
     person = models.ForeignKey(MissionPerson, on_delete=models.CASCADE)
     mission = models.ForeignKey(Mission, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = _("mission visualizatiom")
+        verbose_name_plural = _("mission visualizations")
+
     @property
     def view_count(self):
         return self.views.count()
@@ -68,6 +84,10 @@ class MissionVisualization(models.Model):
 class MissionVisualizationInstance(models.Model):
     visualization = models.ForeignKey(MissionVisualization, on_delete=models.CASCADE, related_name="views")
     seen_at = models.DateTimeField(_("seen_at"), editable=False)
+
+    class Meta:
+        verbose_name = _("mission visualization instance")
+        verbose_name_plural = _("mission visualization instances")
 
     def __str__(self):
         return f"{self.visualization.person.who} saw {self.visualization.mission.day} at {self.seen_at}"

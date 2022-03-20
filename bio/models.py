@@ -41,5 +41,9 @@ class SocialLink(models.Model):
     url = models.URLField(_('url'))
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = _("social link")
+        verbose_name_plural = _("social links")
+
     def __str__(self):
         return self.url
