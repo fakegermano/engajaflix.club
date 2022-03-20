@@ -37,7 +37,7 @@ class MustBeLoggedIn:
     def test_anonymous(self):
         c = Client()
         response = c.get(self.view_url)
-        assert 'login' in response.url
+        assert 'next' in response.url
 
     def test_logged_in(self):
         c = Client()
@@ -66,7 +66,7 @@ class TestHomeView:
 
 
 class TestLoginView:
-    view_url = '/login/'
+    view_url = '/'
 
     def test_form(self):
         c = Client()
@@ -118,12 +118,6 @@ class TestPasswordResetView:
 
 class TestPasswordChangeView(MustBeLoggedIn):
     view_url = '/password/change/'
-
-    def test_anonymous(self):
-        c = Client()
-        response = c.get(self.view_url, follow=True)
-        assert response.status_code == 200
-        assert 'login' in response.content.decode('utf-8')
 
     def test_logged_in(self):
         c = Client()
