@@ -348,7 +348,7 @@ msgid ""
 "you extra insights and track your progress!"
 msgstr ""
 "Depois de completar a missão, você pode enviar ela aqui para que nós a revisemos. "
-"Vamos tentar te dar dicas e acompanhar seu progresso!"
+"Vamos te dar dicas e acompanhar seu progresso!"
 
 #: .\templates\missions\index.html:46
 msgid "You've seen all we've got, but there is sure more coming."
