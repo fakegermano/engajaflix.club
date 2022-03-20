@@ -22,8 +22,9 @@ class Mission(models.Model):
     def earliest():
         return Mission.objects.order_by("day").first()
 
+    @property
     def number(self):
-        return (self.day - self.earliest().day).days
+        return (self.day - self.earliest().day).days + 1
 
 
 class MissionSubmission(models.Model):

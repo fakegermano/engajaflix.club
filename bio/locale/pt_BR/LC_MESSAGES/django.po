@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 19:03+0100\n"
+"POT-Creation-Date: 2022-03-20 22:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,47 +30,43 @@ msgstr "Por favor, faça login"
 msgid "Login"
 msgstr "Entrar"
 
-#: .\bio\forms.py:42
-msgid "Coming Soon"
-msgstr "Em breve"
-
-#: .\bio\forms.py:55 .\bio\forms.py:60
-msgid "Password change"
-msgstr "Mudar senha"
-
-#: .\bio\forms.py:61 .\bio\forms.py:79 .\bio\forms.py:145 .\bio\forms.py:209
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: .\bio\forms.py:75 .\bio\forms.py:78
-msgid "Reset password"
-msgstr "Redefinir senha"
-
-#: .\bio\forms.py:93 .\bio\forms.py:97
-msgid "Set password"
-msgstr "Definir senha"
-
-#: .\bio\forms.py:125
-msgid "Create your account!"
-msgstr "Crie sua conta!"
-
-#: .\bio\forms.py:144
+#: .\bio\forms.py:42 .\bio\forms.py:145
 msgid "Register"
 msgstr "Registrar-se"
 
-#: .\bio\forms.py:182
+#: .\bio\forms.py:56 .\bio\forms.py:61
+msgid "Password change"
+msgstr "Mudar senha"
+
+#: .\bio\forms.py:62 .\bio\forms.py:80 .\bio\forms.py:146 .\bio\forms.py:210
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: .\bio\forms.py:76 .\bio\forms.py:79
+msgid "Reset password"
+msgstr "Redefinir senha"
+
+#: .\bio\forms.py:94 .\bio\forms.py:98
+msgid "Set password"
+msgstr "Definir senha"
+
+#: .\bio\forms.py:126
+msgid "Create your account!"
+msgstr "Crie sua conta!"
+
+#: .\bio\forms.py:183
 msgid "Edit your profile!"
 msgstr "Edite seu perfil!"
 
-#: .\bio\forms.py:206
+#: .\bio\forms.py:207
 msgid "Save"
 msgstr "Salvar"
 
-#: .\bio\forms.py:207
+#: .\bio\forms.py:208
 msgid "Change password"
 msgstr "Mudar senha"
 
-#: .\bio\forms.py:217
+#: .\bio\forms.py:218
 msgid "You cannot change the username for now."
 msgstr "Você não pode mudar o nome de usuário agora."
 
@@ -121,6 +117,9 @@ msgstr "links de rede social"
 #: .\bio\views.py:59 .\bio\views.py:96
 msgid "Failed to create user"
 msgstr "Falha ao criar usuário"
+
+#~ msgid "Coming Soon"
+#~ msgstr "Em breve"
 
 #~ msgid "Logout"
 #~ msgstr "Logout"

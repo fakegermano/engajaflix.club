@@ -47,7 +47,7 @@ def index(request):
     )
     if mission and person:
         completed = mission.missionsubmission_set.filter(person=person).count()
-        mission_number = mission.number()
+        mission_number = mission.number
     else:
         completed = 0
         mission_number = ""

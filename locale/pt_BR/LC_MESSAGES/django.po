@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 19:03+0100\n"
+"POT-Creation-Date: 2022-03-20 22:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,17 +57,15 @@ msgstr "criado_em"
 msgid "title"
 msgstr "título"
 
-#: .\missions\models.py:11 .\missions\models.py:34
+#: .\missions\models.py:11 .\missions\models.py:35
 msgid "description"
 msgstr "descrição"
 
-#: .\missions\models.py:12 .\missions\models.py:35
+#: .\missions\models.py:12 .\missions\models.py:36
 msgid "attachment"
 msgstr "anexo"
 
 #: .\missions\models.py:15
-#, fuzzy
-#| msgid "missions"
 msgid "mission"
 msgstr "missão"
 
@@ -75,57 +73,51 @@ msgstr "missão"
 msgid "missions"
 msgstr "missões"
 
-#: .\missions\models.py:32
+#: .\missions\models.py:33
 msgid "name"
 msgstr "nome"
 
-#: .\missions\models.py:33
+#: .\missions\models.py:34
 msgid "email"
 msgstr "e-mail"
 
-#: .\missions\models.py:38
-#, fuzzy
-#| msgid "missions"
+#: .\missions\models.py:39
 msgid "mission submission"
 msgstr "submissão de missões"
 
-#: .\missions\models.py:39
+#: .\missions\models.py:40
 msgid "mission submissions"
 msgstr "submissões de missões"
 
-#: .\missions\models.py:47
+#: .\missions\models.py:48
 msgid "uid"
 msgstr "uid"
 
-#: .\missions\models.py:50
-#, fuzzy
-#| msgid "missions"
+#: .\missions\models.py:51
 msgid "mission person"
 msgstr "fazedor"
 
-#: .\missions\models.py:51
-#, fuzzy
-#| msgid "missions"
+#: .\missions\models.py:52
 msgid "mission persons"
 msgstr "fazedores"
 
-#: .\missions\models.py:73
+#: .\missions\models.py:74
 msgid "mission visualizatiom"
 msgstr "visualização de missão"
 
-#: .\missions\models.py:74
+#: .\missions\models.py:75
 msgid "mission visualizations"
 msgstr "visualizações de missão"
 
-#: .\missions\models.py:86
+#: .\missions\models.py:87
 msgid "seen_at"
 msgstr "visto_em"
 
-#: .\missions\models.py:89
+#: .\missions\models.py:90
 msgid "mission visualization instance"
 msgstr "instância de visualização de missão"
 
-#: .\missions\models.py:90
+#: .\missions\models.py:91
 msgid "mission visualization instances"
 msgstr "instâncias de visualização de missão"
 
@@ -225,7 +217,7 @@ msgstr "Atualizar Perfil"
 msgid "Verification email sent to "
 msgstr "Email de verificação enviado para "
 
-#: .\templates\bio\register.html:6 .\templates\missions\index.html:43
+#: .\templates\bio\register.html:6
 msgid "Register"
 msgstr "Registrar-se"
 
@@ -343,19 +335,16 @@ msgid "Mission #"
 msgstr "Missão nº"
 
 #: .\templates\missions\index.html:39
-msgid "You've seen all we've got, but there is sure more coming."
-msgstr "Você viu tudo o que temos, mas em breve vem mais."
+msgid "Download attachment"
+msgstr "Baixar anexo"
+
+#: .\templates\missions\index.html:41
+msgid "Submit your mission:"
+msgstr "Complete a missão:"
 
 #: .\templates\missions\index.html:45
-#, fuzzy
-#| msgid "coming soon"
-msgid "Coming Soon"
-msgstr "Em Breve"
-
-#: .\templates\missions\index.html:47 .\templates\registration\login.html:6
-#: .\templates\verify_success.html:12
-msgid "Login"
-msgstr "Entrar"
+msgid "You've seen all we've got, but there is sure more coming."
+msgstr "Você viu tudo o que temos, mas em breve vem mais."
 
 #: .\templates\registration\logged_out.html:5
 msgid "Logout"
@@ -369,6 +358,10 @@ msgstr "Saiu"
 msgid "Login again"
 msgstr "Entrar novamente"
 
+#: .\templates\registration\login.html:6 .\templates\verify_success.html:12
+msgid "Login"
+msgstr "Entrar"
+
 #: .\templates\registration\login.html:13
 msgid "Already logged in "
 msgstr "Já está logado "
@@ -378,6 +371,16 @@ msgstr "Já está logado "
 #| msgid "Logged out"
 msgid "Log out"
 msgstr "Saiu"
+
+#: .\templates\registration\login.html:14
+#, fuzzy
+#| msgid "missions"
+msgid "Missions"
+msgstr "Missões"
+
+#: .\templates\registration\login.html:15
+msgid "You will be redirected automatically to the missions page"
+msgstr "Você será redirecionade automaticamente para a página de missões"
 
 #: .\templates\registration\password_change_done.html:4
 msgid "Password change done"
@@ -1684,6 +1687,11 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#, fuzzy
+#~| msgid "coming soon"
+#~ msgid "Coming Soon"
+#~ msgstr "Em Breve"
 
 #~ msgid "Welcome "
 #~ msgstr "Bem vinde "
