@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 22:20+0100\n"
+"POT-Creation-Date: 2022-03-20 23:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -335,14 +335,24 @@ msgid "Mission #"
 msgstr "Missão nº"
 
 #: .\templates\missions\index.html:39
-msgid "Download attachment"
-msgstr "Baixar anexo"
+msgid "Extra material"
+msgstr "Material complementar"
 
 #: .\templates\missions\index.html:41
-msgid "Submit your mission:"
-msgstr "Complete a missão:"
+#, fuzzy
+#| msgid "Submit your mission:"
+msgid "Submit the result of your mission"
+msgstr "Envie o resultado da sua missão"
 
-#: .\templates\missions\index.html:45
+#: .\templates\missions\index.html:42
+msgid ""
+"After completing your mission, you can submit it for our review! We'll give "
+"you extra insights and track your progress!"
+msgstr ""
+"Depois de completar a missão, você pode enviar ela aqui para que nós a revisemos."
+"Vamos tentar te dar digcas e acompanhar seu progresso!"
+
+#: .\templates\missions\index.html:46
 msgid "You've seen all we've got, but there is sure more coming."
 msgstr "Você viu tudo o que temos, mas em breve vem mais."
 
@@ -1687,6 +1697,9 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Download attachment"
+#~ msgstr "Baixar anexo"
 
 #, fuzzy
 #~| msgid "coming soon"
