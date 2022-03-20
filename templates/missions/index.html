@@ -37,6 +37,9 @@
                 {% endif %}
             {% else %}
                 <h1>{% translate "You've seen all we've got, but there is sure more coming." %}</h1>
+                <div class="mt-1 mb-1">
+                    <img src="{% static "/img/will_find.gif" %}" class="img-fluid" alt="will smith magnifying glass" />
+                </div>
             {% endif %}
             <span>
                 {% if not user.is_authenticated %}
