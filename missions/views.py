@@ -45,10 +45,16 @@ def index(request):
         second=0,
         microsecond=0
     )
-    completed = mission.missionsubmission_set.filter(person=person).count()
+    if mission and person:
+        completed = mission.missionsubmission_set.filter(person=person).count()
+        mission_number = mission.number()
+    else:
+        completed = 0
+        mission_number = ""
+
     share_text = (
         gettext_lazy("I completed mission #") +
-        f"{mission.number()}! {completed} " +
+        f"{mission_number}! {completed} " +
         gettext_lazy("missions completed so far!") +
         " https://engajaflix.club/"
     )
