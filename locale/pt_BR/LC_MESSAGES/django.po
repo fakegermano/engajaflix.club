@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-21 00:12+0100\n"
+"POT-Creation-Date: 2022-03-21 01:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,93 +39,93 @@ msgstr ""
 msgid "You must fill in either the description or send an attachment"
 msgstr "Você deve inserir ou a descrição ou um anexo"
 
-#: .\missions\forms.py:39
+#: .\missions\forms.py:41
 msgid "Send"
 msgstr "Submeter"
 
-#: .\missions\models.py:8
+#: .\missions\models.py:9
 #, fuzzy
 #| msgid "May"
 msgid "day"
 msgstr "Maio"
 
-#: .\missions\models.py:9
+#: .\missions\models.py:10
 msgid "created_at"
 msgstr "criado_em"
 
-#: .\missions\models.py:10
+#: .\missions\models.py:11
 msgid "title"
 msgstr "título"
 
-#: .\missions\models.py:11 .\missions\models.py:35
+#: .\missions\models.py:12 .\missions\models.py:36
 msgid "description"
 msgstr "descrição"
 
-#: .\missions\models.py:12 .\missions\models.py:36
+#: .\missions\models.py:13 .\missions\models.py:37
 msgid "attachment"
 msgstr "anexo"
 
-#: .\missions\models.py:15
+#: .\missions\models.py:16
 msgid "mission"
 msgstr "missão"
 
-#: .\missions\models.py:16 .\templates\bio\index.html:20
+#: .\missions\models.py:17 .\templates\bio\index.html:20
 msgid "missions"
 msgstr "missões"
 
-#: .\missions\models.py:33
+#: .\missions\models.py:34
 msgid "name"
 msgstr "nome"
 
-#: .\missions\models.py:34
+#: .\missions\models.py:35
 msgid "email"
 msgstr "e-mail"
 
-#: .\missions\models.py:39
+#: .\missions\models.py:40
 msgid "mission submission"
 msgstr "submissão de missões"
 
-#: .\missions\models.py:40
+#: .\missions\models.py:41
 msgid "mission submissions"
 msgstr "submissões de missões"
 
-#: .\missions\models.py:48
+#: .\missions\models.py:49
 msgid "uid"
 msgstr "uid"
 
-#: .\missions\models.py:51
+#: .\missions\models.py:52
 msgid "mission person"
 msgstr "fazedor"
 
-#: .\missions\models.py:52
+#: .\missions\models.py:53
 msgid "mission persons"
 msgstr "fazedores"
 
-#: .\missions\models.py:74
+#: .\missions\models.py:79
 msgid "mission visualizatiom"
 msgstr "visualização de missão"
 
-#: .\missions\models.py:75
+#: .\missions\models.py:80
 msgid "mission visualizations"
 msgstr "visualizações de missão"
 
-#: .\missions\models.py:87
+#: .\missions\models.py:92
 msgid "seen_at"
 msgstr "visto_em"
 
-#: .\missions\models.py:90
+#: .\missions\models.py:95
 msgid "mission visualization instance"
 msgstr "instância de visualização de missão"
 
-#: .\missions\models.py:91
+#: .\missions\models.py:96
 msgid "mission visualization instances"
 msgstr "instâncias de visualização de missão"
 
-#: .\missions\views.py:60
+#: .\missions\views.py:58
 msgid "I completed mission #"
 msgstr "Completei a missão nº"
 
-#: .\missions\views.py:62
+#: .\missions\views.py:60
 msgid "missions completed so far!"
 msgstr "missões cumpridas até hoje!"
 

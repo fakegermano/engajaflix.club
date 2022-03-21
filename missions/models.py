@@ -1,7 +1,8 @@
 from django.db import models
-from engajaflix.settings import AUTH_USER_MODEL
-from datetime import date
+from engajaflix.settings import AUTH_USER_MODEL, TIME_ZONE
+from datetime import datetime
 from django.utils.translation import gettext_lazy as _
+import pytz
 
 
 class Mission(models.Model):
@@ -53,17 +54,21 @@ class MissionPerson(models.Model):
 
     @property
     def has_sent(self):
-        today = date.today()
+        today = datetime.now(pytz.timezone(TIME_ZONE)).date()
         if self.mission_submissions.filter(mission__day__contains=today).count() > 0:
             return True
         return False
 
     @property
     def who(self):
-        return f"{self.user}" if self.user is not None else f"{self.uid}"
+        if self.user is not None:
+            return f"{self.user}"
+        return f"{self.uid}"
 
     def __str__(self):
-        return f"{self.uid}" + "" if self.user is None else f" - {self.user}"
+        if self.user is None:
+            return f"{self.uid}"
+        return f"{self.uid} - {self.user}"
 
 
 class MissionVisualization(models.Model):

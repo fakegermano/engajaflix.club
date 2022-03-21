@@ -19,3 +19,4 @@ mysqlclient
 django-pagedown
 django-markdownify
 django-user-agents
+pytz

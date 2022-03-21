@@ -14,7 +14,7 @@ from .forms import SubmissionForm
 def index(request):
     user_agent = get_user_agent(request)
     can_share = not user_agent.is_pc and user_agent.os.family != "iOS"
-    now = datetime.utcnow().replace(tzinfo=pytz.timezone(TIME_ZONE))
+    now = datetime.now(pytz.timezone(TIME_ZONE))
     try:
         mission = Mission.objects.get(day=now.date())
     except Mission.DoesNotExist:
@@ -33,13 +33,11 @@ def index(request):
         visualization, _ = MissionVisualization.objects.get_or_create(mission=mission, person=person)
         visualization.views.create(seen_at=now)
         visualization.save()
-        form = SubmissionForm()
+        form = SubmissionForm(initial={"name": request.user.get_full_name(), "email": request.user.email})
     elif request.method == "POST" and mission:
         form = SubmissionForm(request.POST, request.FILES)
         if form.is_valid():
             submission = form.save(commit=False)
-            submission.name = request.user.first_name
-            submission.email = request.user.email
             submission.person = person
             submission.mission = mission
             submission.save()
