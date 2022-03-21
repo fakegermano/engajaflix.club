@@ -98,14 +98,12 @@
                         $("#share-alert").show();
                     }).catch((err)=> {
                         $("#error-alert").show();
-                        alert(err);
                     })
                 } else {
                     navigator.clipboard.writeText(shareText).then(() => {
                         $("#copy-alert").show();
                     }).catch((err)=>{
                         $("#error-alert").show();
-                        alert(err);
                     });
                 }
             });
@@ -115,7 +113,6 @@
                     $("#copy-alert").show();
                 }).catch((err)=>{
                     $("#error-alert").show();
-                    alert(err);
                 });
             })
             {% endif %}
