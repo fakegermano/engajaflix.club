@@ -368,7 +368,7 @@ msgstr "Você viu tudo o que temos, mas em breve vem mais."
 
 #: .\templates\missions\index.html:66
 msgid "Meanwhile, you can follow us on social media!"
-msgstr "Enquanto isso, você pode nos seguir nas redes sociais!"
+msgstr "Enquanto isso, você pode nos acompanhar nas redes sociais!"
 
 #: .\templates\registration\logged_out.html:5
 msgid "Logout"
