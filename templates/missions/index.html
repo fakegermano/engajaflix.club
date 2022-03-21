@@ -25,12 +25,21 @@
                             <button class="btn btn-primary" id="copy-clip">{% translate "Copy to clipboard " %}<i class="bi bi-clipboard"></i></button>
                         {% endif %}
                     </div>
-                    {% if not can_share %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="copy-alert">
-                        {% translate "Results copied to clipboard" %}
+                    {% if can_share %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" id="share-alert">
+                            {% translate "Results shared!" %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="X"></button>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" id="copy-alert">
+                            {% translate "Results copied to clipboard" %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="X"></button>
+                        </div>
+                    {% endif %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error-alert">
+                        {% translate "Failed to share or copy" %}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="X"></button>
                     </div>
-                    {% endif %}
                     <p>{% translate "The next mission will be available in " %}</p>
                     <h1><noscript>{{ next_mission }} seconds</noscript><span id="countdown"></span></h1>
                     <div class="mt-1 mb-1">
@@ -74,6 +83,7 @@
         $(document).ready(function () {
             $("#mission-description > p > img").addClass("img-fluid");
             $("#copy-alert").hide();
+            $("#error-alert").hide();
             let targetSecs = Number("{{ next_mission }}");
             let shareText = "{{ share_text }}";
             $("#countdown").text(translateSecs(targetSecs));
@@ -82,18 +92,31 @@
                 $("#countdown").text(translateSecs(targetSecs));
             }, 1000);
             {% if can_share %}
-            $("#share").on('click', async () => {
-               if (navigator.canShare && navigator.canShare({ text: ''})) {
-                   await navigator.share({text: shareText});
-               } else {
-                   await navigator.clipboard.writeText(shareText);
-                   $("#copy-alert").show();
-               }
+            $("#share").on('click', () => {
+                if (navigator.canShare && navigator.canShare({ text: ''})) {
+                    navigator.share({text: shareText}).then(() => {
+                        $("#share-alert").show();
+                    }).catch((err)=> {
+                        $("#error-alert").show();
+                        alert(err);
+                    })
+                } else {
+                    navigator.clipboard.writeText(shareText).then(() => {
+                        $("#copy-alert").show();
+                    }).catch((err)=>{
+                        $("#error-alert").show();
+                        alert(err);
+                    });
+                }
             });
             {% else %}
-            $("#copy-clip").on('click', async () => {
-                await navigator.clipboard.writeText(shareText);
-                $("#copy-alert").show();
+            $("#copy-clip").on('click', () => {
+                navigator.clipboard.writeText(shareText).then(()=>{
+                    $("#copy-alert").show();
+                }).catch((err)=>{
+                    $("#error-alert").show();
+                    alert(err);
+                });
             })
             {% endif %}
         })

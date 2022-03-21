@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-21 01:17+0100\n"
+"POT-Creation-Date: 2022-03-21 01:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -327,26 +327,34 @@ msgid "Copy to clipboard "
 msgstr "Copiar resultado "
 
 #: .\templates\missions\index.html:30
+msgid "Results shared!"
+msgstr "Resultado compartilhado!"
+
+#: .\templates\missions\index.html:35
 msgid "Results copied to clipboard"
 msgstr "Resultados copiados no ctrl-v"
 
-#: .\templates\missions\index.html:34
+#: .\templates\missions\index.html:40
+msgid "Failed to share or copy"
+msgstr "Falha ao copiar ou compartilhar"
+
+#: .\templates\missions\index.html:43
 msgid "The next mission will be available in "
 msgstr "A próxima missão estará disponível em "
 
-#: .\templates\missions\index.html:40
+#: .\templates\missions\index.html:49
 msgid "Mission #"
 msgstr "Missão nº"
 
-#: .\templates\missions\index.html:46
+#: .\templates\missions\index.html:55
 msgid "Extra material"
 msgstr "Material complementar"
 
-#: .\templates\missions\index.html:48
+#: .\templates\missions\index.html:57
 msgid "Submit the result of your mission"
 msgstr "Envie o resultado da sua missão"
 
-#: .\templates\missions\index.html:49
+#: .\templates\missions\index.html:58
 msgid ""
 "After completing your mission, you can submit it for our review! We'll give "
 "you extra insights and track your progress!"
@@ -354,7 +362,7 @@ msgstr ""
 "Depois de completar a missão, você pode enviar ela aqui para que nós a "
 "revisemos. Vamos te dar dicas e acompanhar seu progresso!"
 
-#: .\templates\missions\index.html:53
+#: .\templates\missions\index.html:62
 msgid "You've seen all we've got, but there is sure more coming."
 msgstr "Você viu tudo o que temos, mas em breve vem mais."
 
