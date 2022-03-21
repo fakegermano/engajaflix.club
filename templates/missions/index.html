@@ -59,9 +59,14 @@
                     {% crispy form %}
                 {% endif %}
             {% else %}
-                <h1>{% translate "You've seen all we've got, but there is sure more coming." %}</h1>
+                <h2>{% translate "You've seen all we've got, but there is sure more coming." %}</h2>
                 <div class="mt-1 mb-1">
                     <img src="{% static "/img/will_find.gif" %}" class="img-fluid" alt="will smith magnifying glass" />
+                </div>
+                <p class="mt-3">{% translate "Meanwhile, you can follow us on social media!" %}</p>
+                <div class="d-inline">
+                    <a href="https://www.instagram.com/engajaflix.club/" target="_blank" class="btn btn-outline-primary"><i class="bi bi-instagram me-1"></i>Instagram</a>
+                    <a href="https://www.tiktok.com/@engajaflix.club" target="_blank" class="btn btn-outline-primary"><i class="bi bi-tiktok me-1"></i>Tiktok</a>
                 </div>
             {% endif %}
         </div>

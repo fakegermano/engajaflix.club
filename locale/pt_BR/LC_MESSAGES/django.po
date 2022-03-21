@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-21 01:56+0100\n"
+"POT-Creation-Date: 2022-03-21 02:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -365,6 +365,10 @@ msgstr ""
 #: .\templates\missions\index.html:62
 msgid "You've seen all we've got, but there is sure more coming."
 msgstr "Você viu tudo o que temos, mas em breve vem mais."
+
+#: .\templates\missions\index.html:66
+msgid "Meanwhile, you can follow us on social media!"
+msgstr "Enquanto isso, você pode nos seguir nas redes sociais!"
 
 #: .\templates\registration\logged_out.html:5
 msgid "Logout"
