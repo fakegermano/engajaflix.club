@@ -46,7 +46,7 @@
                         <img src="{% static "/img/dog_champagne.gif" %}" class="img-fluid" alt="cute dog with champagne glass" />
                     </div>
                 {% else %}
-                    <h2>{% translate "Mission #" %}{{ mission.number }}:</h2>
+                    {% comment %}<h2>{% translate "Mission #" %}{{ mission.number }}:</h2> {% endcomment %}
                     <h4>{{ mission.day }} - {{ mission.title }}</h4>
                     <div class="mt-1 mb-1 ps-1 pe-1" id="mission-description">
                         {{ mission.description|markdownify }}
