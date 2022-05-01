@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db import models
 from pagedown.widgets import AdminPagedownWidget
 
-from .models import Mission, MissionVisualization, MissionVisualizationInstance, MissionPerson, MissionSubmission
+from .models import Mission, MissionVisualization, MissionVisualizationInstance, MissionPerson, MissionSubmission, MissionClass
 
 
 @admin.register(MissionVisualization)
@@ -28,4 +28,9 @@ class MissionPersonAdmin(admin.ModelAdmin):
 
 @admin.register(MissionSubmission)
 class MissionSubmissionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(MissionClass)
+class MissionClassAdmin(admin.ModelAdmin):
     pass

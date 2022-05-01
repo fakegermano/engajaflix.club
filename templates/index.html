@@ -27,7 +27,7 @@
                 <p>{% translate "If you are coming back, you can " %}<a href="{% url "login" %}">{% translate "login" %}</a>.</p>
             {% endif %}
             <p>
-                {% translate "Go to our " %}<a href="{% url "missions:index" %}">{% translate "start page" %}</a>
+                {% translate "Go to our " %}<a href="{% url "missions:get" %}">{% translate "start page" %}</a>
                 {% if user.is_authenticated %}
                     {% translate " or " %}<a href="{% url "logout" %}">{% translate "logout" %}</a>
                 {% endif %}.

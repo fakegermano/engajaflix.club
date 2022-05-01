@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-21 02:20+0100\n"
+"POT-Creation-Date: 2022-05-02 01:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,75 +57,115 @@ msgstr "criado_em"
 msgid "title"
 msgstr "título"
 
-#: .\missions\models.py:12 .\missions\models.py:36
+#: .\missions\models.py:12 .\missions\models.py:41
 msgid "description"
 msgstr "descrição"
 
-#: .\missions\models.py:13 .\missions\models.py:37
+#: .\missions\models.py:13 .\missions\models.py:42
 msgid "attachment"
 msgstr "anexo"
 
-#: .\missions\models.py:16
+#: .\missions\models.py:14
+msgid "for class"
+msgstr "para turma"
+
+#: .\missions\models.py:17 .\missions\models.py:38 .\missions\models.py:79
 msgid "mission"
 msgstr "missão"
 
-#: .\missions\models.py:17 .\templates\bio\index.html:20
+#: .\missions\models.py:18 .\templates\bio\index.html:20
 msgid "missions"
 msgstr "missões"
 
-#: .\missions\models.py:34
+#: .\missions\models.py:37 .\missions\models.py:78
+#, fuzzy
+#| msgid "mission person"
+msgid "person"
+msgstr "fazedor"
+
+#: .\missions\models.py:39 .\missions\models.py:106
 msgid "name"
 msgstr "nome"
 
-#: .\missions\models.py:35
+#: .\missions\models.py:40
 msgid "email"
 msgstr "e-mail"
 
-#: .\missions\models.py:40
+#: .\missions\models.py:45
 msgid "mission submission"
 msgstr "submissão de missões"
 
-#: .\missions\models.py:41
+#: .\missions\models.py:46
 msgid "mission submissions"
 msgstr "submissões de missões"
 
-#: .\missions\models.py:49
+#: .\missions\models.py:53
+msgid "user"
+msgstr "usuário"
+
+#: .\missions\models.py:54
 msgid "uid"
 msgstr "uid"
 
-#: .\missions\models.py:52
+#: .\missions\models.py:55
+msgid "on class"
+msgstr "na turma"
+
+#: .\missions\models.py:58
 msgid "mission person"
 msgstr "fazedor"
 
-#: .\missions\models.py:53
+#: .\missions\models.py:59
 msgid "mission persons"
 msgstr "fazedores"
 
-#: .\missions\models.py:79
+#: .\missions\models.py:82
 msgid "mission visualizatiom"
 msgstr "visualização de missão"
 
-#: .\missions\models.py:80
+#: .\missions\models.py:83
 msgid "mission visualizations"
 msgstr "visualizações de missão"
 
-#: .\missions\models.py:92
+#: .\missions\models.py:94
+#, fuzzy
+#| msgid "mission visualizations"
+msgid "visualization"
+msgstr "visualizações de missão"
+
+#: .\missions\models.py:95
 msgid "seen_at"
 msgstr "visto_em"
 
-#: .\missions\models.py:95
+#: .\missions\models.py:98
 msgid "mission visualization instance"
 msgstr "instância de visualização de missão"
 
-#: .\missions\models.py:96
+#: .\missions\models.py:99
 msgid "mission visualization instances"
 msgstr "instâncias de visualização de missão"
 
-#: .\missions\views.py:58
+#: .\missions\models.py:107
+msgid "start"
+msgstr "início"
+
+#: .\missions\models.py:108
+msgid "end"
+msgstr "fim"
+
+#: .\missions\models.py:111
+msgid "mission class"
+msgstr "turma"
+
+#: .\missions\models.py:112
+msgid "mission classes"
+msgstr "turmas"
+
+#: .\missions\views.py:66
 msgid "I completed mission #"
 msgstr "Completei a missão nº"
 
-#: .\missions\views.py:60
+#: .\missions\views.py:68
 msgid "missions completed so far!"
 msgstr "missões cumpridas até hoje!"
 
@@ -310,51 +350,55 @@ msgstr "página inicial"
 msgid " or "
 msgstr " ou "
 
-#: .\templates\missions\index.html:12
+#: .\templates\missions\get.html:12
 msgid "Daily missions to improve your brand's communication"
 msgstr "Missões diárias para melhorar a comunicação da sua marca"
 
-#: .\templates\missions\index.html:20
+#: .\templates\missions\get.html:20
 msgid "Congratulations on completing today's mission!"
 msgstr "Parabéns por completar a missão de hoje!"
 
-#: .\templates\missions\index.html:23
+#: .\templates\missions\get.html:23
 msgid "Share "
 msgstr "Compartilhar "
 
-#: .\templates\missions\index.html:25
+#: .\templates\missions\get.html:25
 msgid "Copy to clipboard "
 msgstr "Copiar resultado "
 
-#: .\templates\missions\index.html:30
+#: .\templates\missions\get.html:30
 msgid "Results shared!"
 msgstr "Resultado compartilhado!"
 
-#: .\templates\missions\index.html:35
+#: .\templates\missions\get.html:35
 msgid "Results copied to clipboard"
 msgstr "Resultados copiados no ctrl-v"
 
-#: .\templates\missions\index.html:40
+#: .\templates\missions\get.html:40
 msgid "Failed to share or copy"
 msgstr "Falha ao copiar ou compartilhar"
 
-#: .\templates\missions\index.html:43
+#: .\templates\missions\get.html:47
 msgid "The next mission will be available in "
 msgstr "A próxima missão estará disponível em "
 
-#: .\templates\missions\index.html:49
-msgid "Mission #"
-msgstr "Missão nº"
+#: .\templates\missions\get.html:51
+msgid "Your submission:"
+msgstr "Sua submissão"
 
-#: .\templates\missions\index.html:55
+#: .\templates\missions\get.html:53
+msgid "Attachment"
+msgstr "Anexo"
+
+#: .\templates\missions\get.html:63
 msgid "Extra material"
 msgstr "Material complementar"
 
-#: .\templates\missions\index.html:57
+#: .\templates\missions\get.html:66
 msgid "Submit the result of your mission"
 msgstr "Envie o resultado da sua missão"
 
-#: .\templates\missions\index.html:58
+#: .\templates\missions\get.html:67
 msgid ""
 "After completing your mission, you can submit it for our review! We'll give "
 "you extra insights and track your progress!"
@@ -362,13 +406,33 @@ msgstr ""
 "Depois de completar a missão, você pode enviar ela aqui para que nós a "
 "revisemos. Vamos te dar dicas e acompanhar seu progresso!"
 
-#: .\templates\missions\index.html:62
+#: .\templates\missions\get.html:72
 msgid "You've seen all we've got, but there is sure more coming."
 msgstr "Você viu tudo o que temos, mas em breve vem mais."
 
-#: .\templates\missions\index.html:66
+#: .\templates\missions\get.html:77 .\templates\missions\list.html:22
 msgid "Meanwhile, you can follow us on social media!"
 msgstr "Enquanto isso, você pode nos acompanhar nas redes sociais!"
+
+#: .\templates\missions\get.html:86
+msgid "See past missions"
+msgstr "Ver missões anteriores"
+
+#: .\templates\missions\list.html:9
+msgid "Your missions list"
+msgstr "Sua lista de missões"
+
+#: .\templates\missions\list.html:17
+msgid "There are no missions to show you yet"
+msgstr "Não há missões para mostrar"
+
+#: .\templates\missions\list.html:21
+msgid "Looks like there is nothing here!"
+msgstr "Parece que não tem nada aqui"
+
+#: .\templates\missions\list.html:28
+msgid "Go back"
+msgstr "Voltar"
 
 #: .\templates\registration\logged_out.html:5
 msgid "Logout"
@@ -1711,6 +1775,9 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Mission #"
+#~ msgstr "Missão nº"
 
 #~ msgid "Download attachment"
 #~ msgstr "Baixar anexo"

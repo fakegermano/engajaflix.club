@@ -11,6 +11,7 @@ class Mission(models.Model):
     title = models.CharField(_("title"), max_length=256)
     description = models.TextField(_("description"), default="")
     attachment = models.FileField(_("attachment"), upload_to="media/missions/content/", blank=True, null=True)
+    for_class = models.ForeignKey("MissionClass", null=True, on_delete=models.SET_NULL, related_name="missions", verbose_name=_("for class"))
 
     class Meta:
         verbose_name = _("mission")
@@ -27,10 +28,14 @@ class Mission(models.Model):
     def number(self):
         return (self.day - self.earliest().day).days + 1
 
+    @property
+    def string(self):
+        return f"{self}"
+
 
 class MissionSubmission(models.Model):
-    person = models.ForeignKey('MissionPerson', on_delete=models.CASCADE, related_name="mission_submissions")
-    mission = models.ForeignKey(Mission, on_delete=models.CASCADE)
+    person = models.ForeignKey('MissionPerson', on_delete=models.CASCADE, related_name="mission_submissions", verbose_name=_("person"))
+    mission = models.ForeignKey(Mission, on_delete=models.CASCADE, verbose_name=_("mission"))
     name = models.CharField(_("name"), max_length=256)
     email = models.EmailField(_("email"))
     description = models.TextField(_("description"), blank=True, default="")
@@ -45,25 +50,23 @@ class MissionSubmission(models.Model):
 
 
 class MissionPerson(models.Model):
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_("user"))
     uid = models.UUIDField(_("uid"))
+    on_class = models.ForeignKey("MissionClass", null=True, on_delete=models.SET_NULL, verbose_name=_("on class"))
 
     class Meta:
         verbose_name = _("mission person")
         verbose_name_plural = _("mission persons")
 
     @property
-    def has_sent(self):
-        today = datetime.now(pytz.timezone(TIME_ZONE)).date()
-        if self.mission_submissions.filter(mission__day__contains=today).count() > 0:
-            return True
-        return False
-
-    @property
     def who(self):
         if self.user is not None:
             return f"{self.user}"
         return f"{self.uid}"
+
+    @property
+    def has_class(self):
+        return self.on_class is not None
 
     def __str__(self):
         if self.user is None:
@@ -72,8 +75,8 @@ class MissionPerson(models.Model):
 
 
 class MissionVisualization(models.Model):
-    person = models.ForeignKey(MissionPerson, on_delete=models.CASCADE)
-    mission = models.ForeignKey(Mission, on_delete=models.CASCADE)
+    person = models.ForeignKey(MissionPerson, on_delete=models.CASCADE, verbose_name=_("person"))
+    mission = models.ForeignKey(Mission, on_delete=models.CASCADE, verbose_name=_("mission"))
 
     class Meta:
         verbose_name = _("mission visualizatiom")
@@ -88,7 +91,7 @@ class MissionVisualization(models.Model):
 
 
 class MissionVisualizationInstance(models.Model):
-    visualization = models.ForeignKey(MissionVisualization, on_delete=models.CASCADE, related_name="views")
+    visualization = models.ForeignKey(MissionVisualization, on_delete=models.CASCADE, related_name="views", verbose_name=_("visualization"))
     seen_at = models.DateTimeField(_("seen_at"), editable=False)
 
     class Meta:
@@ -97,3 +100,16 @@ class MissionVisualizationInstance(models.Model):
 
     def __str__(self):
         return f"{self.visualization.person.who} saw {self.visualization.mission.day} at {self.seen_at}"
+
+
+class MissionClass(models.Model):
+    name = models.CharField(_("name"), max_length=256)
+    start = models.DateField(_("start"))
+    end = models.DateField(_("end"))
+
+    class Meta:
+        verbose_name = _("mission class")
+        verbose_name_plural = _("mission classes")
+
+    def __str__(self):
+        return f"{self.name}"

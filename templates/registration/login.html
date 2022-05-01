@@ -11,7 +11,7 @@
         <div class="col text-center">
             {% if user.is_authenticated %}
                 <p>{% translate "Already logged in " %}<a href="{% url "logout" %}">{% translate "Log out" %}</a></p>
-                <p><a href="{% url "missions:index" %}">{% translate "Missions" %}</a></p>
+                <p><a href="{% url "missions:get" %}">{% translate "Missions" %}</a></p>
                 <p>{% translate "You will be redirected automatically to the missions page" %}</p>
             {% else %}
                 {% crispy form %}
@@ -26,7 +26,7 @@ $(document).ready(() => {
     let authenticated = Boolean("{% if user.is_authenticated %}1{% else %}{% endif %}");
     if (authenticated) {
         setTimeout(() => {
-            window.location.replace("{% url "missions:index" %}");
+            window.location.replace("{% url "missions:get" %}");
         }, 3000);
     }
 })

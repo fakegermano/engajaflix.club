@@ -17,7 +17,7 @@
                 <h1>{% translate "Welcome to engajaflix!" %}</h1>
                 <p>{% translate "You know, you can " %}<a href="{% url "login" %}">{% translate "Log in"%}</a></p>
             {% endif %}
-            <p>{% translate "At any time you can go back to the " %}<a href="{% url "missions:index" %}">{% translate "missions" %}</a>{% translate " page!" %}</p>
+            <p>{% translate "At any time you can go back to the " %}<a href="{% url "missions:get" %}">{% translate "missions" %}</a>{% translate " page!" %}</p>
         </div>
     </div>
 {% endblock %}

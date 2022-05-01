@@ -16,7 +16,7 @@
     <div class="row mt-3 mb-3 d-flex justify-content-center">
         <div class="col text-center">
             {% if mission and user.is_authenticated and user.allowed %}
-                {% if has_sent %}
+                {% if submission %}
                     <h2>{% translate "Congratulations on completing today's mission!" %}</h2>
                     <div class="mt-3 mb-3">
                         {% if can_share %}
@@ -40,33 +40,49 @@
                         {% translate "Failed to share or copy" %}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="X"></button>
                     </div>
-                    <p>{% translate "The next mission will be available in " %}</p>
-                    <h1><noscript>{{ next_mission }} seconds</noscript><span id="countdown"></span></h1>
                     <div class="mt-1 mb-1">
                         <img src="{% static "/img/dog_champagne.gif" %}" class="img-fluid" alt="cute dog with champagne glass" />
                     </div>
-                {% else %}
-                    {% comment %}<h2>{% translate "Mission #" %}{{ mission.number }}:</h2> {% endcomment %}
-                    <h4>{{ mission.day }} - {{ mission.title }}</h4>
-                    <div class="mt-1 mb-1 ps-1 pe-1" id="mission-description">
-                        {{ mission.description|markdownify }}
-                    </div>
-                    <div class="mb-2 mt-2">
-                        <a class="btn btn-info" href="{{ mission.attachment.url }}" target="_blank">{% translate "Extra material" %}</a>
-                    </div>
+                    {% if next_mission %}
+                        <p>{% translate "The next mission will be available in " %}</p>
+                        <h1><noscript>{{ next_mission }} seconds</noscript><span id="countdown"></span></h1>
+                    {% endif %}
+                    <hr>
+                    <p class="display-5 mt-2 mb-2">{% translate "Your submission:" %}</p>
+                    <p class="lead">{{ submission.description }}</p>
+                    <a class="btn btn-info {% if not submission.attachment %} disabled {% endif %}" href="{% if submission.attachment %}{{ submission.attachment.url }}{% else %}#{% endif %}">{% translate "Attachment" %}</a>
+                    <hr>
+                {% endif %}
+                {% comment %}<h2>{% translate "Mission #" %}{{ mission.number }}:</h2> {% endcomment %}
+                <h4>{{ mission.day }} - {{ mission.title }}</h4>
+                <div class="mt-1 mb-1 ps-1 pe-1" id="mission-description">
+                    {{ mission.description|markdownify }}
+                </div>
+                <div class="mb-2 mt-2">
+                    <a class="btn btn-info" href="{{ mission.attachment.url }}" target="_blank">{% translate "Extra material" %}</a>
+                </div>
+                {% if not submission %}
                     <p class="display-5 mt-1 mb-2">{% translate "Submit the result of your mission" %}</p>
                     <p>{% translate "After completing your mission, you can submit it for our review! We'll give you extra insights and track your progress!" %}</p>
                     {% crispy form %}
-                {% endif %}
+                {% else %}
+                    {% endif %}
             {% else %}
                 <h2>{% translate "You've seen all we've got, but there is sure more coming." %}</h2>
                 <div class="mt-1 mb-1">
                     <img src="{% static "/img/will_find.gif" %}" class="img-fluid" alt="will smith magnifying glass" />
                 </div>
+
                 <p class="mt-3">{% translate "Meanwhile, you can follow us on social media!" %}</p>
                 <div class="d-inline">
                     <a href="https://www.instagram.com/engajaflix.club/" target="_blank" class="btn btn-outline-primary"><i class="bi bi-instagram me-1"></i>Instagram</a>
                     <a href="https://www.tiktok.com/@engajaflix.club" target="_blank" class="btn btn-outline-primary"><i class="bi bi-tiktok me-1"></i>Tiktok</a>
+                </div>
+            {% endif %}
+            <hr>
+            {% if user.is_authenticated %}
+                <div class="mb-2 mt-2">
+                    <a class="btn btn-secondary" href="{% url "missions:list" %}">{% translate "See past missions" %}</a>
                 </div>
             {% endif %}
         </div>
@@ -76,6 +92,7 @@
 {% block scripts %}
     {% if user.is_authenticated and user.allowed %}
     <script>
+        {% if next_mission %}
         const translateSecs = (secs) => {
             let diff = secs;
             const hours = Math.floor(diff / 3600) % 24;
@@ -85,10 +102,12 @@
             const seconds = Math.floor(diff) % 60;
             return `${hours}h ${minutes}m ${seconds}s`;
         }
+        {% endif %}
         $(document).ready(function () {
             $("#mission-description > p > img").addClass("img-fluid");
             $("#copy-alert").hide();
             $("#error-alert").hide();
+            {% if next_mission %}
             let targetSecs = Number("{{ next_mission }}");
             let shareText = "{{ share_text }}";
             $("#countdown").text(translateSecs(targetSecs));
@@ -96,6 +115,7 @@
                 targetSecs -= 1;
                 $("#countdown").text(translateSecs(targetSecs));
             }, 1000);
+            {% endif %}
             {% if can_share %}
             $("#share").on('click', () => {
                 if (navigator.canShare && navigator.canShare({ text: ''})) {

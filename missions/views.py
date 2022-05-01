@@ -3,6 +3,7 @@ from uuid import uuid4, UUID
 from datetime import datetime, timedelta
 from django.utils.translation import gettext_lazy
 from django_user_agents.utils import get_user_agent
+from django.contrib.auth.decorators import login_required
 import pytz
 
 from engajaflix.settings import TIME_ZONE
@@ -11,10 +12,22 @@ from .models import MissionPerson, Mission, MissionVisualization, MissionSubmiss
 from .forms import SubmissionForm
 
 
-def index(request):
+def get_mission(request, year=None, month=None, day=None):
     user_agent = get_user_agent(request)
     can_share = not user_agent.is_pc and user_agent.os.family != "iOS"
-    now = datetime.now(pytz.timezone(TIME_ZONE))
+
+    if year is None:
+        now = datetime.now(pytz.timezone(TIME_ZONE))
+        midnight = (now + timedelta(days=1)).replace(
+            hour=0,
+            minute=0,
+            second=0,
+            microsecond=0
+        )
+        next_mission = (midnight - now).seconds
+    else:
+        now = datetime.fromisoformat(f"{year:04}-{month:02}-{day:02}")
+        next_mission = None
     try:
         mission = Mission.objects.get(day=now.date())
     except Mission.DoesNotExist:
@@ -41,12 +54,7 @@ def index(request):
             submission.person = person
             submission.mission = mission
             submission.save()
-    midnight = (now + timedelta(days=1)).replace(
-        hour=0,
-        minute=0,
-        second=0,
-        microsecond=0
-    )
+
     if mission and person:
         completed = mission.missionsubmission_set.filter(person=person).count()
         mission_number = mission.number
@@ -61,11 +69,36 @@ def index(request):
         " https://engajaflix.club/"
     )
 
-    return render(request, template_name="missions/index.html", context={
+    if mission and person:
+        submission = MissionSubmission.objects.filter(person=person, mission=mission).first()
+    else:
+        submission = None
+    return render(request, template_name="missions/get.html", context={
         "mission": mission,
-        "has_sent": person.has_sent,
-        "next_mission": (midnight - now).seconds,
+        "next_mission": next_mission,
         "can_share": can_share,
         "share_text": share_text,
         "form": form,
+        "person": person,
+        "submission": submission
+    })
+
+
+@login_required
+def list_missions(request):
+    now = datetime.now(pytz.timezone(TIME_ZONE))
+    person = MissionPerson.objects.filter(user=request.user).first()
+    if person.on_class:
+        missions = person.on_class.missions.filter(day__lte=now)
+    else:
+        missions = []
+    submitted = set()
+    for mission in missions:
+        submission = MissionSubmission.objects.filter(mission=mission, person=person).first()
+        if submission is not None:
+            submitted.add(f"{mission}")
+    return render(request, template_name="missions/list.html", context={
+        "missions": missions,
+        "person": person,
+        "submitted": submitted
     })
