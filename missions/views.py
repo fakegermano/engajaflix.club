@@ -33,13 +33,12 @@ def get_mission(request, year=None, month=None, day=None):
     except Mission.DoesNotExist:
         mission = None
     cookie = request.session.get("uid", None)
+    person = MissionPerson.objects.filter(user=request.user).first()
     if cookie is None:
-        person = MissionPerson(uid=uuid4())
-        request.session["uid"] = str(person.uid)
-    else:
-        person, _ = MissionPerson.objects.get_or_create(uid=UUID(cookie))
-    if request.user.is_authenticated:
-        person.user = request.user
+        if not person:
+            person = MissionPerson(uid=uuid4())
+    request.session["uid"] = str(person.uid)
+    person.user = request.user
     person.save()
     form = None
     if request.method == "GET" and mission:
