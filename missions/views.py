@@ -29,7 +29,7 @@ def get_mission(request, year=None, month=None, day=None):
         now = datetime.fromisoformat(f"{year:04}-{month:02}-{day:02}")
         next_mission = None
     person = MissionPerson.objects.filter(user=request.user).first()
-    mission = Mission.objects.filter(day=now.date(), for_class=person.on_class).first()
+    mission = person.on_class.first().missions.filter(day=now.date()).first()
     cookie = request.session.get("uid", None)
     if cookie is None:
         if not person:
@@ -85,7 +85,7 @@ def list_missions(request):
     now = datetime.now(pytz.timezone(TIME_ZONE))
     person = MissionPerson.objects.filter(user=request.user).first()
     if person.on_class:
-        missions = person.on_class.missions.filter(day__lte=now)
+        missions = person.on_class.first().missions.filter(day__lte=now)
     else:
         missions = []
     submitted = set()
