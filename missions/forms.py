@@ -6,7 +6,7 @@ from crispy_bootstrap5.bootstrap5 import FloatingField
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .models import MissionSubmission
+from .models import MissionSubmission, MissionClass, Mission, MissionPerson
 
 
 class SubmissionForm(forms.ModelForm):

@@ -11,7 +11,7 @@ class Mission(models.Model):
     title = models.CharField(_("title"), max_length=256)
     description = models.TextField(_("description"), default="")
     attachment = models.FileField(_("attachment"), upload_to="media/missions/content/", blank=True, null=True)
-    for_class = models.ForeignKey("MissionClass", null=True, on_delete=models.SET_NULL, related_name="missions", verbose_name=_("for class"))
+    for_class = models.ManyToManyField("MissionClass", blank=True, related_name="missions", verbose_name=_("for class"))
 
     class Meta:
         verbose_name = _("mission")
@@ -52,7 +52,7 @@ class MissionSubmission(models.Model):
 class MissionPerson(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_("user"))
     uid = models.UUIDField(_("uid"))
-    on_class = models.ForeignKey("MissionClass", null=True, on_delete=models.SET_NULL, verbose_name=_("on class"))
+    on_class = models.ManyToManyField("MissionClass", blank=True, verbose_name=_("on class"), related_name="persons")
 
     class Meta:
         verbose_name = _("mission person")

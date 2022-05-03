@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-02 01:35+0200\n"
+"POT-Creation-Date: 2022-05-03 09:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,23 @@ msgstr ""
 msgid "There is something wrong with this link, can't verify the user..."
 msgstr ""
 "Parece ter algo de errado com este link, não pudemos verificar o usuário..."
+
+#: .\missions\admin.py:41 .\missions\models.py:58
+msgid "mission person"
+msgstr "fazedor"
+
+#: .\missions\admin.py:42 .\missions\models.py:59
+msgid "mission persons"
+msgstr "fazedores"
+
+#: .\missions\admin.py:47 .\missions\models.py:17 .\missions\models.py:38
+#: .\missions\models.py:79
+msgid "mission"
+msgstr "missão"
+
+#: .\missions\admin.py:48 .\missions\models.py:18 .\templates\bio\index.html:20
+msgid "missions"
+msgstr "missões"
 
 #: .\missions\forms.py:20
 msgid "You must fill in either the description or send an attachment"
@@ -69,14 +86,6 @@ msgstr "anexo"
 msgid "for class"
 msgstr "para turma"
 
-#: .\missions\models.py:17 .\missions\models.py:38 .\missions\models.py:79
-msgid "mission"
-msgstr "missão"
-
-#: .\missions\models.py:18 .\templates\bio\index.html:20
-msgid "missions"
-msgstr "missões"
-
 #: .\missions\models.py:37 .\missions\models.py:78
 #, fuzzy
 #| msgid "mission person"
@@ -110,14 +119,6 @@ msgstr "uid"
 #: .\missions\models.py:55
 msgid "on class"
 msgstr "na turma"
-
-#: .\missions\models.py:58
-msgid "mission person"
-msgstr "fazedor"
-
-#: .\missions\models.py:59
-msgid "mission persons"
-msgstr "fazedores"
 
 #: .\missions\models.py:82
 msgid "mission visualizatiom"
@@ -161,11 +162,11 @@ msgstr "turma"
 msgid "mission classes"
 msgstr "turmas"
 
-#: .\missions\views.py:66
+#: .\missions\views.py:62
 msgid "I completed mission #"
 msgstr "Completei a missão nº"
 
-#: .\missions\views.py:68
+#: .\missions\views.py:64
 msgid "missions completed so far!"
 msgstr "missões cumpridas até hoje!"
 
@@ -430,7 +431,7 @@ msgstr "Não há missões para mostrar"
 msgid "Looks like there is nothing here!"
 msgstr "Parece que não tem nada aqui"
 
-#: .\templates\missions\list.html:28
+#: .\templates\missions\list.html:30
 msgid "Go back"
 msgstr "Voltar"
 
