@@ -28,12 +28,9 @@ def get_mission(request, year=None, month=None, day=None):
     else:
         now = datetime.fromisoformat(f"{year:04}-{month:02}-{day:02}")
         next_mission = None
-    try:
-        mission = Mission.objects.get(day=now.date())
-    except Mission.DoesNotExist:
-        mission = None
-    cookie = request.session.get("uid", None)
     person = MissionPerson.objects.filter(user=request.user).first()
+    mission = Mission.objects.filter(day=now.date(), for_class=person.on_class).first()
+    cookie = request.session.get("uid", None)
     if cookie is None:
         if not person:
             person = MissionPerson(uid=uuid4())
