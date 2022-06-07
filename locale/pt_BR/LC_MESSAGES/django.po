@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-03 09:25+0200\n"
+"POT-Creation-Date: 2022-06-07 19:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,20 +35,20 @@ msgid "There is something wrong with this link, can't verify the user..."
 msgstr ""
 "Parece ter algo de errado com este link, não pudemos verificar o usuário..."
 
-#: .\missions\admin.py:41 .\missions\models.py:58
+#: .\missions\admin.py:41 .\missions\models.py:59
 msgid "mission person"
 msgstr "fazedor"
 
-#: .\missions\admin.py:42 .\missions\models.py:59
+#: .\missions\admin.py:42 .\missions\models.py:60
 msgid "mission persons"
 msgstr "fazedores"
 
-#: .\missions\admin.py:47 .\missions\models.py:17 .\missions\models.py:38
-#: .\missions\models.py:79
+#: .\missions\admin.py:47 .\missions\models.py:18 .\missions\models.py:39
+#: .\missions\models.py:83
 msgid "mission"
 msgstr "missão"
 
-#: .\missions\admin.py:48 .\missions\models.py:18 .\templates\bio\index.html:20
+#: .\missions\admin.py:48 .\missions\models.py:19 .\templates\bio\index.html:20
 msgid "missions"
 msgstr "missões"
 
@@ -74,11 +74,11 @@ msgstr "criado_em"
 msgid "title"
 msgstr "título"
 
-#: .\missions\models.py:12 .\missions\models.py:41
+#: .\missions\models.py:12 .\missions\models.py:42
 msgid "description"
 msgstr "descrição"
 
-#: .\missions\models.py:13 .\missions\models.py:42
+#: .\missions\models.py:13 .\missions\models.py:43
 msgid "attachment"
 msgstr "anexo"
 
@@ -86,87 +86,91 @@ msgstr "anexo"
 msgid "for class"
 msgstr "para turma"
 
-#: .\missions\models.py:37 .\missions\models.py:78
+#: .\missions\models.py:15
+msgid "XP"
+msgstr "EXP"
+
+#: .\missions\models.py:38 .\missions\models.py:82
 #, fuzzy
 #| msgid "mission person"
 msgid "person"
 msgstr "fazedor"
 
-#: .\missions\models.py:39 .\missions\models.py:106
+#: .\missions\models.py:40 .\missions\models.py:110
 msgid "name"
 msgstr "nome"
 
-#: .\missions\models.py:40
+#: .\missions\models.py:41
 msgid "email"
 msgstr "e-mail"
 
-#: .\missions\models.py:45
+#: .\missions\models.py:46
 msgid "mission submission"
 msgstr "submissão de missões"
 
-#: .\missions\models.py:46
+#: .\missions\models.py:47
 msgid "mission submissions"
 msgstr "submissões de missões"
 
-#: .\missions\models.py:53
+#: .\missions\models.py:54
 msgid "user"
 msgstr "usuário"
 
-#: .\missions\models.py:54
+#: .\missions\models.py:55
 msgid "uid"
 msgstr "uid"
 
-#: .\missions\models.py:55
+#: .\missions\models.py:56
 msgid "on class"
 msgstr "na turma"
 
-#: .\missions\models.py:82
+#: .\missions\models.py:86
 msgid "mission visualizatiom"
 msgstr "visualização de missão"
 
-#: .\missions\models.py:83
+#: .\missions\models.py:87
 msgid "mission visualizations"
 msgstr "visualizações de missão"
 
-#: .\missions\models.py:94
+#: .\missions\models.py:98
 #, fuzzy
 #| msgid "mission visualizations"
 msgid "visualization"
 msgstr "visualizações de missão"
 
-#: .\missions\models.py:95
+#: .\missions\models.py:99
 msgid "seen_at"
 msgstr "visto_em"
 
-#: .\missions\models.py:98
+#: .\missions\models.py:102
 msgid "mission visualization instance"
 msgstr "instância de visualização de missão"
 
-#: .\missions\models.py:99
+#: .\missions\models.py:103
 msgid "mission visualization instances"
 msgstr "instâncias de visualização de missão"
 
-#: .\missions\models.py:107
+#: .\missions\models.py:111
 msgid "start"
 msgstr "início"
 
-#: .\missions\models.py:108
+#: .\missions\models.py:112
 msgid "end"
 msgstr "fim"
 
-#: .\missions\models.py:111
+#: .\missions\models.py:115
 msgid "mission class"
 msgstr "turma"
 
-#: .\missions\models.py:112
+#: .\missions\models.py:116
 msgid "mission classes"
 msgstr "turmas"
 
-#: .\missions\views.py:62
+#: .\missions\views.py:63
 msgid "I completed mission #"
 msgstr "Completei a missão nº"
 
-#: .\missions\views.py:64
+#: .\missions\views.py:65
 msgid "missions completed so far!"
 msgstr "missões cumpridas até hoje!"
 
@@ -411,7 +415,7 @@ msgstr ""
 msgid "You've seen all we've got, but there is sure more coming."
 msgstr "Você viu tudo o que temos, mas em breve vem mais."
 
-#: .\templates\missions\get.html:77 .\templates\missions\list.html:22
+#: .\templates\missions\get.html:77 .\templates\missions\list.html:24
 msgid "Meanwhile, you can follow us on social media!"
 msgstr "Enquanto isso, você pode nos acompanhar nas redes sociais!"
 
@@ -423,15 +427,19 @@ msgstr "Ver missões anteriores"
 msgid "Your missions list"
 msgstr "Sua lista de missões"
 
-#: .\templates\missions\list.html:17
+#: .\templates\missions\list.html:10
+msgid "Total EXP: "
+msgstr "EXP Total: "
+
+#: .\templates\missions\list.html:19
 msgid "There are no missions to show you yet"
 msgstr "Não há missões para mostrar"
 
-#: .\templates\missions\list.html:21
+#: .\templates\missions\list.html:23
 msgid "Looks like there is nothing here!"
 msgstr "Parece que não tem nada aqui"
 
-#: .\templates\missions\list.html:30
+#: .\templates\missions\list.html:32
 msgid "Go back"
 msgstr "Voltar"
 

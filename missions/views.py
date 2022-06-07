@@ -12,6 +12,7 @@ from .models import MissionPerson, Mission, MissionVisualization, MissionSubmiss
 from .forms import SubmissionForm
 
 
+@login_required
 def get_mission(request, year=None, month=None, day=None):
     user_agent = get_user_agent(request)
     can_share = not user_agent.is_pc and user_agent.os.family != "iOS"
@@ -96,5 +97,6 @@ def list_missions(request):
     return render(request, template_name="missions/list.html", context={
         "missions": missions,
         "person": person,
-        "submitted": submitted
+        "submitted": submitted,
+        "xp": person.total_xp(person.on_class.first()),
     })

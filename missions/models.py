@@ -12,6 +12,7 @@ class Mission(models.Model):
     description = models.TextField(_("description"), default="")
     attachment = models.FileField(_("attachment"), upload_to="media/missions/content/", blank=True, null=True)
     for_class = models.ManyToManyField("MissionClass", blank=True, related_name="missions", verbose_name=_("for class"))
+    experience = models.IntegerField(_("XP"), default=0)
 
     class Meta:
         verbose_name = _("mission")
@@ -68,6 +69,9 @@ class MissionPerson(models.Model):
     def has_class(self):
         return self.on_class is not None
 
+    def total_xp(self, class_):
+        return sum(ms.mission.experience for ms in self.mission_submissions.filter(mission__for_class=class_))
+    
     def __str__(self):
         if self.user is None:
             return f"{self.uid}"
