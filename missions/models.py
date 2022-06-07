@@ -72,6 +72,12 @@ class MissionPerson(models.Model):
     def total_xp(self, class_):
         return sum(ms.mission.experience for ms in self.mission_submissions.filter(mission__for_class=class_))
     
+    def total_xp_classes(self):
+        exp = {}
+        for class_ in self.on_class.all():
+            exp[class_] = self.total_xp(class_)
+        return exp
+    
     def __str__(self):
         if self.user is None:
             return f"{self.uid}"

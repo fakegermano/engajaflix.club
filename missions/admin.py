@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.db import models
 from pagedown.widgets import AdminPagedownWidget
 from django.utils.translation import gettext_lazy as _
+from django.utils.html import format_html_join
+from django.utils.safestring import mark_safe
 
 from .models import Mission, MissionVisualization, MissionVisualizationInstance, MissionPerson, MissionSubmission, MissionClass
 
@@ -25,7 +27,17 @@ class MissionAdmin(admin.ModelAdmin):
 
 @admin.register(MissionPerson)
 class MissionPersonAdmin(admin.ModelAdmin):
+    readonly_fields = ('total_xp_report',)
     filter_horizontal = ('on_class',)
+
+    @admin.display(description=_("EXP"))
+    def total_xp_report(self, instance):
+        exp = instance.total_xp_classes()
+        return format_html_join(
+            mark_safe("<br>"),
+            "{}: {}{}",
+            ((class_.name, xp, _("XP")) for class_, xp in exp.items())
+        ) or mark_safe("<span class='errors'>{}</span>".format(_("Can't get XP")))
 
 
 @admin.register(MissionSubmission)

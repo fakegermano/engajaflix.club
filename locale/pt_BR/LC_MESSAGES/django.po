@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-07 19:21+0200\n"
+"POT-Creation-Date: 2022-06-07 22:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,20 +35,34 @@ msgid "There is something wrong with this link, can't verify the user..."
 msgstr ""
 "Parece ter algo de errado com este link, não pudemos verificar o usuário..."
 
-#: .\missions\admin.py:41 .\missions\models.py:59
+#: .\missions\admin.py:33
+#, fuzzy
+#| msgid "XP"
+msgid "EXP"
+msgstr "EXP"
+
+#: .\missions\admin.py:39 .\missions\models.py:15
+msgid "XP"
+msgstr "EXP"
+
+#: .\missions\admin.py:40
+msgid "Can't get XP"
+msgstr "Sem EXP"
+
+#: .\missions\admin.py:53 .\missions\models.py:59
 msgid "mission person"
 msgstr "fazedor"
 
-#: .\missions\admin.py:42 .\missions\models.py:60
+#: .\missions\admin.py:54 .\missions\models.py:60
 msgid "mission persons"
 msgstr "fazedores"
 
-#: .\missions\admin.py:47 .\missions\models.py:18 .\missions\models.py:39
-#: .\missions\models.py:83
+#: .\missions\admin.py:59 .\missions\models.py:18 .\missions\models.py:39
+#: .\missions\models.py:89
 msgid "mission"
 msgstr "missão"
 
-#: .\missions\admin.py:48 .\missions\models.py:19 .\templates\bio\index.html:20
+#: .\missions\admin.py:60 .\missions\models.py:19 .\templates\bio\index.html:20
 msgid "missions"
 msgstr "missões"
 
@@ -86,17 +100,13 @@ msgstr "anexo"
 msgid "for class"
 msgstr "para turma"
 
-#: .\missions\models.py:15
-msgid "XP"
-msgstr "EXP"
-
-#: .\missions\models.py:38 .\missions\models.py:82
+#: .\missions\models.py:38 .\missions\models.py:88
 #, fuzzy
 #| msgid "mission person"
 msgid "person"
 msgstr "fazedor"
 
-#: .\missions\models.py:40 .\missions\models.py:110
+#: .\missions\models.py:40 .\missions\models.py:116
 msgid "name"
 msgstr "nome"
 
@@ -124,45 +134,45 @@ msgstr "uid"
 msgid "on class"
 msgstr "na turma"
 
-#: .\missions\models.py:86
+#: .\missions\models.py:92
 msgid "mission visualizatiom"
 msgstr "visualização de missão"
 
-#: .\missions\models.py:87
+#: .\missions\models.py:93
 msgid "mission visualizations"
 msgstr "visualizações de missão"
 
-#: .\missions\models.py:98
+#: .\missions\models.py:104
 #, fuzzy
 #| msgid "mission visualizations"
 msgid "visualization"
 msgstr "visualizações de missão"
 
-#: .\missions\models.py:99
+#: .\missions\models.py:105
 msgid "seen_at"
 msgstr "visto_em"
 
-#: .\missions\models.py:102
+#: .\missions\models.py:108
 msgid "mission visualization instance"
 msgstr "instância de visualização de missão"
 
-#: .\missions\models.py:103
+#: .\missions\models.py:109
 msgid "mission visualization instances"
 msgstr "instâncias de visualização de missão"
 
-#: .\missions\models.py:111
+#: .\missions\models.py:117
 msgid "start"
 msgstr "início"
 
-#: .\missions\models.py:112
+#: .\missions\models.py:118
 msgid "end"
 msgstr "fim"
 
-#: .\missions\models.py:115
+#: .\missions\models.py:121
 msgid "mission class"
 msgstr "turma"
 
-#: .\missions\models.py:116
+#: .\missions\models.py:122
 msgid "mission classes"
 msgstr "turmas"
 
