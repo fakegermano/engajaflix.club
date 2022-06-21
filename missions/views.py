@@ -17,13 +17,10 @@ def get_mission(request, year=None, month=None, day=None):
     user_agent = get_user_agent(request)
     can_share = not user_agent.is_pc and user_agent.os.family != "iOS"
 
+    now = datetime.now(pytz.timezone(TIME_ZONE))
     if year is None:
-        now = datetime.now(pytz.timezone(TIME_ZONE))
         midnight = (now + timedelta(days=1)).replace(
-            hour=0,
-            minute=0,
-            second=0,
-            microsecond=0
+            hour=0, minute=0, second=0, microsecond=0
         )
         next_mission = (midnight - now).seconds
     else:
@@ -40,10 +37,14 @@ def get_mission(request, year=None, month=None, day=None):
     person.save()
     form = None
     if request.method == "GET" and mission:
-        visualization, _ = MissionVisualization.objects.get_or_create(mission=mission, person=person)
+        visualization, _ = MissionVisualization.objects.get_or_create(
+            mission=mission, person=person
+        )
         visualization.views.create(seen_at=now)
         visualization.save()
-        form = SubmissionForm(initial={"name": request.user.get_full_name(), "email": request.user.email})
+        form = SubmissionForm(
+            initial={"name": request.user.get_full_name(), "email": request.user.email}
+        )
     elif request.method == "POST" and mission:
         form = SubmissionForm(request.POST, request.FILES)
         if form.is_valid():
@@ -60,25 +61,31 @@ def get_mission(request, year=None, month=None, day=None):
         mission_number = ""
 
     share_text = (
-        gettext_lazy("I completed mission #") +
-        f"{mission_number}! {completed} " +
-        gettext_lazy("missions completed so far!") +
-        " https://engajaflix.club/"
+        gettext_lazy("I completed mission #")
+        + f"{mission_number}! {completed} "
+        + gettext_lazy("missions completed so far!")
+        + " https://engajaflix.club/"
     )
 
     if mission and person:
-        submission = MissionSubmission.objects.filter(person=person, mission=mission).first()
+        submission = MissionSubmission.objects.filter(
+            person=person, mission=mission
+        ).first()
     else:
         submission = None
-    return render(request, template_name="missions/get.html", context={
-        "mission": mission,
-        "next_mission": next_mission,
-        "can_share": can_share,
-        "share_text": share_text,
-        "form": form,
-        "person": person,
-        "submission": submission
-    })
+    return render(
+        request,
+        template_name="missions/get.html",
+        context={
+            "mission": mission,
+            "next_mission": next_mission,
+            "can_share": can_share,
+            "share_text": share_text,
+            "form": form,
+            "person": person,
+            "submission": submission,
+        },
+    )
 
 
 @login_required
@@ -91,12 +98,18 @@ def list_missions(request):
         missions = []
     submitted = set()
     for mission in missions:
-        submission = MissionSubmission.objects.filter(mission=mission, person=person).first()
+        submission = MissionSubmission.objects.filter(
+            mission=mission, person=person
+        ).first()
         if submission is not None:
             submitted.add(f"{mission}")
-    return render(request, template_name="missions/list.html", context={
-        "missions": missions,
-        "person": person,
-        "submitted": submitted,
-        "xp": person.total_xp(person.on_class.first()),
-    })
+    return render(
+        request,
+        template_name="missions/list.html",
+        context={
+            "missions": missions,
+            "person": person,
+            "submitted": submitted,
+            "xp": person.total_xp(person.on_class.first()),
+        },
+    )
