@@ -1,33 +1,55 @@
-* Profile data
-What makes up a profile on the system
-** first_name
-** last_name
-** username
-** email
+* Profile Data (New)
+** user (django contrib)
 ** phone
 ** description
 ** picture
-** social links
-** type [Cative, Fazedor, Padrinho]
-** pronoums
-* Feature list
-List of features that the software *should* have
-** login DONE
-** logout DONE
-** forgot password/reset DONE
-** change password DONE
-** register DONE
-** see profile DONE
-** edit profile DONE
-** add social-media info
-** create new topic
-** post message to topic (basic markdown)
-** comment on message
-** hide message / comment from topic
-** follow topic
-** see messages from followed topics
-** explore topics
-** follow/add/connect
-** give XP
-** gain XP
-** spend XP
+** social-links
+** type (doer, tutor)
+** pronouns
+* Feature List (New)
+** Tutor:
+*** Create/Edit missions
+*** Create/Edit studies
+*** Associate doers to studies
+*** Associate missions to studies
+*** View submissions to missions
+*** Check activity log for doers
+** Doer:
+*** View today's mission
+*** View/edit their profile
+*** View studies they belong
+*** View archive of missions and submissions in studies
+*** View activity log
+
+* User stories:
+** As a user I want to be able to register and login
+** As a user I want to be able to reset my password
+** As a user I want to be able to view my profile
+** As a user I want to be able to edit my profile
+** As a user I want to be able to download all data related to me
+** As a user I want to be able to request the system to delete my profile
+** As a tutor I want to be able to view all studies
+** As a tutor I want to be able to create a new study
+** As a tutor I want my studies to have a defined start and end date
+** As a tutor I want a study to have one mission for each weekday included in it
+** As a tutor I want to be able to edit a study
+** As a tutor I want to be able to see a list of all missions
+** As a tutor I want to be able to create a new mission
+** As a tutor I want my mission to have a specific XP amount
+** As a tutor I want to be able to edit a mission
+** As a tutor I want to be able to associate a mission to a study at a specific day
+** As a tutor I want the experience of associating a mission to a study to be painless
+*** drag-drop, search bars, calendar view
+** As a tutor I want to be able to give doers access to a study
+** As a tutor I want the experience of associating a doer to a study to be painless
+*** drag-drop, search bar
+** As a tutor I want to be able to view when doers viewed a mission and how many times
+** As a doer I want to view today's mission
+** As a doer I want to be able to submit to today's mission
+** As a doer I want to be able to know how long until the next mission is available
+** As a doer I want to know how much XP I have so far
+** As a doer I want to view/edit (and even remove) my submissions
+** As a doer I want to see all studies I was a part of and their mission
+** As a doer I want to view my activity log to see what the system keeps track
+** As an admin I want to be able to view all the activity that took place in chronological order
+** As an admin I want to be able to migrate from the old system to the new one seamlessly - one command run manually
