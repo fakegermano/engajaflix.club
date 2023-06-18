@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+{% load static i18n %}
+
+{% block content %}
+<section id="banner">
+    <div class="w-full">
+        <img src="{% static 'img/logo.png' %}" class="max-w-full h-screen" alt="{% blocktrans %}logo engajaflix{% endblocktrans %}"/>
+    </div>
+</section>
+    
+<section id="content">
+    <p class="text-lg">engajaflix</p>
+    {% include "partials/_reserve.html" %}
+</section>
+{% endblock content %}

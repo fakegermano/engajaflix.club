@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: super-secret-password
+      MYSQL_DATABASE: engajaflix_club
+      MYSQL_USER: engajaflix_club
+      MYSQL_PASSWORD: engajaflix_club
+      MYSQL_PORT: 3306
+    ports:
+      - 3306:3306
+  app:
+    build: 
+      dockerfile: docker/Dockerfile
+      context: ../
+    ports:
+      - 8080:80

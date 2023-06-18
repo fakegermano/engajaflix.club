@@ -1,0 +1,20 @@
+
+{% load static %}
+{% load django_htmx %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>engajaflix.club - {% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
+    <script defer src="https://unpkg.com/htmx.org@1.9.2"></script>
+    {% django_htmx_script %}
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+{% block content %}
+{% endblock content %}
+</body>
+</html>
