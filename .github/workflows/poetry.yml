@@ -35,21 +35,9 @@ jobs:
         run: poetry run poe t
         env:
           DJANGO_SECRET_KEY: test
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - uses: actions/cache@v3
-        name: Define a cache for the node modules based on package lock file
-        with:
-          path: ./node_modules
-          key: node-modles-${{ hashFiles('package-lock.json') }}
-      - name: Initialize tailwind dependencies
-        run: npm install
-      - name: Compile tailwind files
-        run: poetry run poe tw
       - name: Generate req file
         run: poetry export -f requirements.txt --output ./requirements.txt
-      - name: Create "new" dir on remote and install venv
+      - name: Create "new" dir on remote and install venv and node
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -60,13 +48,15 @@ jobs:
             mkdir -p ${{ env.SITE_HOME }}/new
             cd ${{ env.SITE_HOME }}
             [[ -d venv ]] || ./../opt/python-3.11.0/bin/python3 -m venv venv
+            nvm install --lts
+            nvm use --lts
       - name: Push to live site
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
-          source: "core/*,engajaflix_club/*,templates/*,static/*,manage.py,requirements.txt"
+          source: "core/*,engajaflix_club/*,templates/*,static/*,manage.py,requirements.txt,package.json,package-lock.json,tailwind.config.js,input.css"
           target: "${{ env.SITE_HOME }}/new"
       - name: Set correct files
         uses: appleboy/ssh-action@master
@@ -77,39 +67,46 @@ jobs:
           timeout: 1m
           script_stop: true
           script: |
-            cd ${{ env.SITE_HOME }}/new
-            echo "" > .env
-            echo "PUBLIC_ROOT=/home/${{ secrets.SERVER_USER }}/${{ env.SITE_HOME }}/public" >> .env
-            echo "DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
-            echo "DJANGO_ENV=production" >> .env
-            echo "DJANGO_DEBUG=" >> .env
-            echo "DJANGO_ALLOWED_HOSTS=${{ env.SITE_HOME }},www.${{ env.SITE_HOME }}" >> .env
-            echo "DJANGO_CSRF_TRUSTED_ORIGINS=https://${{ env.SITE_HOME }}" >> .env
-            echo "DJANGO_SUPERUSER_USERNAME=${{ secrets.SUPERUSER_USERNAME }}" >> .env
-            echo "DJANGO_SUPERUSER_PASSWORD=${{ secrets.SUPERUSER_PASSWORD }}" >> .env
-            echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> .env
-            echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> .env
-            echo "ADMIN_URL=/admin/" >> .env
-            echo "DATABASE_URL=${{ secrets.REFACTOR_DATABASE_URL }}" >> .env
-            source ../venv/bin/activate
+            cd /home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/new
+            echo -n $(cat <<EOF
+            PUBLIC_ROOT=/home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/public
+            DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY}}
+            DJANGO_ENV=production
+            DJANGO_DEBUG=
+            DJANGO_ALLOWED_HOSTS=${{ env.SITE_HOME}},www.${{ env.SITE_HOME }}
+            DJANGO_CSRF_TRUSTED_ORIGINS=https://${{ env.SITE_HOME}}
+            DJANGO_SUPERUSER_USERNAME=${{ secrets.SUPERUSER_USERNAME }}
+            DJANGO_SUPERUSER_PASSWORD=${{ secrets.SUPERUSER_PASSWORD }}
+            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+            SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+            ADMIN_URL=/admin/
+            DATABASE_URL=${{ secrets.REFACTOR_DATABASE_URL }}
+            EOF
+            ) > .env
+            source /home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/venv/bin/activate
             pip install -r requirements.txt
+            npm install
+            npx tailwindcss -i ./input.css -o ./static/css/output.css --minify
             python manage.py collectstatic --noinput
             python manage.py migrate --noinput
             python manage.py makesuperuser
-            cd ../
-            tar --exclude={'*.pyc','__pycache__'} -czf old.tar.gz app/.
+            cd /home/${{ secrets.SERVER_USER }}/${{ env.SITE_HOME }}/
+            tar --exclude={'*.pyc','__pycache__','node_modules'} -czf old.tar.gz app/.
             rm -rf app/
             mv new/ app/
-            echo "" > passenger_wsgi.py
-            echo "import sys, os" >> passenger_wsgi.py
-            echo "cwd = os.getcwd()" >> passenger_wsgi.py
-            echo 'sys.path.append(cwd + "/")' >> passenger_wsgi.py
-            echo 'sys.path.append(cwd + "/app")' >> passenger_wsgi.py
-            echo 'INTERP = "/home/${{ secrets.SERVER_USER }}/${{ env.SITE_HOME }}/venv/bin/python3"' >> passenger_wsgi.py
-            echo "if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)" >> passenger_wsgi.py
-            echo "sys.path.insert(0, os.path.join(cwd, 'venv', 'bin'))" >> passenger_wsgi.py
-            echo "sys.path.insert(0, os.path.join(cwd, 'venv', 'lib', 'python3.11', 'site-packages'))" >> passenger_wsgi.py
-            echo 'os.environ["DJANGO_SETTINGS_MODULE"] = "engajaflix_club.settings"' >> passenger_wsgi.py
-            echo "from django.core.wsgi import get_wsgi_application" >> passenger_wsgi.py
-            echo "application = get_wsgi_application()" >> passenger_wsgi.py
+            echo -n $(cat <<EOF
+            import sys, os
+            cwd = os.getcwd()
+            sys.path.append(cwd + "/")
+            sys.path.append(cwd + "/app")
+            INTERP = "/home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME }}/venv/bin/python3"
+            if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)
+            sys.path.insert(0, os.path.join(cwd, 'venv', 'bin'))
+            sys.path.insert(0, os.path.join(cwd, 'venv', 'lib', 'python3.11', 'site-packages'))
+            os.environ["DJANGO_SETTINGS_MODULE"] = "engajaflix_club.settings"
+            from django.core.wsgi import get_wsgi_application
+            application = get_wsgi_application()
+            EOF
+            ) > ./passenger_wsgi.py
+            mkdir -p tmp
             touch tmp/restart.txt

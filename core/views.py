@@ -1,8 +1,4 @@
-import time
-from typing import Any
 from django.http import HttpResponse
-from django.http.request import HttpRequest
-from django.http.response import HttpResponseBase
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView, FormView
