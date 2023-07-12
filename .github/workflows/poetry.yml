@@ -111,7 +111,7 @@ jobs:
             echo "import sys, os" >> passenger_wsgi.py
             echo "cwd = os.getcwd()" >> passenger_wsgi.py
             echo "sys.path.append(cwd)" >> passenger_wsgi.py
-            echo "sys.path.append(cwd, "app")" >> passenger_wsgi.py
+            echo 'sys.path.append(cwd, "app")' >> passenger_wsgi.py
             echo 'INTERP = "/home/${{ secrets.SERVER_USER }}/${{ env.SITE_HOME }}/venv/bin/python3"' >> passenger_wsgi.py
             echo "if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)" >> passenger_wsgi.py
             echo "sys.path.insert(0, os.path.join(cwd, 'venv', 'bin'))" >> passenger_wsgi.py
