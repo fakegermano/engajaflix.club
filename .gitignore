@@ -5,3 +5,8 @@ venv/
 __pycache__/
 CACHE/
 .env
+*.pyc
+.vscode/
+node_modules/*
+public/*
+output.css
