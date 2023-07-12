@@ -2,7 +2,7 @@
 {% load static django_htmx i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE}}" 
+<html lang="{{ LANGUAGE_CODE }}" 
     x-data
     :data-theme="$store.darkMode.on ? 'dark' : 'light'" 
     :class="$store.darkMode.on && 'dark'">
@@ -32,7 +32,7 @@
     </script>
     {% django_htmx_script %}
     {% block extra_css %}
-    {% endblock%}
+    {% endblock extra_css %}
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-ext="loading-states" class="font-sans relative">
     <div class="flex rounded-full text-accent dark:bg-white/30 bg-black/30 backdrop-blur-md p-2 z-[1000] fixed top-3 lg:right-12 right-3">
@@ -52,7 +52,7 @@
             {% endif%}
         </label>
     </div>
-    <div data-loading-class-remove="hidden" data-loading-delay="200" class="fixed hidden top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-base-100 bg-opacity-80 backdrop-blur-sm transition-all ease-in-out duration-600">
+    <div data-loading-class-remove="hidden" data-loading-delay="200" class="fixed hidden top-0 left-0 w-full h-full flex items-center justify-center z-[999] bg-base-100 bg-opacity-80 backdrop-blur-sm transition-all ease-in-out duration-600">
         <div>
             <span class="loading loading-dots loading-lg text-accent"></span>
         </div>
@@ -60,6 +60,6 @@
     {% block content %}
     {% endblock content %}
     {% block extra_js %}
-    {% endblock%}
+    {% endblock extra_js %}
 </body>
 </html>
