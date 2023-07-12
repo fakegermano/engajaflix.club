@@ -72,7 +72,7 @@ jobs:
             echo "DJANGO_ENV=production" >> .env
             echo "DJANGO_DEBUG=" >> .env
             echo "DJANGO_ALLOWED_HOSTS=engajaflix.club,www.engajaflix.club" >> .env
-            echo "DJANGO_CSRF_TRUSTED_ORIGINS=engajaflix.club" >> .env
+            echo "DJANGO_CSRF_TRUSTED_ORIGINS=https://*.engajaflix.club" >> .env
             echo "DJANGO_SUPERUSER_USERNAME=${{ secrets.SUPERUSER_USERNAME }}" >> .env
             echo "DJANGO_SUPERUSER_PASSWORD=${{ secrets.SUPERUSER_PASSWORD }}" >> .env
             echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> .env
