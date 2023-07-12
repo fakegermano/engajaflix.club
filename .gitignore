@@ -136,3 +136,4 @@ dmypy.json
 static/css/output.css
 media/
 public/
+node_modules/
