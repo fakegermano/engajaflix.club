@@ -27,11 +27,18 @@ jobs:
       - name: Install the project dependencies
         run: poetry install
       - name: Run the automated tests (for example)
-        run: DJANGO_SECRET_KEY=test poetry run poe t
+        run: poetry run poe t
+        env:
+          DJANGO_SECRET_KEY: test
+          DJANGO_ALLOWED_HOSTS: "*"
       - name: Compile tailwind files
         run: poetry run poe tw
       - name: Collect static files
-        run: DJANGO_ENV=production DJANGO_DEBUG= PUBLIC_ROOT=./public/ poetry run poe cs
+        run: poetry run poe cs
+        env:
+          DJANGO_ENV: production
+          DJANGO_DEBUG: 0
+          PUBLIC_ROOT: "public/"
       - name: Generate req file
         run: poetry export -f requirements.txt --output requirements.txt
       - name: Create "new" dir on remote
@@ -41,8 +48,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
           script: |
-            cd test.engajaflix.club
-            mkdir -p new
+            mkdir -p test.engajaflix.club/new
       - name: Push to live site
         uses: appleboy/scp-action@master
         with:
