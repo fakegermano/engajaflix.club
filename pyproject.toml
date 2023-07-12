@@ -24,7 +24,6 @@ django-loguru = "^1.0.3"
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^4.1.0"
 django-browser-reload = "^1.10.0"
-pytailwindcss = "^0.1.4"
 black = "^23.3.0"
 ruff = "^0.0.272"
 django-stubs = {extras = ["compatible-mypy"], version = "^4.2.1"}
