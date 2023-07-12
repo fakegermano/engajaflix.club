@@ -38,6 +38,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - uses: actions/cache@v3
+        name: Define a cache for the node modules based on package lock file
+        with:
+          path: ./node_modules
+          key: node-modles-${{ hashFiles('package-lock.json') }}
       - name: Initialize tailwind dependencies
         run: npm install
       - name: Compile tailwind files
