@@ -30,7 +30,6 @@ jobs:
         run: poetry run poe t
         env:
           DJANGO_SECRET_KEY: test
-          DJANGO_ALLOWED_HOSTS: "*"
       - name: Compile tailwind files
         run: poetry run poe tw
       - name: Collect static files
@@ -38,6 +37,8 @@ jobs:
         env:
           DJANGO_ENV: production
           DJANGO_DEBUG: 0
+          DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DJANGO_CSRF_TRUSTED_ORIGINS: "*"
           PUBLIC_ROOT: "public/"
       - name: Generate req file
         run: poetry export -f requirements.txt --output requirements.txt

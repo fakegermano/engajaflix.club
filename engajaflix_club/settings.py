@@ -14,7 +14,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 DJANGO_ENV = env.str("DJANGO_ENV", "dev")
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env("DJANGO_DEBUG", default=False)
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", ["*"])
 
 LANGUAGE_CODE = "pt-br"
 TIME_ZONE = "America/Sao_Paulo"
@@ -141,8 +141,8 @@ EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
 )
 
-SUPERUSER_USERNAME = env("DJANGO_SUPERUSER_USERNAME")
-SUPERUSER_PASSWORD = env("DJANGO_SUPERUSER_PASSWORD")
+SUPERUSER_USERNAME = env("DJANGO_SUPERUSER_USERNAME", "dummy")
+SUPERUSER_PASSWORD = env("DJANGO_SUPERUSER_PASSWORD", "dummy")
 
 if DJANGO_ENV == "production":
     import sentry_sdk
@@ -182,17 +182,19 @@ if DJANGO_ENV == "production":
     ]
 
     # email
-    EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
-    ANYMAIL = {
-        "SENDGRID_API_KEY": env("SENDGRID_API_KEY"),
-    }
+    if "SENDGRID_API_KEY" in os.environ:
+        EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
+        ANYMAIL = {
+            "SENDGRID_API_KEY": env("SENDGRID_API_KEY"),
+        }
 
-    # sentry
-    sentry_sdk.init(
-        dsn=env("SENTRY_DSN"),
-        integrations=[DjangoIntegration()],
-        environment=env("SENTRY_ENVIRONMENT", default="production"),
-        traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
-        auto_session_tracking=False,
-        release="1.0.0",
-    )
+    if "SENTRY_DSN" in os.environ:
+        # sentry
+        sentry_sdk.init(
+            dsn=env("SENTRY_DSN"),
+            integrations=[DjangoIntegration()],
+            environment=env("SENTRY_ENVIRONMENT", default="production"),
+            traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
+            auto_session_tracking=False,
+            release="1.0.0",
+        )
