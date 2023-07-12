@@ -42,16 +42,8 @@ jobs:
         run: npm install
       - name: Compile tailwind files
         run: poetry run poe tw
-      - name: Collect static files
-        run: poetry run poe cs
-        env:
-          DJANGO_ENV: production
-          DJANGO_DEBUG: 0
-          DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DJANGO_CSRF_TRUSTED_ORIGINS: "*"
-          PUBLIC_ROOT: "public/"
       - name: Generate req file
-        run: poetry export -f requirements.txt --output requirements.txt
+        run: poetry export -f requirements.txt --output ./requirements.txt
       - name: Create "new" dir on remote and install venv
         uses: appleboy/ssh-action@master
         with:
@@ -69,7 +61,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
-          source: "core/*,engajaflix_club/*,public/*,templates/*,static/*,manage.py,requirements.txt"
+          source: "core/*,engajaflix_club/*,templates/*,static/*,manage.py,requirements.txt"
           target: "${{ env.SITE_HOME }}/new"
       - name: Set correct files
         uses: appleboy/ssh-action@master
@@ -82,7 +74,7 @@ jobs:
           script: |
             cd ${{ env.SITE_HOME }}/new
             echo "" > .env
-            echo "PUBLIC_ROOT=$(pwd)/public" >> .env
+            echo "PUBLIC_ROOT=/home/${{ secrets.SERVER_USER }}/${{ env.SITE_HOME }}/public" >> .env
             echo "DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
             echo "DJANGO_ENV=production" >> .env
             echo "DJANGO_DEBUG=" >> .env
@@ -96,12 +88,11 @@ jobs:
             echo "DATABASE_URL=${{ secrets.REFACTOR_DATABASE_URL }}" >> .env
             source ../venv/bin/activate
             pip install -r requirements.txt
+            python manage.py collectstatic --noinput
             python manage.py migrate --noinput
             python manage.py makesuperuser
             cd ../
             tar --exclude={'*.pyc','__pycache__'} -czf old.tar.gz app/.
-            cp -rf new/public/. public
-            rm -rf new/public new/static
             rm -rf app/
             mv new/ app/
             echo "" > passenger_wsgi.py
