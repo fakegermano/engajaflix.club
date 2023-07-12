@@ -60,7 +60,7 @@ jobs:
           password: ${{ secrets.SERVER_PASS }}
           script: |
             cd ${{ env.SITE_HOME }}
-            [[ ! -d venv ]] && ./../opt/python-3.11.0/bin/python3 -m venv venv
+            [[ -d venv ]] || ./../opt/python-3.11.0/bin/python3 -m venv venv
       - name: Create "new" dir on remote
         uses: appleboy/ssh-action@master
         with:
