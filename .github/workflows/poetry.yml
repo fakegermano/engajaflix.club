@@ -92,6 +92,6 @@ jobs:
             python manage.py migrate --noinput
             python manage.py makesuperuser
             cd ../
-            cp -r new/* .
+            cp -r new/. .
             rm -rf new
             touch tmp/restart.txt
