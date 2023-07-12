@@ -2,7 +2,7 @@
 {% with target="unreserve_process" swap_target="unreserve-form" %}
 <div id="{{ swap_target }}">
     <p class="text-2xl text-accent font-subrayada font-bold">{% trans "reservado com sucesso!" %}</p>
-    <p class="text-normal">{% trans "se quiser, voce pode cancelar sua reserva" %}</p>
+    <p class="text-base-content">{% trans "se quiser, voce pode cancelar sua reserva" %}</p>
     <form action="{% url target %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="confirm" value="true">

@@ -1,0 +1,17 @@
+<div class="form-control relative group {{ extra_css }}">
+    {% if field.help_text %}
+    <label class="label absolute -top-1 right-2 hidden group-hover:flex">
+        <span class="label-text"></span>
+        <span class="label-text-alt">{{ field.help_text }}</span>
+    </label>
+    {% endif %}
+    <input class="text-gray-700 dark:text-gray-300 group-hover:placeholder:text-base-content/20 focus:placeholder:text-base-content/20 input input-bordered input-secondary {% if field.errors %}input-error{% endif %} rounded-2xl"  
+        type="text" name="{{ field.name }}" placeholder="{{ field.label }}" {% if field.value %}value="{{ field.value }}"{% endif%} />
+    {% if field.errors %}
+    <label class="label">
+        {% for error in field.errors %}
+        <span class="label-text-alt text-error">{{ error }}</span>
+        {% endfor %}
+    </label>
+    {% endif %}
+</div>

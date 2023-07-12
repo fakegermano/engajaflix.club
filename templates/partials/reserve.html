@@ -1,4 +1,7 @@
 {% load static i18n %}
+<meta name="description" hx-swap-oob="outerHTML:#meta-description" id="meta-description" content="{{ meta_description }}">
+<meta name="keywords" hx-swap-oob="outerHTML:#meta-keywords" id="meta-keywords" content="{{ meta_keywords }}">
+<title hx-swap-oob="outerHTML:#meta-title" id="meta-title">engajaflix.club - {{ subtitle }}</title>
 <div class="bg-base-200 min-h-screen relative" id="content">
     <section id="reserve" class="min-h-screen" >
         <div class="hero place-items-stretch min-h-screen p-4 lg:p-8">
@@ -19,12 +22,12 @@
                     <div class="card-body">
                         <p class="text-normal lg:hidden">Deixe se email e seu @ para receber novidades e acesso adiantado à nossa nova plataforma</p>
                         {% if session_uuid.email_reserve.reserved %}
-                        {% include "partials/_unreserve.html" %}
+                        <div hx-get="{% url "unreserve_process" %}" hx-target="this" hx-swap="outerHTML" hx-trigger="revealed"></div>
                         {% else %}
-                        {% include "partials/_reserve.html" %}
+                        <div hx-get="{% url "reserve_process" %}" hx-target="this" hx-swap="outerHTML" hx-trigger="revealed"></div>
                         {% endif %}
                         <div class="divider"></div>
-                        <a class="link link-neutral" hx-get="{% url "index" %}" hx-target="#content" hx-swap="outerHTML">{% trans "voltar" %}</a>
+                        <a class="link text-base-content" hx-get="{% url "index" %}" hx-target="#content" hx-swap="outerHTML">{% trans "voltar" %}</a>
                     </div>
                 </div>
             </div>

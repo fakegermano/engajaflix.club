@@ -1,7 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.utils.decorators import method_decorator
-from django.views.decorators.http import require_http_methods
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
@@ -18,8 +16,25 @@ class HtmxTemplateView(TemplateView):
 class IndexView(HtmxTemplateView):
     template_name = "index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["subtitle"] = _("início")
+        context["meta_description"] = _("remova o ruído e encontre uma internet mais diversa")
+        context["meta_keywords"] = _("inovação, comunicação, tecnologia, internet, " +
+                                     "compartilhe informação, fonte confiável, " +
+                                     "pesquise, questione, entenda")
+        return context
+    
+
 class ReserveView(HtmxTemplateView):
     template_name = "reserve.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["subtitle"] = _("reserva")
+        context["meta_description"] = _("receber novidades e acesso adiantado à plataforma")
+        context["meta_keywords"] = _("espera, reserva, novidade, acesso, adiantado")
+        return context
 
 class ReserveProcessView(FormView):
     form_class = EmailReserveForm

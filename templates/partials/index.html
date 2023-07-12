@@ -1,4 +1,7 @@
 {% load static i18n %}
+<meta name="description" hx-swap-oob="outerHTML:#meta-description" id="meta-description" content="{{ meta_description }}">
+<meta name="keywords" hx-swap-oob="outerHTML:#meta-keywords" id="meta-keywords" content="{{ meta_keywords }}">
+<title hx-swap-oob="outerHTML:#meta-title" id="meta-title">engajaflix.club - {{ subtitle }}</title>
 {% with swap_target="content" type="link" %}
 <div class="dark:bg-secondary min-h-screen" id="content">
     <section id="banner" class="min-h-screen bg-cover bg-no-repeat bg-background-light-sm lg:bg-background-light-lg dark:bg-background-dark-sm dark:lg:bg-background-dark-lg">

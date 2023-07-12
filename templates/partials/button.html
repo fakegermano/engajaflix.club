@@ -1,11 +1,11 @@
 {% if type == "link" %}
 <a class="relative overflow-visible" hx-get="{% url target %}" hx-target="#{{ swap_target }}" hx-swap="outerHTML" >
     <span class="absolute inset-0 bg-gradient-to-r from-primary to-accent blur-md"></span>
-    <span class="relative z-10 btn btn-block glass text-white hover:btn-primary rounded-2xl px-16 text-lg">{{ text }}</span>
+    <span class="relative z-10 btn btn-block glass dark:text-gray-100 text-gray-900 hover:btn-primary rounded-2xl px-16 text-lg">{{ text }}</span>
 </a>
 {% else %}
-<button class="relative overflow-visible" hx-post="{% url target %}" hx-include="{{ fields }}" hx-target="#{{ swap_target }}" hx-swap="outerHTML">
+<button class="relative overflow-visible" hx-post="{% url target %}" hx-include="{% for field in fields.split %}{% if not forloop.first %},{% endif %}[name='{{ field }}']{% endfor %}" hx-target="#{{ swap_target }}" hx-swap="outerHTML">
     <span class="absolute inset-0 bg-gradient-to-r from-primary to-accent blur-md"></span>
-    <span class="relative z-10 btn btn-block glass text-white hover:btn-primary rounded-2xl px-16 text-lg">{{ text }}</span>
+    <span class="relative z-10 btn btn-block glass dark:text-gray-100 text-gray-900 hover:btn-primary rounded-2xl px-16 text-lg">{{ text }}</span>
 </button>
 {% endif %}
