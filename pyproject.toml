@@ -50,7 +50,9 @@ u = { cmd = "python manage.py makesuperuser", help = "Create a new superuser usi
 m = { cmd = "python manage.py migrate", help = "Apply migrations" }
 mk = { cmd = "python manage.py makemigrations", help = "Make migrations" }
 rd = { cmd = "python manage.py reset_db --noinput", help = "Delete and recreate your database" }
-tw = { cmd = "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch", help = "Compile tailwind in watch mode" }
+cs = { cmd = "python manage.py collectstatic --noinput", help = "Collect static files for build" }
+tw = { cmd = "tailwindcss -i ./input.css -o ./static/css/output.css", help = "Compile tailwind" }
+tww = { cmd = "tailwindcss -i ./input.css -o ./static/css/output.css --watch", help = "Compile tailwind in watch mode" }
 wt = { cmd = "pytest -f", help = "Run tests and watch" }
 t = { cmd = "pytest -s", help = "Run tests and watch" }
 

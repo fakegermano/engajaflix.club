@@ -160,7 +160,8 @@ if DJANGO_ENV == "production":
     SESSION_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
-
+    STATIC_ROOT = env('PUBLIC_ROOT', default=BASE_DIR) / 'static'
+    MEDIA_ROOT = env('PUBLIC_ROOT', default=BASE_DIR) / 'media'
     # password validation
     AUTH_PASSWORD_VALIDATORS = [
         {
