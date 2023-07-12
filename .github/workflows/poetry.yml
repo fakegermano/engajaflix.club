@@ -70,21 +70,18 @@ jobs:
           script: |
             source ~/.zprofile
             cd /home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/new
-            echo -n $(cat <<EOF
-            PUBLIC_ROOT=/home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/public
-            DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY}}
-            DJANGO_ENV=production
-            DJANGO_DEBUG=
-            DJANGO_ALLOWED_HOSTS=${{ env.SITE_HOME}},www.${{ env.SITE_HOME }}
-            DJANGO_CSRF_TRUSTED_ORIGINS=https://${{ env.SITE_HOME}}
-            DJANGO_SUPERUSER_USERNAME=${{ secrets.SUPERUSER_USERNAME }}
-            DJANGO_SUPERUSER_PASSWORD=${{ secrets.SUPERUSER_PASSWORD }}
-            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
-            SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-            ADMIN_URL=/admin/
-            DATABASE_URL=${{ secrets.REFACTOR_DATABASE_URL }}
-            EOF
-            ) > .env
+            echo "PUBLIC_ROOT=/home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/public" > .env
+            echo "DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY}}" >> .env
+            echo "DJANGO_ENV=production" >> .env            
+            echo "DJANGO_DEBUG=" >> .env            
+            echo "DJANGO_ALLOWED_HOSTS=${{ env.SITE_HOME}},www.${{ env.SITE_HOME }}" >> .env            
+            echo "DJANGO_CSRF_TRUSTED_ORIGINS=https://${{ env.SITE_HOME}}" >> .env            
+            echo "DJANGO_SUPERUSER_USERNAME=${{ secrets.SUPERUSER_USERNAME }}" >> .env            
+            echo "DJANGO_SUPERUSER_PASSWORD=${{ secrets.SUPERUSER_PASSWORD }}" >> .env            
+            echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> .env            
+            echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> .env            
+            echo "ADMIN_URL=/admin/" >> .env            
+            echo "DATABASE_URL=${{ secrets.REFACTOR_DATABASE_URL }}" >> .env            
             source /home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/venv/bin/activate
             pip install -r requirements.txt
             npm install
@@ -96,19 +93,16 @@ jobs:
             tar --exclude={'*.pyc','__pycache__','node_modules'} -czf old.tar.gz app/.
             rm -rf app/
             mv new/ app/
-            echo -n $(cat <<EOF
-            import sys, os
-            cwd = os.getcwd()
-            sys.path.append(cwd + "/")
-            sys.path.append(cwd + "/app")
-            INTERP = "/home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME }}/venv/bin/python3"
-            if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)
-            sys.path.insert(0, os.path.join(cwd, 'venv', 'bin'))
-            sys.path.insert(0, os.path.join(cwd, 'venv', 'lib', 'python3.11', 'site-packages'))
-            os.environ["DJANGO_SETTINGS_MODULE"] = "engajaflix_club.settings"
-            from django.core.wsgi import get_wsgi_application
-            application = get_wsgi_application()
-            EOF
-            ) > ./passenger_wsgi.py
+            echo "import sys, os" > passenger_wsgi.py            
+            echo "cwd = os.getcwd()" >> passenger_wsgi.py            
+            echo "sys.path.append(cwd + '/')" >> passenger_wsgi.py            
+            echo "sys.path.append(cwd + '/app')" >> passenger_wsgi.py            
+            echo "INTERP = '/home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME }}/venv/bin/python3'" >> passenger_wsgi.py            
+            echo "if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)" >> passenger_wsgi.py            
+            echo "sys.path.insert(0, os.path.join(cwd, 'venv', 'bin'))" >> passenger_wsgi.py            
+            echo "sys.path.insert(0, os.path.join(cwd, 'venv', 'lib', 'python3.11', 'site-packages'))" >> passenger_wsgi.py            
+            echo "os.environ['DJANGO_SETTINGS_MODULE'] = 'engajaflix_club.settings'" >> passenger_wsgi.py            
+            echo "from django.core.wsgi import get_wsgi_application" >> passenger_wsgi.py            
+            echo "application = get_wsgi_application()" >> passenger_wsgi.py
             mkdir -p tmp
             touch tmp/restart.txt
