@@ -106,7 +106,7 @@ WSGI_APPLICATION = "engajaflix_club.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="mysql://engajaflix_club:engajaflix_club@localhost:3306/engajaflix_club")
+    "default": env.db("DATABASE_URL", default="sqlite:///test.sqlite3")
 }
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
