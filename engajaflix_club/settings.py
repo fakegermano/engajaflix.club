@@ -141,8 +141,8 @@ EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
 )
 
-SUPERUSER_USERNAME = env("DJANGO_SUPERUSER_USERNAME", "dummy")
-SUPERUSER_PASSWORD = env("DJANGO_SUPERUSER_PASSWORD", "dummy")
+SUPERUSER_USERNAME = env("DJANGO_SUPERUSER_USERNAME", default="dummy")
+SUPERUSER_PASSWORD = env("DJANGO_SUPERUSER_PASSWORD", default="dummy")
 
 if DJANGO_ENV == "production":
     import sentry_sdk
