@@ -27,7 +27,7 @@ jobs:
       - name: Install the project dependencies
         run: poetry install
       - name: Run the automated tests (for example)
-        run: poetry run poe t
+        run: DJANGO_SECRET_KEY=test poetry run poe t
       - name: Compile tailwind files
         run: poetry run poe tw
       - name: Collect static files
