@@ -10,3 +10,4 @@ CACHE/
 node_modules/*
 public/*
 output.css
+.pytest_cache
