@@ -56,7 +56,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
-          source: "core/*,engajaflix_club/*,public/*,templates/*,manage.py,requirements.txt"
+          source: "core/*,engajaflix_club/*,public/*,templates/*,static/*,manage.py,requirements.txt"
           target: "test.engajaflix.club/new"
       - name: Set correct files
         uses: appleboy/ssh-action@master
