@@ -45,9 +45,9 @@ jobs:
           password: ${{ secrets.SERVER_PASS }}
           script_stop: true
           script: |
+            source ~/.zprofile
             mkdir -p ${{ env.SITE_HOME }}/new
             cd ${{ env.SITE_HOME }}
-            env
             [[ -d venv ]] || ./../opt/python-3.11.0/bin/python3 -m venv venv
             nvm install --lts
             nvm use --lts
@@ -68,6 +68,7 @@ jobs:
           timeout: 1m
           script_stop: true
           script: |
+            source ~/.zprofile
             cd /home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/new
             echo -n $(cat <<EOF
             PUBLIC_ROOT=/home/${{ secrets.SERVER_USER}}/${{ env.SITE_HOME}}/public
