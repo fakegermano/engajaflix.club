@@ -11,7 +11,7 @@
                 <img src="{% static 'img/logo-transparencia.png' %}" alt="Logo" class="mx-auto my-auto md:max-w-3xl p-4 lg:p-12">
                 <div class="mx-4 pb-4 lg:pb-12">
                     <p class="mb-5 md:text-4xl text-2xl">{% trans "remova o ruído e encontre uma internet mais diversa" %}</p>
-                    <a class="btn btn-lg btn-wide btn-outline btn-accent rounded-2xl font-subrayada mt-8" hx-get="{% url "reserve" %}" hx-swap="outerHTML" hx-target="#{{ swap_target }}">{% trans "começe agora" %}</a>
+                    <a data-loading-disabled class="btn btn-lg btn-wide btn-outline btn-accent rounded-2xl font-subrayada mt-8" hx-get="{% url "reserve" %}" hx-swap="outerHTML" hx-target="#{{ swap_target }}">{% trans "começe agora" %}</a>
                 </div>
             </div>
         </div>

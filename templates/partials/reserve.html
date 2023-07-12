@@ -19,16 +19,18 @@
                     <p class="hidden lg:inline py-6 text-5xl text-white text-start">Deixe se email e seu @ para receber novidades e acesso adiantado à nossa nova plataforma</p>
                 </div>
                 <div class="card card-compact lg:card-normal mx-auto shadow-2xl backdrop-blur-xl bg-opacity-60 bg-base-100 lg:my-auto">
-                    <div class="card-body">
-                        <p class="text-normal lg:hidden">Deixe se email e seu @ para receber novidades e acesso adiantado à nossa nova plataforma</p>
-                        <div id="loading" class="hidden">
-                            <span class="loading loading-dots loading-lg text-accent"></span>
-                        </div>
+                    <div class="card-body" data-loading-states>
+                        <p class="text-normal text-base-content lg:hidden">Deixe se email e seu @ para receber novidades e acesso adiantado à nossa nova plataforma</p>
                         {% if session_uuid.email_reserve.reserved %}
-                        <div hx-get="{% url "unreserve_process" %}" hx-target="this" hx-swap="outerHTML" hx-trigger="load" data-loading-target="#loading" data-loading-class-remove="hidden"></div>
+                        <div hx-get="{% url "unreserve_process" %}" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>
+                        
                         {% else %}
-                        <div hx-get="{% url "reserve_process" %}" hx-target="this" hx-swap="outerHTML" hx-trigger="load" data-loading-target="#loading" data-loading-class-remove="hidden"></div>
+                        <div hx-get="{% url "reserve_process" %}" hx-target="this" hx-swap="outerHTML" hx-trigger="load"></div>
                         {% endif %}
+                        <div data-loading class="text-base-content">
+                            <p>{% trans "aguarde" %}</p>
+                            <p><span class="loading loading-dots loading-md text-accent"></span></p>
+                        </div>
                         <div class="divider"></div>
                         <a class="link text-base-content" hx-get="{% url "index" %}" hx-target="#content" hx-swap="outerHTML">{% trans "voltar" %}</a>
                     </div>

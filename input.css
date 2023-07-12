@@ -9,3 +9,7 @@
 .background-dark {
     background-image: url({% static 'img/background-dark.svg' %});
 }
+
+[data-loading] {
+    display: none;
+  }
