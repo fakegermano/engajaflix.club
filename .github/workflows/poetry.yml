@@ -21,15 +21,15 @@ jobs:
           poetry config virtualenvs.in-project true --local
       - name: Install the project dependencies
         run: poetry install
-      - uses: actions/cache@v3
-        name: Define a cache for the virtual environment based on the dependencies lock file
-        with:
-          path: ./.venv
-          key: venv-${{ hashFiles('poetry.lock') }}
       - name: Run the automated tests (for example)
         run: poetry run poe t
         env:
           DJANGO_SECRET_KEY: test
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Initialize tailwind dependencies
+        run: npm install
       - name: Compile tailwind files
         run: poetry run poe tw
       - name: Collect static files
