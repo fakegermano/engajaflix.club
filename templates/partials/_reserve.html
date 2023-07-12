@@ -1,2 +1,18 @@
-{% load i18n %}
-<button type="button">{% blocktrans %}Reserve sua vaga{% endblocktrans %}</button>
+{% load static i18n %}
+{% with target="reserve_process" swap_target="reserve-form" %}
+<form action="{% url target %}" method="post" id="{{ swap_target }}">
+    {% csrf_token %}
+    <div class="form-control mt-2 lg:mt-4">
+        <input type="text" name="email" placeholder="{% trans "email" %}" class="input input-bordered rounded-2xl" />
+    </div>
+    <div class="form-control mt-2 lg:mt-4">
+        <input type="text" name="social" placeholder="{% trans "link de sua rede social principal" %}" class="input input-bordered rounded-2xl" />
+    </div>
+    <div class="form-control mt-6">
+        {% include "partials/button.html" with text=_("enviar") type="submit" fields="email,social" %}
+    </div>
+    <label class="label">
+        <p class="label-text-alt">{% trans "Ao clicar em enviar, você concorda com nossos Termos de Serviço e Política de Privacidade." %}</p>
+    </label>
+</form>
+{% endwith %}

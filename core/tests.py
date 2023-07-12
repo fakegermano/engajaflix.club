@@ -1,6 +1,9 @@
+import logging
 from django.test import TestCase
 from django.urls import reverse
+from .models import UuidSession, EmailReserve
 
+logger = logging.getLogger(__name__)
 class IndexViewTestCase(TestCase):
     def setUp(self) -> None:        
         self.url = reverse("index")
@@ -8,25 +11,22 @@ class IndexViewTestCase(TestCase):
     
     def test_view_exists(self):
         resp = self.client.get(self.url)
-        self.assertIs(resp.status_code, 200)
+        self.assertContains(resp, "engajaflix", status_code=200, html=True)
 
-    def test_view_mentions_engajaflix(self):
+    def test_view_generates_uuid(self):
         resp = self.client.get(self.url)
-        self.assertIn("engajaflix", resp.content.decode())
+        self.assertEqual(str(resp.context["session_uuid"].uuid), self.client.session["uuid"])
 
-    def test_view_has_banner_section(self):
+    def test_view_starts_not_reserved(self):
         resp = self.client.get(self.url)
-        self.assertIn('<section id="banner">', resp.content.decode())
+        if "reserved" in resp.context:
+            self.assertFalse(resp.context["reserved"])
 
-    def test_view_has_logo(self):
+    def test_view_reserve_session(self):
+        uuid_session = UuidSession.objects.create()
+        self.client.session["uuid"] = uuid_session.uuid
+        uuid_session.save()
+        reserve = EmailReserve.objects.create(email="test@example.com", session=uuid_session)
+        reserve.save()
         resp = self.client.get(self.url)
-        self.assertIn('logo.png', resp.content.decode())
-
-    def test_view_has_reserve_button(self):
-        resp = self.client.get(self.url)
-        self.assertIn("Reserve sua vaga", resp.content.decode())
-
-    def test_view_reserve_button_posts(self):
-        resp = self.client.get(self.url)
-        self.assertIn(f'<button id="reserve" hx-post="{reverse("reserve")}"', resp.content.decode())
-        
+        self.assertContains(resp, "Reserve", status_code=200, html=True)

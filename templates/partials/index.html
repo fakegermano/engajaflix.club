@@ -1,0 +1,67 @@
+{% load static i18n %}
+{% with swap_target="content" type="link" %}
+<div class="dark:bg-secondary min-h-screen" id="content">
+    <section id="banner" class="min-h-screen bg-cover bg-no-repeat bg-background-light-sm lg:bg-background-light-lg dark:bg-background-dark-sm dark:lg:bg-background-dark-lg">
+        <div class="hero min-h-screen p-4 lg:p-8">
+            <div class="hero-overlay bg-opacity-60 rounded-3xl backdrop-blur-2xl"></div>
+            <div class="hero-content mx-auto h-full flex-col place-content-between text-center text-neutral-content">
+                <img src="{% static 'img/logo-transparencia.png' %}" alt="Logo" class="mx-auto my-auto md:max-w-3xl p-4 lg:p-12">
+                <div class="mx-4 pb-4 lg:pb-12">
+                    <p class="mb-5 md:text-4xl text-2xl">{% trans "remova o ruído e encontre uma internet mais diversa" %}</p>
+                    <a class="btn btn-lg btn-wide btn-outline btn-accent rounded-2xl font-subrayada mt-8" hx-get="{% url "reserve" %}" hx-swap="outerHTML" hx-target="#{{ swap_target }}">{% trans "começe agora" %}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="research" class="card max-w-xl dark:bg-gray-800/80 backdrop-blur-xl shadow-xl mx-auto rounded-2xl">
+        <div class="card-body">
+            <h2 class="card-title font-subrayada">{% trans "pesquise • questione • entenda" %}</h2>
+            <p>{% trans "acompanhe uma curadoria de conteúdo permanente e construa sua base de conhecimento a partir de uma perspectiva mais autônoma" %}</p>
+            <div class="divider"></div>
+        </div>
+    </section>
+    <section id="cta" class="max-w-3xl mx-auto mt-14 relative">
+        <figure class="flex "><img src="{% static 'img/julia.gif' %}" alt="julia" class="mx-auto shadow-xl"/></figure>
+        <div class="flex absolute -top-6 w-full justify-center items-center">
+            {% include "partials/button.html" with text=_("reserve sua vaga") target="reserve" %}
+        </div>
+    </section>
+    <section id="source" class="card max-w-xl dark:bg-gray-800/80 backdrop-blur-xl shadow-xl mx-auto rounded-2xl mt-8">
+        <div class="card-body">
+            <h2 class="card-title font-subrayada">{% trans "fonte confiável" %}</h2>
+            <p>{% trans "encontre uma coleção especial de insights e conteúdos cuidadosamente selecionados por" %}
+                <a href="https://instagram.com/@juliagtr" target="_blank" rel="noopener noreferrer" class="text-accent">@juliagtr</a></p>
+                <div class="divider"></div>
+            </div>
+        </section>
+        <section id="grid-cta" class="relative container mx-auto mt-8">
+            <div class="max-w-2xl mx-auto">
+                <div class="flex flex-col items-center justify-center">
+                    {% include "partials/button.html" with text=_("reserve sua vaga") target="reserve" %}
+                </div>
+                <div class="grid lg:grid-cols-2 grid-cols-1 lg:gap-16 gap-2 mt-8 px-2 py-2">
+                    {% with "inovação comunicação tecnologia internet" as keywords %}
+                    {% for keyword in keywords.split %}
+                    <span class="bg-primary text-center shadow-lg text-lg px-8 py-3 text-primary-content font-bold border-2 border-primary-content rounded-3xl no-animation cursor-default">{{keyword}}</span>
+                    {% endfor %}
+                    {% endwith %}
+                </div>
+            </div>
+        </section>
+        <section id="share" class="card max-w-xl dark:bg-gray-800/80 backdrop-blur-xl shadow-xl mx-auto rounded-2xl mt-8">
+            <div class="card-body">
+                <h2 class="card-title font-subrayada">{% trans "compartilhe informação" %}</h2>
+                <p>{% trans "tire suas dúvidas de forma pública ou anônima e troque conhecimento com a comunidade" %}</p>
+                <div class="divider"></div>
+                <div class="card-actions justify-end">
+                    {% include "partials/button.html" with text=_("reserve sua vaga") target="reserve" %}
+                </div>
+            </div>
+        </section>
+        <section id="thanks" class="relative container mx-auto mt-8">
+            <div class="py-8">
+                <p class="text-center text-3xl font-subrayada">{% trans "gracias pela visita" %}</p>
+            </div>
+        </section>
+    </div>
+{% endwith %}

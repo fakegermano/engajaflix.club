@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+    text-transform: none;
+}
+
+.background-dark {
+    background-image: url({% static 'img/background-dark.svg' %});
+}
