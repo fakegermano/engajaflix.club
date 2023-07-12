@@ -9,6 +9,8 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      SITE_HOME: test.engajaflix.club
     steps:
       - uses: actions/checkout@v3
       - name: Install Python
@@ -57,7 +59,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
           script: |
-            mkdir -p test.engajaflix.club/new
+            mkdir -p ${{ env.SITE_HOME }}/new
       - name: Push to live site
         uses: appleboy/scp-action@master
         with:
@@ -65,7 +67,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
           source: "core/*,engajaflix_club/*,public/*,templates/*,static/*,manage.py,requirements.txt"
-          target: "test.engajaflix.club/new"
+          target: "${{ env.SITE_HOME }}/new"
       - name: Set correct files
         uses: appleboy/ssh-action@master
         with:
@@ -73,14 +75,14 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
           script: |
-            cd test.engajaflix.club/new
+            cd ${{ env.SITE_HOME }}/new
             echo "" > .env
             echo "PUBLIC_ROOT=$(pwd)/public" >> .env
             echo "DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
             echo "DJANGO_ENV=production" >> .env
             echo "DJANGO_DEBUG=" >> .env
-            echo "DJANGO_ALLOWED_HOSTS=engajaflix.club,www.engajaflix.club" >> .env
-            echo "DJANGO_CSRF_TRUSTED_ORIGINS=https://*.engajaflix.club" >> .env
+            echo "DJANGO_ALLOWED_HOSTS=${{ env.SITE_HOME }},www.${{ env.SITE_HOME }}" >> .env
+            echo "DJANGO_CSRF_TRUSTED_ORIGINS=https://${{ env.SITE_HOME }}" >> .env
             echo "DJANGO_SUPERUSER_USERNAME=${{ secrets.SUPERUSER_USERNAME }}" >> .env
             echo "DJANGO_SUPERUSER_PASSWORD=${{ secrets.SUPERUSER_PASSWORD }}" >> .env
             echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> .env
@@ -92,6 +94,28 @@ jobs:
             python manage.py migrate --noinput
             python manage.py makesuperuser
             cd ../
-            cp -r new/. .
-            rm -rf new
+            tar --exclude={'*.pyc','__pycache__'} -czf old.tar.gz app/.
+            cp -rf new/public/. public
+            rm -rf app/
+            mv new/ app/
+      - name: Set passenger wsgi
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASS }}
+          script: |
+            cd ${{ env.SITE_HOME }}
+            echo "" > passenger_wsgi.py
+            echo "import sys, os" >> passenger_wsgi.py
+            echo "cwd = os.getcwd()" >> passenger_wsgi.py
+            echo "sys.path.append(cwd) >> passenger_wsgi.py"
+            echo "sys.path.append(cwd, "app") >> passenger_wsgi.py"
+            echo 'INTERP = "/home/${{ secrets.SERVER_USER }}/${{ env.SITE_HOME }}/venv/bin/python3"' >> passenger_wsgi.py
+            echo "if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)" >> passenger_wsgi.py
+            echo "sys.path.insert(0, os.path.join(cwd, 'venv', 'bin'))" >> passenger_wsgi.py
+            echo "sys.path.insert(0, os.path.join(cwd, 'venv', 'lib', 'python3.11', 'site-packages'))" >> passenger_wsgi.py
+            echo 'os.environ["DJANGO_SETTINGS_MODULE"] = "engajaflix_club.settings"' >> passenger_wsgi.py
+            echo "from django.core.wsgi import get_wsgi_application" >> passenger_wsgi.py
+            echo "application = get_wsgi_application()" >> passenger_wsgi.py
             touch tmp/restart.txt
