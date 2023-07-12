@@ -47,6 +47,7 @@ jobs:
           script: |
             mkdir -p ${{ env.SITE_HOME }}/new
             cd ${{ env.SITE_HOME }}
+            env
             [[ -d venv ]] || ./../opt/python-3.11.0/bin/python3 -m venv venv
             nvm install --lts
             nvm use --lts
