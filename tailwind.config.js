@@ -11,6 +11,8 @@ module.exports = {
         'background-dark-sm': "url('/static/img/background-dark-sm.svg')",
         'background-light-lg': "url('/static/img/background.svg')",
         'background-light-sm': "url('/static/img/background-sm.svg')",
+        'logo-dark': "url('/static/img/logo-cheio-dark.png')",
+        'logo-light': "url('/static/img/logo-cheio.png')",
       },
       fontFamily: {
         sans: ["Montserrat", "sans-serif"],
