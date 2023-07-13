@@ -127,7 +127,7 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 STATICFILES_FINDERS = [
@@ -170,6 +170,14 @@ if DJANGO_ENV == "production":
     SECURE_CONTENT_TYPE_NOSNIFF = True
     STATIC_ROOT = env('PUBLIC_ROOT', default=BASE_DIR) / 'static'
     MEDIA_ROOT = env('PUBLIC_ROOT', default=BASE_DIR) / 'media'
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+        }
+    }
     # password validation
     AUTH_PASSWORD_VALIDATORS = [
         {
