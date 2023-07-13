@@ -11,8 +11,10 @@ module.exports = {
         'background-dark-sm': "url('/static/img/background-dark-sm.svg')",
         'background-light-lg': "url('/static/img/background.svg')",
         'background-light-sm': "url('/static/img/background-sm.svg')",
-        'logo-dark': "url('/static/img/logo-cheio-dark.png')",
-        'logo-light': "url('/static/img/logo-cheio.png')",
+        'logo-dark': "url('/static/img/logo-engajaflix-azul.svg')",
+        'logo-outline-dark': "url('/static/img/logo-engajaflix-azul-vazado.svg')",
+        'logo-light': "url('/static/img/logo-engajaflix-amarelo.svg')",
+        'logo-outline-light': "url('/static/img/logo-engajaflix-amarelo-vazado.svg')",
       },
       fontFamily: {
         sans: ["Montserrat", "sans-serif"],
