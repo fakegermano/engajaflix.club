@@ -10,7 +10,7 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     env:
-      SITE_HOME: test.engajaflix.club
+      SITE_HOME: engajaflix.club
     steps:
       - uses: actions/checkout@v3
       - name: Install Python
